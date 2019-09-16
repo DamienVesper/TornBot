@@ -32,11 +32,11 @@ client.on(`guildMemberAdd`, member => {
   member.guild.channels.get(`564930384861855754`).send({
 		"embed": {
 			"title": "Welcome!",
-			"description": `<@${member.id}>, welcome to the server! \nThere are now **${member.guild.memberCount}** members.`,
+			"description": `<@${member.id}>, welcome to the server! Do \`-register [username]\` in #bots to register your torn.space account. \nThere are now **${member.guild.memberCount}** members.`,
 			"timestamp": new Date(),
 			"footer": {
 				"icon_url": "https://cdn.discordapp.com/embed/avatars/0.png",
-				"text": "© DamienVesper 2019"
+				"text": "© DamienVesper & 2swap 2019"
 			},
 			"thumbnail": {
 				"url": `${member.user.avatarURL}`
@@ -52,7 +52,7 @@ client.on(`guildMemberRemove`, member => {
 			"timestamp": new Date(),
 			"footer": {
 				"icon_url": "https://cdn.discordapp.com/embed/avatars/0.png",
-				"text": "© DamienVesper 2019"
+				"text": "© DamienVesper & 2swap 2019"
 			},
 			"thumbnail": {
 				"url": `${member.user.avatarURL}`
@@ -60,16 +60,6 @@ client.on(`guildMemberRemove`, member => {
 		}
 	}); 
 });
-//Declare Cache
-/*var cache = {
-	twitch: {
-		profile: $.getJSON(`https://api.twitch.tv/helix/users?login=trainergabe`)
-	}
-}
-//Update Cache
-setInterval(function() {
-	cache.twitch.profile = $.getJSON(`https://api.twitch.tv/helix/users?login=trainergabe`);
-}, 600000);*/
 
 client.on(`message`, async message => {
 	if(message.author.bot) return;
@@ -93,7 +83,7 @@ client.on(`message`, async message => {
 			client.destroy();
 			return client.login(config.token);
 		}
-		else if(subCommand == `codebase`) return message.reply(`https://repl.it/@DamienVesper/TrainerBot`);
+		else if(subCommand == `codebase`) return message.reply(`https://repl.it/@DamienVesper/TornSpaceBot`);
 		//else if(subCommand == ``) {}
 	}
 	//Alpha | VIP Commands
@@ -101,26 +91,16 @@ client.on(`message`, async message => {
 		let subCommand = args[0];
 		if(!subCommand) return message.channel.send(`Please specify a subcommand.`);
 		else if(subCommand == ``) return message.channel.send(`Please don't use a blank subcommand.`);
-		else if(subCommand == ``) {}
-		else if(subCommand == ``) {}
-		else if(subCommand == ``) {}
-		else if(subCommand == ``) {}
-		else if(subCommand == ``) {}
-		else if(subCommand == ``) {}
+		//else if(subCommand == ``) {}
 	}
 
 	//Regular Commands
 	if(command == ``) return message.channel.send(`Please don't use a blank command.`);
+	else if(command == `register`) {}
+	else if(command == `update`) {}
 	//else if(command == `help`) {}
+	//else if(command == ``) {}
 	
-	//Gabe's Social 
-	//else if(command == `social`) {}
-	else if(command == `twitch`) return message.reply(`Here is TrainerGabe's twitch: https://twitch.tv/trainergabe/`);
-	else if(command == `yt` || command == `youtube`) return message.reply(`Here is TrainerGabe's youtube: https://www.youtube.com/channel/UCSgf08iZwdRRH51aEKYCsZw/.`);
-	else if(command == ``) {}
-	else if(command == ``) {}
-	else if(command == ``) {}
-
 	//Custom Commands
 	/*else if(command == `poll`) {
 		message.react(`✅`)
