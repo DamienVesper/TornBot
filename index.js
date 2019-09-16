@@ -3,7 +3,7 @@ const Math = require(`math.js`);
 const JSON = require(`json`);
 const $ = require(`jquery`);
 
-let replServer = require(`./serverCreate.js`);
+let nodeServer = require(`./nodeServer.js`);
 
 let client = new Discord.Client();
 
