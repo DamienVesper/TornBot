@@ -96,8 +96,12 @@ client.on(`message`, async message => {
 
 	//Regular Commands
 	if(command == ``) return message.channel.send(`Please don't use a blank command.`);
-	else if(command == `register`) {}
+	else if(command == `register`) {
+		
+	}
 	else if(command == `update`) {}
+	else if(command == `stats`) {}
+	//else if(command == `item`) {}
 	//else if(command == `help`) {}
 	//else if(command == ``) {}
 	
@@ -109,4 +113,4 @@ client.on(`message`, async message => {
 	}*/
 	//else if(command == ``) {}
 });
-client.login(config.token);
+client.login(process.env.DISCORD_BOT_TOKEN);
