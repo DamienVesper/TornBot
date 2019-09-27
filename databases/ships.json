@@ -1,0 +1,13 @@
+{
+	"template": {
+		"nameA": "",
+		"nameH": "",
+		"description": "",
+		"thrust": 0,
+		"health": 0,
+		"agility": 0,
+		"price": 0,
+		"weapons": 0,
+		"capacity": 0
+	}
+}	

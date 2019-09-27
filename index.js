@@ -1,116 +1,126 @@
+/* Network-Installed Dependencies */
 const Discord = require(`discord.js`);
 const Math = require(`math.js`);
 const JSON = require(`json`);
 const $ = require(`jquery`);
+const jsonstore = require(`jsonstore.io`);
+const http = require(`http`);
+const https = require(`https`);
+const fs = require(`fs`);
+const getJSON = require(`get-json`);
 
-let nodeServer = require(`./nodeServer.js`);
+/* Local Dependencies */
+const bus = require('./messageBus.js');
+const nodeServer = require('./nodeServer.js');
 
-let client = new Discord.Client();
+/* Cooldown Setup */
+let cooldown = new Set();
+let cdseconds = 3;
+let serverID = null;
 
+/* Client Config */
+let client = new Discord.Client({ disableEveryone: true });
 var config = {
-	prefix: `t.`,
-	devUsername: `DamienVesper`,
-	devDiscriminator: `4927`,
-	alphaUsername: `DamienVesper YT`,
-	alphaDiscriminator: `5698`,
-	token: process.env.DISCORD_BOT_TOKEN
+	developer: `DamienVesper`,
+	developerTag: `#4927`,
+	developerid: null,
+	prefix: `!`,
+	token: process.env.DISCORD_BOT_TOKEN,
+	jsonstoretoken: process.env.JSONSTORE_TOKEN,
+	version: `0.1.1`,
+	footer: `© Torn.Space 2019 | Failed to load version.`,
+	databases: {
+		ships: require(`./databases/ships.json`),
+		weapons: require(`./databases/weapons.json`)
+	}
+}
+config.footer = `© Torn.Space 2019 | v${config.version}`
+module.exports = { config };
+
+/* Client Events */
+client.on(`ready`, async () => {
+		console.log(`${client.user.username} has started, with ${client.users.size} users in ${client.guilds.size} servers.`);
+		client.user.setActivity(`Torn.Space`);
+		refreshActivity();
+});
+
+/* Other Client Events */
+let memberJoin = require(`./clientEvents/memberJoin.js`);
+let memberLeave = require(`./clientEvents/memberLeave.js`);
+
+/* Client Commands */
+client.commands = new Discord.Collection();
+fs.readdir(`./commands/`, (err, files) => {
+		if (err) console.error(err);
+
+		let jsfiles = files.filter(f => f.split(".").pop() === "js");
+		if (jsfiles.length <= 0) {
+				console.log(`No commands to load!`);
+				return;
+		}
+
+		/* Load Commands */
+		console.log(`Loading ${jsfiles.length} command(s)!`);
+		jsfiles.forEach((f, i) => {
+				let props = require(`./cmds/${f}`);
+				console.log(`${i + 1}: ${f} loaded!`);
+				client.commands.set(props.config.name, props);
+		});
+});
+
+/* Client Checks */
+function refreshActivity() {
+	let botGame = `Torn.Space`;
+	let memberCount = client.guilds.get(``).memberCount;
+	client.user.setPresence({
+			game: { 
+					name: `${memberCount} users on ${botGame}.`,
+					type: `WATCHING`
+			},
+			status: `dnd`
+	});
 }
 
-client.on(`ready`, () => {
-  console.log(`Bot has started, with ${client.users.size} users, in ${client.channels.size} channels of ${client.guilds.size} guilds.`); 
-  client.user.setActivity(`${config.prefix}help | ${client.guilds.size} servers | ${client.users.size} players`);
-});
-client.on(`guildCreate`, guild => {
-  console.log(`New guild joined: ${guild.name} (id: ${guild.id}). This guild has ${guild.memberCount} members!`);
-  client.user.setActivity(`${config.prefix}help | ${client.guilds.size} servers | ${client.users.size} players`);
-});
-client.on(`guildDelete`, guild => {
-  console.log(`I have been removed from: ${guild.name} (id: ${guild.id})`);
-  client.user.setActivity(`${config.prefix}help | ${client.guilds.size} servers | ${client.users.size} players`);
-});
-client.on(`guildMemberAdd`, member => {
-  member.guild.channels.get(`564930384861855754`).send({
-		"embed": {
-			"title": "Welcome!",
-			"description": `<@${member.id}>, welcome to the server! Do \`-register [username]\` in #bots to register your torn.space account. \nThere are now **${member.guild.memberCount}** members.`,
-			"timestamp": new Date(),
-			"footer": {
-				"icon_url": "https://cdn.discordapp.com/embed/avatars/0.png",
-				"text": "© DamienVesper & 2swap 2019"
-			},
-			"thumbnail": {
-				"url": `${member.user.avatarURL}`
-			}
-		}
-	});
-});
-client.on(`guildMemberRemove`, member => {
-  member.guild.channels.get(`564930384861855754`).send({
-		"embed": {
-			"title": "Leave...",
-			"description": `<@${member.id}> has just left the server. :cry: \nThere are now **${member.guild.memberCount}** members.`,
-			"timestamp": new Date(),
-			"footer": {
-				"icon_url": "https://cdn.discordapp.com/embed/avatars/0.png",
-				"text": "© DamienVesper & 2swap 2019"
-			},
-			"thumbnail": {
-				"url": `${member.user.avatarURL}`
-			}
-		}
-	}); 
-});
+client.on(`guildMemberAdd`, async () => refreshActivity());
+client.on(`guildMemberRemove`, async () => refreshActivity());
+
+client.on(`guildMemberAdd`, member => bus.emit(`guildMemberAdd`, member));
+client.on(`guildMemberAdd`, member => bus.emit(`guildMemberRemove`, member));
+
 
 client.on(`message`, async message => {
-	if(message.author.bot) return;
-	if(message.content.slice(0, config.prefix.length) != config.prefix) return;
+	/* Botception & Message Handling */
+	if(message.channel.name != `bots` || message.author.bot || message.channel.type == `dm`) return;
 
+	/* Get Commands & Arguments */
 	const args = message.content.slice(config.prefix.length).trim().split(/ +/g);
-  const command = args.shift().toLowerCase();
+	const command = args.shift().toLowerCase();
 
-	//Dev Commands
-	if(message.author.username.toString().toLowerCase() == config.devUsername.toLowerCase() && message.author.discriminator.toString().toLowerCase() == config.devDiscriminator.toLowerCase() && command == `dev`) {
-		let subCommand = args[0];
-		if(!subCommand) return message.channel.send(`Please specify a subcommand.`);
-		else if(subCommand == ``) return message.channel.send(`Please don't use a blank subcommand.`);
-		else if(subCommand == `ping`) return;
-		else if(subCommand == `shudown`) {
-			message.channel.send(`Shutting down ${client.username}...`);
-			return client.destroy();
-		}
-		else if(command == `restart`) {
-			message.channel.send(`Restarting ${client.username}...`);
-			client.destroy();
-			return client.login(config.token);
-		}
-		else if(subCommand == `codebase`) return message.reply(`https://repl.it/@DamienVesper/TornSpaceBot`);
-		//else if(subCommand == ``) {}
+	if(cooldown.has(message.author.id)) {
+		let warningMessage = message.channel.send(`You must wait before you can use a command again.`).then(() => {
+			setTimeout(() => {
+				warningMessage.delete();
+			});
+		});
 	}
-	//Alpha | VIP Commands
-	if(message.author.username.toString().toLowerCase() == config.alphaUsername.toLowerCase() && message.author.discriminator.toString().toLowerCase() == config.alphaDiscriminator.toLowerCase() && command == `vip`) {
-		let subCommand = args[0];
-		if(!subCommand) return message.channel.send(`Please specify a subcommand.`);
-		else if(subCommand == ``) return message.channel.send(`Please don't use a blank subcommand.`);
-		//else if(subCommand == ``) {}
+	if(!message.member.hasPermission("ADMINISTRATOR")) {
+		if(message.member.id != `${config.developerID}`) {
+			cooldown.add(message.author.id);
+		}
 	}
 
-	//Regular Commands
-	if(command == ``) return message.channel.send(`Please don't use a blank command.`);
-	else if(command == `register`) {
-		
-	}
-	else if(command == `update`) {}
-	else if(command == `stats`) {}
-	//else if(command == `item`) {}
-	//else if(command == `help`) {}
-	//else if(command == ``) {}
-	
-	//Custom Commands
-	/*else if(command == `poll`) {
-		message.react(`✅`)
-			.then(() => message.react(`❌`))
-			.catch(() => console.error('One of the emojis failed to react.'));
-	}*/
-	//else if(command == ``) {}
+	setTimeout(() => {
+		cooldown.delete(message.author.id)
+	}, cdseconds * 1000)
+
+	cmd.run(client, message, args);
 });
-client.login(process.env.DISCORD_BOT_TOKEN);
+
+client.login(config.token);
+
+
+http.createServer((req, res) => {
+	res.writeHead(200);
+	res.write(`Initialize bot server. API usage enabled.`);
+	res.end();
+}).listen(8000);
