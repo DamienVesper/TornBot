@@ -8,7 +8,8 @@ const http = require(`http`);
 const https = require(`https`);
 const fs = require(`fs`);
 const getJSON = require(`get-json`);
-let webRequest = require(`request`);
+const webRequest = require(`request`);
+const axios = require(`axios`);
 
 /* Local Dependencies */
 const bus = require(`./messageBus.js`);
@@ -24,11 +25,11 @@ let client = new Discord.Client({ disableEveryone: true });
 var config = {
 	developer: `DamienVesper`,
 	developerTag: `#4927`,
-	developerID: null,
+	developerID: `386940319666667521`,
 	prefix: `!`,
-	token: process.env.DISCORD_BOT_TOKEN,
+	token: process.env.DBL_SELFBOT,
 	jsonstoreToken: process.env.JSONSTORE_TOKEN,
-	version: `0.1.1`,
+	version: `0.1.8`,
 	footer: `© Torn.Space 2019 | Failed to load version.`,
 	databases: {
 		ships: require(`./databases/ships.json`),
@@ -72,7 +73,7 @@ fs.readdir(`./commands/`, (err, files) => {
 /* Client Checks */
 function refreshActivity() {
 	let botGame = `Torn.Space`;
-	let memberCount = 0;//client.guilds.get(``).memberCount;
+	let memberCount = 0; //client.guilds.get(`247490958374076416`).memberCount
 	client.user.setPresence({
 			game: { 
 					name: `${memberCount} users on ${botGame}.`,
@@ -82,41 +83,26 @@ function refreshActivity() {
 	});
 }
 
+//Refresh Activity on Member Event
 client.on(`guildMemberAdd`, async () => refreshActivity());
 client.on(`guildMemberRemove`, async () => refreshActivity());
 
+//Send Message on Member Event
 client.on(`guildMemberAdd`, member => bus.emit(`guildMemberAdd`, member));
-client.on(`guildMemberAdd`, member => bus.emit(`guildMemberRemove`, member));
-
+client.on(`guildMemberRemove`, member => bus.emit(`guildMemberRemove`, member));
 
 client.on(`message`, async message => {
 	/* Botception & Message Handling */
-	if(message.channel.name != `bots` && message.channel.name != `bot-commands`) return;
+	if(message.guild.id == `247490958374076416` && message.channel.name != `bots`) return;
 	if(message.author.bot || message.channel.type == `dm`) return;
+	if(message.content.slice(0, config.prefix.length) != config.prefix) return;
 
 	/* Get Commands & Arguments */
 	const args = message.content.slice(config.prefix.length).trim().split(/ +/g);
 	const command = args.shift().toLowerCase();
 
-	if(cooldown.has(message.author.id)) {
-		let warningMessage = message.channel.send(`You must wait before you can use another command.`).then(() => {
-			setTimeout(() => {
-				warningMessage.delete();
-			}, 1000);
-		});
-	}
-	if(!message.member.hasPermission(`ADMINISTRATOR`)) {
-		if(message.member.id != `${config.developerID}`) {
-			cooldown.add(message.author.id);
-		}
-	}
-	/* Delete Cooldowns */
-	setTimeout(() => {
-		cooldown.delete(message.author.id);
-	}, cdseconds * 1000);
 
-	console.log(command);
-  let cmd = client.commands.get(command); //console.log(cmd);
+  let cmd = client.commands.get(command);
 	if(cmd) cmd.run(client, message, args);
 });
 

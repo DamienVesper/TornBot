@@ -3,8 +3,11 @@ const { config } = require(`../index.js`);
 const axios = require(`axios`);
 const webRequest = require(`request`);
 
-
 module.exports.run = async(client, message, args) => {
+	if(message.author.id == `182205823395692546` 
+	|| message.author.id == `422035078504382464` 
+	|| message.author.id == `312983344910565376` 
+	|| message.author.id == `407149399442063361`) return message.channel.send(`${message.author} You can't use that!`); 
 	let tornUser = args.join(` `);
 	webRequest(`https://torn.space/leaderboard/`, (err, res, body) => {
 		if(!err) {
@@ -44,24 +47,26 @@ module.exports.run = async(client, message, args) => {
 			}
 		}
 		else console.log(err);
-	let tornUserObj = tornUsers[tornUser];
-	if(!tornUserObj) return message.channel.send(`${message.author} That user is either not ranked yet or doesn't exist!`);
-	
-	let sEmbed = new Discord.RichEmbed()
-	.setTitle(`Player Info | ${tornUser}`)
-	.addField(`Placement`, tornUserObj.position, true)
-	.addField(`Side`, tornUserObj.side, true)
-	.addField(`Rank`, tornUserObj.rank, true)
-	.addBlankField()
-	.addField(`Experience`, tornUserObj.xp, true)
-	.addField(`Kills`, tornUserObj.kills, true)
-	//.addField(`Account Type`. tornUserObj.accountType, true)
-	.setTimestamp(new Date())
-	.setFooter(config.footer);
-	message.channel.send(sEmbed);
+
+		axios.get(`https://www.jsonstore.io/${config.jsonstoreToken}/users/${message.author.id}`).then(res => { 
+			if(!res.data[`result`]) return message.channel.send(`${message.author} You are not registered! Please do \`${config.prefix}register\` to register your account.`);
+			
+			axios.delete(`https://www.jsonstore.io/${config.jsonstoreToken}/users/${message.author.id}`, {
+				tornUsername: `${tornUser}`
+			}).then(res => {
+				console.log(`Succesfully deregistered user \`${message.author.id}\` from account.`)
+				message.channel.send(`Succesfully deregistered user \`${message.author.id}\` from account.`);
+			}).catch(err => {
+				console.log(err);
+				message.channel.send(`${message.author} Failed to deregister you because of: ${err}.`);
+			});			
+			axios.delete(`https://www.jsonstore.io/${config.jsonstoreToken}/authorizedUsers/${tornUser}`, {
+				user: `${message.author.id}`
+			});				
+		});
 	});
 }
 
 module.exports.config = {
-  name: `search`
+  name: `deregister`
 }

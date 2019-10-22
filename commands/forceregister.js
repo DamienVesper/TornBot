@@ -3,9 +3,8 @@ const { config } = require(`../index.js`);
 const axios = require(`axios`);
 const webRequest = require(`request`);
 
-
 module.exports.run = async(client, message, args) => {
-	let tornUser = args.join(` `);
+	if(message.author.id != config.developerID) return message.channel.send(`${message.author} You can't use that!`);
 	webRequest(`https://torn.space/leaderboard/`, (err, res, body) => {
 		if(!err) {
 			let tableInfo = body.split(`</tr>`);
@@ -44,24 +43,34 @@ module.exports.run = async(client, message, args) => {
 			}
 		}
 		else console.log(err);
-	let tornUserObj = tornUsers[tornUser];
-	if(!tornUserObj) return message.channel.send(`${message.author} That user is either not ranked yet or doesn't exist!`);
+
+		message.channel.send(`Forcing registration of ${message.guild.memberCount} users...`);
+		message.guild.members.forEach(member => {
+			let tornUser = member.displayName.toLowerCase();
+			let tornUserObj = tornUsers[tornUser];
+			if(!tornUserObj) return console.log(`${member.user.id} is either not ranked yet or doesn't exist!`);
+
+			axios.get(`https://www.jsonstore.io/${config.jsonstoreToken}/users/${member.user.id}`).then(res => {
+				if(res.data[`result`]) return console.log(`${member.user.id} is already registered.`);
+
+				axios.get(`https://www.jsonstore.io/${config.jsonstoreToken}/authorizedUsers/${tornUser}`).then(res => {
+					if(res.data[`result`]) return console.log(`${member.user.id} failed to register to an account as it was in use.`);
+					
+					axios.post(`https://www.jsonstore.io/${config.jsonstoreToken}/users/${member.user.id}`, {
+						tornUsername: `${tornUser}`
+					}).then(res => {
+						console.log(`Succesfully registered user \`${member.user.id}\` to account \`${tornUser}\`.`);
 	
-	let sEmbed = new Discord.RichEmbed()
-	.setTitle(`Player Info | ${tornUser}`)
-	.addField(`Placement`, tornUserObj.position, true)
-	.addField(`Side`, tornUserObj.side, true)
-	.addField(`Rank`, tornUserObj.rank, true)
-	.addBlankField()
-	.addField(`Experience`, tornUserObj.xp, true)
-	.addField(`Kills`, tornUserObj.kills, true)
-	//.addField(`Account Type`. tornUserObj.accountType, true)
-	.setTimestamp(new Date())
-	.setFooter(config.footer);
-	message.channel.send(sEmbed);
+						axios.post(`https://www.jsonstore.io/${config.jsonstoreToken}/authorizedUsers/${tornUser}`, {
+							user: `${member.user.id}`
+						});
+					});
+				});
+			});
+		});
 	});
 }
 
 module.exports.config = {
-  name: `search`
+  name: `forceregister`
 }
