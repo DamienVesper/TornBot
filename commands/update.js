@@ -1,6 +1,6 @@
 const Discord = require(`discord.js`);
 const axios = require(`axios`);
-const { getTornUsers } = require(`../mainFunctions/getTornUsers.js`);
+const { getTornUsers } = require(`../getTornUsers.js`);
 const { config } = require(`../index.js`);
 
 module.exports.run = async(client, message, args) => {
@@ -55,9 +55,8 @@ module.exports.run = async(client, message, args) => {
       else return message.channel.send(`${message.author} Could not determine the type of account you have!`); */
 
       message.channel.send(`Updated roles for \`${message.author.id}\`.`)
-    });
   }, 500);
-}
+});
 
 module.exports.config = {
   name: `update`

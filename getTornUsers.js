@@ -1,5 +1,5 @@
 const request = require(`request`);
-const { config } = require(`../index.js`);
+const { config } = require(`./index.js`);
 
 function getTornUsers() {
     request(`https://torn.space/leaderboard/`, (err, res, body) => {

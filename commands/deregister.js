@@ -1,7 +1,7 @@
 const Discord = require(`discord.js`);
 const { config } = require(`../index.js`);
 const axios = require(`axios`);
-let { getTornUsers } = require(`../mainFunctions/getTornUsers.js`);
+let { getTornUsers } = require(`../getTornUsers.js`);
 
 module.exports.run = async(client, message, args) => {
 	let tornUser = args[0];

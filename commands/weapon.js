@@ -10,7 +10,7 @@ module.exports.run = async(client, message, args) => {
 	if(!weaponObj) return message.channel.send(`${message.author} That weapon does not exist!`);
 	
 	let sEmbed = new Discord.RichEmbed()
-		.setTitle(weaponName])
+		.setTitle(weaponName)
 		.setDescription(weaponObj[`description`])
 		.addField(`Price`, weaponObj[`price`], true)
 		.addField(`Damage`, weaponObj[`damage`], true)
