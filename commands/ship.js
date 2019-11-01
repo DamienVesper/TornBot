@@ -5,11 +5,10 @@ const shipDatabase = require(`../databases/ships.json`);
 module.exports.run = async(client, message, args) => {
 	let shipRank = args[0];
 	if(!shipRank) return message.channel.send(`${message.author} Please identify the ship by its respective rank!`);
-	else {
-		let shipID = shipRank;
-		let shipInfo = shipDatabase[shipRank];
+	let shipInfo = shipDatabase[parseInt(shipRank)];
+	if(!shipInfo) return message.channel.send(`${message.author} That ship doesn't exist!`);
 
-		let sEmbed = new Discord.RichEmbed()
+	let sEmbed = new Discord.RichEmbed()
 		.setColor(`#f4d35e`)
 		.setTitle(`${shipInfo[`nameR`]} / ${shipInfo[`nameB`]}`)
 		.setDescription(`The rank ${shipRank} ship in Torn.Space.`)
@@ -22,8 +21,7 @@ module.exports.run = async(client, message, args) => {
 		.addField(`Weapons`, shipInfo[`weapons`], true)
 		.setFooter(config.footer);
 		
-		message.channel.send(sEmbed);
-	}
+	message.channel.send(sEmbed);
 }
 
 module.exports.config = {
