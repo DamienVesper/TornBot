@@ -4,8 +4,9 @@ const weaponDatabase = require(`../databases/weapons.json`);
 
 module.exports.run = async(client, message, args) => {
 	// return message.channel.send(`${message.author} Command not available!`);
-	let weaponName = args.join(` `);
-	let weaponObj = weaponDatabase[weaponName];
+	let weaponName = args[0];
+	if(!weaponName) return message.channel.send(`${message.author} Please specify a weapon to search for!`);
+	let weaponObj = weaponDatabase[parseInt(weaponName)];
 	if(!weaponObj) return message.channel.send(`${message.author} That weapon does not exist!`);
 	
 	let sEmbed = new Discord.RichEmbed()
