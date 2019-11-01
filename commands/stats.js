@@ -30,12 +30,15 @@ module.exports.run = async(client, message, args) => {
 			let sEmbed = new Discord.RichEmbed()
 				.setTitle(`Player Stats | ${requestedUser}`)
 				.addField(`Placement`, tornUserObj.position, true)
-				.addField(`Side`, tornUserObj.side, true)
+				.addField(`Side`, tornUserObj.team, true)
 				.addField(`Rank`, tornUserObj.rank, true)
 				.addBlankField()
 				.addField(`Experience`, tornUserObj.xp, true)
 				.addField(`Kills`, tornUserObj.kills, true)
-				//.addField(`Account Type`. tornUserObj.accountType, true)
+				.addField(`Account Type`. tornUserObj.accountType, true)
+				/* .addBlankField()
+				.addField(`Money`. tornUserObj.liquidValue, true)
+				.addField(`Tech`. tornUserObj.tech, true) */
 				.setTimestamp(new Date())
 				.setFooter(config.footer);
 				

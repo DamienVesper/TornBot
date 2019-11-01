@@ -29,10 +29,10 @@ function getTornUsers() {
             else newUO = rawTornUsers[i][1];
 
             //Assign side
-            if(rawUO[0].slice(13, 17) == `cyan`) tornUsers[newUO].side = `Human`;
-            else if(rawUO[0].slice(13, 17) == `pink`) tornUsers[newUO].side = `Alien`;
-            else if(rawUO[0].slice(13, 17) == `lime`) tornUsers[newUO].side = `Green`;
-            else tornUsers[newUO] = `Undetermined`;
+            if(rawUO[0].slice(13, 17) == `cyan`) tornUsers[newUO].team = `Human`;
+            else if(rawUO[0].slice(13, 17) == `pink`) tornUsers[newUO].team = `Alien`;
+            else if(rawUO[0].slice(13, 17) == `lime`) tornUsers[newUO].team = `Green`;
+            else tornUsers[newUO].team = `Undetermined`;
 
             //Assign account type
             if(rawUO[1].slice(0, 3) == `[J]`) tornUsers[newUO].accountType = `Janitor`;
@@ -45,8 +45,8 @@ function getTornUsers() {
             tornUsers[newUO].xp = parseInt(rawUO[2]);
             tornUsers[newUO].rank = parseInt(rawUO[3]);
             tornUsers[newUO].kills = parseInt(rawUO[4]);
-            tornUsers[newUO].liquidValue = parseInt(rawUO[5]);
-            tornUsers[newUO].tech = parseInt(rawUO[6]);
+            // tornUsers[newUO].liquidValue = parseInt(rawUO[5]);
+            // tornUsers[newUO].tech = parseInt(rawUO[6]);
         }
 
         //Return user object.

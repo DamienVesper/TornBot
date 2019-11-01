@@ -4,14 +4,8 @@ const { getTornUsers } = require(`../mainFunctions/getTornUsers.js`);
 const { config } = require(`../index.js`);
 
 module.exports.run = async(client, message, args) => {
-  // return message.channel.send(`${message.author} Command not available!`);
+  if(message.author.id != config.developerID) return message.channel.send(`${message.author} Command not available!`);
   
-  var requestedUser;
-	if(message.author.id == `182205823395692546`) requestedUser = `[O] 2swap`;
-	else if(message.author.id == `422035078504382464`) requestedUser = `[M] tardis`;
-	else if(message.author.id == `312983344910565376`) requestedUser = `[M] 24sans24`;
-	else if(message.author.id == `407149399442063361`) requestedUser = `[M] luunch`;
-	else {
 		axios.get(`https://www.jsonstore.io/${config.jsonstoreToken}/users/${message.author.id}`).then(res => {
 			if(!res.data[`result`]) return message.channel.send(`${message.author} The requested user is not registered!`);
 			requestedUser = res.data[`result`][`tornUsername`];		
@@ -25,14 +19,13 @@ module.exports.run = async(client, message, args) => {
       let tornUserObj = tornUsers[requestedUser];
       if(!tornUserObj) return message.channel.send(`${message.author} That account either does not exist or is not ranked yet!`);
 
-      let unremovableRoles = [`Developer`, `Server Admin`, `VIP`, `Wiki Editor`];
-      let placementRoles = [`5`, `10`, `25`, `50`, `75`, `100`, `250`, `500`, `750`, `1000`];
-      let teamRoles = [`Human`, `Alien`, `Green`];
+      let placementRoles = [`453678967996678145`, `453678938275708960`, `453678890628546560`, `453678855534804992`, `453612904365948929`, `453620521632923660`, `453620581041045555`, `453620631116709888`, `453620675526000674`, `453620720581214208`];
+      let teamRoles = [`513781861542002690`, `524288679473184806`, `633664409528565798`];
       let accountRoles = [`Registered`, `Janitor`, `Moderator`, `Owner`];
 
       //Remove current roles (except for non-account related roles)
       message.member.roles.forEach(role => {
-        if(!unremovableRoles.includes(role.id)) message.member.roles.removeRole(role.id);
+        if(placementRoles.includes(role.id) || teamRoles.includes(role.id) || accountRoles.includes(role.id)) message.member.roles.removeRole(role.id);
       });
 
       //Add placement roles
@@ -55,11 +48,11 @@ module.exports.run = async(client, message, args) => {
       else return message.channel.send(`${message.author} Could not determine which team you are on!`);
 
       //Add account roles (change account permission int. based on account status).
-      if(tornUserObj.accountType == `Player`) message.member.roles.addRole(accountRoles[0]);
+      /* if(tornUserObj.accountType == `Player`) message.member.roles.addRole(accountRoles[0]);
       else if(tornUserObj.accountType == `Janitor`) message.member.roles.addRole(accountRoles[1]);
       else if(tornUserObj.accountType == `Moderator`) message.member.roles.addRole(accountRoles[2]);
       else if(tornUserObj.accountType == `Owner`) message.member.roles.addRole(accountRoles[3]);
-      else return message.channel.send(`${message.author} Could not determine the type of account you have!`);
+      else return message.channel.send(`${message.author} Could not determine the type of account you have!`); */
 
       message.channel.send(`Updated roles for \`${message.author.id}\`.`)
     });
