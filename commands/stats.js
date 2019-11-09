@@ -1,93 +1,64 @@
 const Discord = require(`discord.js`);
-const { config } = require(`../index.js`);
-const webRequest = require(`request`);
 const axios = require(`axios`);
+const { config } = require(`../index.js`);
+let { getTornUsers } = require(`../getTornUsers.js`);
 
 module.exports.run = async(client, message, args) => {
-	var requestedUser;
-	var tornUser = message.mentions.members.first();
-	if(!tornUser && args[0]) {
-		tornUser = {
-			id: args[0]
-		}
-	}
-	else tornUser = message.author;
-
-	//Special Accounts
-	if(tornUser.id == `182205823395692546`) requestedUser = `[O] 2swap`;
-	else if(tornUser.id == `422035078504382464`) requestedUser = `[M] tardis`;
-	else if(tornUser.id == `312983344910565376`) requestedUser = `[M] 24sans24`;
-	else if(tornUser.id == `407149399442063361`) requestedUser = `[M] luunch`;
-	else {
-		axios.get(`https://www.jsonstore.io/${config.jsonstoreToken}/users/${tornUser.id}`).then(res => {
+  if(message.author.id != config.developerID) return message.channel.send(`${message.author} Command not available!`);
+  
+		axios.get(`https://www.jsonstore.io/${config.jsonstoreToken}/users/${message.author.id}`).then(res => {
 			if(!res.data[`result`]) return message.channel.send(`${message.author} The requested user is not registered!`);
 			requestedUser = res.data[`result`][`tornUsername`];		
 		}).catch(err => {
 			console.log(err);
 		}); 
-	}
-	
-	setTimeout(() => {
-		webRequest(`https://torn.space/leaderboard/`, (err, res, body) => {
-			if(!err) {
-				let tableInfo = body.split(`</tr>`);
-				var tableData = [];
+  }
+  
+  setTimeout(() => {
+    getTornUsers().then(tornUsers => {
+      let tornUserObj = tornUsers[requestedUser];
+      if(!tornUserObj) return message.channel.send(`${message.author} That account either does not exist or is not ranked yet!`);
 
-				for(let i = 1; i < tableInfo.length - 1; i++) {
-					tableData.push(tableInfo[i].split(`</th>`));
-				}
+      let placementRoles = [`453678967996678145`, `453678938275708960`, `453678890628546560`, `453678855534804992`, `453612904365948929`, `453620521632923660`, `453620581041045555`, `453620631116709888`, `453620675526000674`, `453620720581214208`];
+      let teamRoles = [`513781861542002690`, `524288679473184806`, `633664409528565798`];
+      let accountRoles = [`Registered`, `Janitor`, `Moderator`, `Owner`];
 
-				var rawTornUsers = {};
-				for(let i = 0; i < tableData.length; i++) {
-					let newRawTornUser = tableData[i].slice(`,`);
-					rawTornUsers[`account${i}`] = newRawTornUser;
-				}
+      //Remove current roles (except for non-account related roles)
+      message.member.roles.forEach(role => {
+        if(placementRoles.includes(role.id) || teamRoles.includes(role.id) || accountRoles.includes(role.id)) message.member.roles.removeRole(role.id);
+      });
 
-				var tornUsers = {};
-				for(let i = 0; i < tableData.length; i++) {
+      //Add placement roles
+      if(tornUserObj.placement <= 5) message.member.roles.addRole(placementRoles[0]);
+      else if(tornUserObj.placement <= 10) message.member.roles.addRole(placementRoles[1]);
+      else if(tornUserObj.placement <= 25) message.member.roles.addRole(placementRoles[2]);
+      else if(tornUserObj.placement <= 50) message.member.roles.addRole(placementRoles[3]);
+      else if(tornUserObj.placement <= 75) message.member.roles.addRole(placementRoles[4]);
+      else if(tornUserObj.placement <= 100) message.member.roles.addRole(placementRoles[5]);
+      else if(tornUserObj.placement <= 250) message.member.roles.addRole(placementRoles[6]);
+      else if(tornUserObj.placement <= 500) message.member.roles.addRole(placementRoles[7]);
+      else if(tornUserObj.placement <= 750) message.member.roles.addRole(placementRoles[8]);
+      else if(tornUserObj.placement <= 1000) message.member.roles.addRole(placementRoles[9]);
+      else return message.channel.send(`${message.author} You are not ranked!`);
 
-					//Init User Vars
-					let currentUser = `${rawTornUsers[`account${i}`][1].slice(4)}`;
-					let oldUser = rawTornUsers[`account${i}`];
-					tornUsers[currentUser] = {};
+      //Add team roles (enable access to team-specific channels).
+      if(tornUserObj.team == `Human`) message.member.roles.addRole(teamRoles[0]);
+      else if(tornUserObj.team == `Alien`) message.member.roles.addRole(teamRoles[1]);
+      else if(tornUserObj.team == `Green`) message.member.roles.addRole(teamRoles[2]);
+      else return message.channel.send(`${message.author} Could not determine which team you are on!`);
 
-					//Get User Stats
-					tornUsers[currentUser].position = parseInt(`${oldUser[0].slice(28, rawTornUsers[`account${i}`][0].length - 1)}`);
-					tornUsers[currentUser].rank = parseInt(`${oldUser[3].slice(4)}`);
-					tornUsers[currentUser].xp = parseInt(`${oldUser[2].slice(4)}`);
-					tornUsers[currentUser].kills = parseInt(`${oldUser[4].slice(4)}`);
-				//	tornUsers[currentUser].accountType = oldUser[5];
+      //Add account roles (change account permission int. based on account status).
+      /* if(tornUserObj.accountType == `Player`) message.member.roles.addRole(accountRoles[0]);
+      else if(tornUserObj.accountType == `Janitor`) message.member.roles.addRole(accountRoles[1]);
+      else if(tornUserObj.accountType == `Moderator`) message.member.roles.addRole(accountRoles[2]);
+      else if(tornUserObj.accountType == `Owner`) message.member.roles.addRole(accountRoles[3]);
+      else return message.channel.send(`${message.author} Could not determine the type of account you have!`); */
 
-					//Determine User's Side
-					if(oldUser[0].slice(17, 21) == `cyan`) tornUsers[currentUser].side = `Human`;
-					else if(oldUser[0].slice(17, 21) == `pink`) tornUsers[currentUser].side = `Alien`;
-					else if(oldUser[0].slice(17, 21) == `lime`) tornUsers[currentUser].side = `Moderation`;
-					else console.log(`Could not determine user's team side! ${oldUser}`);
-				}
-			}
-			else console.log(err);
-			
-			//Get Stats
-			let tornUserObj = tornUsers[requestedUser];
-			if(!tornUserObj) return message.channel.send(`${message.author} That user is either not ranked yet or doesn't exist!`);
-			
-			//Send Stats
-			let sEmbed = new Discord.RichEmbed()
-				.setTitle(`Player Stats | ${requestedUser}`)
-				.addField(`Placement`, tornUserObj.position, true)
-				.addField(`Side`, tornUserObj.side, true)
-				.addField(`Rank`, tornUserObj.rank, true)
-				.addBlankField()
-				.addField(`Experience`, tornUserObj.xp, true)
-				.addField(`Kills`, tornUserObj.kills, true)
-				//.addField(`Account Type`. tornUserObj.accountType, true)
-				.setTimestamp(new Date())
-				.setFooter(config.footer);
-				message.channel.send(sEmbed);
-			});
-	}, 500);
-}
+      message.channel.send(`Updated roles for \`${message.author.id}\`.`);
+  }, 500);
+});
+
 
 module.exports.config = {
-  name: `stats`
+  name: `update`
 }
