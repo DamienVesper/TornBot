@@ -1,0 +1,300 @@
+{
+    "new": [
+        {
+            "name": "",
+            "type": "",
+            "location": "A1"
+        },
+        {
+            "name": "",
+            "type": "",
+            "location": "A2"
+        },
+        {
+            "name": "",
+            "type": "",
+            "location": "A3"
+        },
+        {
+            "name": "",
+            "type": "",
+            "location": "A4"
+        },
+        {
+            "name": "Ayahuasca",
+            "type": "",
+            "location": "A5"
+        },
+        {
+            "name": "",
+            "type": "",
+            "location": "A6"
+        },
+        {
+            "name": "",
+            "type": "",
+            "location": "A7"
+        },
+        {
+            "name": "",
+            "type": "",
+            "location": "B1"
+        },
+        {
+            "name": "",
+            "type": "",
+            "location": "B2"
+        },
+        {
+            "name": "",
+            "type": "",
+            "location": "B3"
+        },
+        {
+            "name": "",
+            "type": "",
+            "location": "B4"
+        },
+        {
+            "name": "",
+            "type": "",
+            "location": "B5"
+        },
+        {
+            "name": "",
+            "type": "",
+            "location": "B6"
+        },
+        {
+            "name": "",
+            "type": "",
+            "location": "B7"
+        },
+        {
+            "name": "",
+            "type": "",
+            "location": "C1"
+        },
+        {
+            "name": "",
+            "type": "",
+            "location": "C2"
+        },
+        {
+            "name": "Muscaria",
+            "type": "",
+            "location": "C3"
+        },
+        {
+            "name": "",
+            "type": "",
+            "location": "C4"
+        },
+        {
+            "name": "",
+            "type": "",
+            "location": "C5"
+        },
+        {
+            "name": "",
+            "type": "",
+            "location": "C6"
+        },
+        {
+            "name": "",
+            "type": "",
+            "location": "C7"
+        },
+        {
+            "name": "Pluteus",
+            "type": "",
+            "location": "D1"
+        },
+        {
+            "name": "",
+            "type": "",
+            "location": "D2"
+        },
+        {
+            "name": "",
+            "type": "",
+            "location": "D3"
+        },
+        {
+            "name": "Inocybe",
+            "type": "",
+            "location": "D4"
+        },
+        {
+            "name": "",
+            "type": "",
+            "location": "D5"
+        },
+        {
+            "name": "",
+            "type": "",
+            "location": "D6"
+        },
+        {
+            "name": "",
+            "type": "",
+            "location": "D7"
+        },
+        {
+            "name": "",
+            "type": "",
+            "location": "E1"
+        },
+        {
+            "name": "",
+            "type": "",
+            "location": "E2"
+        },
+        {
+            "name": "",
+            "type": "",
+            "location": "E3"
+        },
+        {
+            "name": "",
+            "type": "",
+            "location": "E4"
+        },
+        {
+            "name": "Weilii",
+            "type": "",
+            "location": "E5"
+        },
+        {
+            "name": "",
+            "type": "",
+            "location": "E6"
+        },
+        {
+            "name": "",
+            "type": "",
+            "location": "E7"
+        },
+        {
+            "name": "",
+            "type": "",
+            "location": "F1"
+        },
+        {
+            "name": "Bohemica",
+            "type": "",
+            "location": "F2"
+        },
+        {
+            "name": "Cordispora",
+            "type": "",
+            "location": "F3"
+        },
+        {
+            "name": "",
+            "type": "",
+            "location": "F4"
+        },
+        {
+            "name": "",
+            "type": "",
+            "location": "F5"
+        },
+        {
+            "name": "",
+            "type": "",
+            "location": "F6"
+        },
+        {
+            "name": "",
+            "type": "",
+            "location": "F7"
+        },
+        {
+            "name": "",
+            "type": "",
+            "location": "G1"
+        },
+        {
+            "name": "",
+            "type": "",
+            "location": "G2"
+        },
+        {
+            "name": "Acutipilea",
+            "type": "",
+            "location": "G3"
+        },
+        {
+            "name": "",
+            "type": "",
+            "location": "G4"
+        },
+        {
+            "name": "",
+            "type": "",
+            "location": "G5"
+        },
+        {
+            "name": "Purpurea",
+            "type": "",
+            "location": "G6"
+        },
+        {
+            "name": "",
+            "type": "",
+            "location": "G7"
+        }
+    ],
+    "old": [
+        // "Inocybe",
+        "Bisporus",
+        "Lophophora",
+        "Pluteus",
+        "Pholiotina",
+        "Panaeolina",
+        "Conocybe",
+        "Fimicola",
+        "Cubensis",
+        "Mycena",
+        "Cyanescens",
+        "Semilanceata",
+        // "Bohemica",
+        "Guzman",
+        "Lysergia",
+        "Stuntzii",
+        "Muscaria",
+        "Gymnopilus",
+        "Baeocystis",
+        // "Cordispora",
+        // "Acutipilea",
+        "Rosetta",
+        "Copelandia",
+        "Azurescens",
+        "Indica",
+        "Panaeolus",
+        "Ovoid",
+        "Stropharea",
+        "Ayahuasca",
+        "Psilocybe",
+        "Agaricales",
+        "Venenata",
+        // "Weilii",
+        "Amanita",
+        "Mexicana",
+        "Galerina",
+        "Basidius",
+        "Argyreia",
+        "Allenii",
+        "Stamets",
+        "Mycetes",
+        "Cinctulus",
+        "Lophophora",
+        // "Purpurea",
+        "Tampanensis",
+        "Aztecorum",
+        // "Muscaria",
+        "Somniferum",
+        "Caapi"
+    ]
+}
