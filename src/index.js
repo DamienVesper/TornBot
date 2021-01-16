@@ -13,8 +13,7 @@ const client = new Discord.Client({
 const mongoDB = require(`mongodb`);
 const mongoose = require(`mongoose`);
 
-mongoDB.connect(config.db.uri, config.db.uriParams).then(() => console.log(`Succesfully connected to MongoDB Atlas.`)).catch(err => console.error(err));
-mongoose.connect(config.db.uri, config.db.uriParams).catch(err => console.error(err));
+mongoose.connect(config.db.uri, config.db.uriParams).then(() => console.log(`Connected to database.`)).catch(err => console.error(err));
 
 // Export config and client for commands / events.
 module.exports = {

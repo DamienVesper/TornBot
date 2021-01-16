@@ -12,7 +12,6 @@ module.exports = {
 
 module.exports.run = async (client, message, args) => {
     const tornUsers = await require(`../api.js`);
-    // console.log(tornUsers);
 
     let lb = [];
     for (let i in tornUsers) {
