@@ -26,7 +26,7 @@ client.api = require(`./api.js`);
 
 // Load events.
 client.on(`ready`, async () => {
-    console.log(`${client.user.username}#${client.user.discriminator} has started, with ${client.users.size} users in ${client.guilds.size} servers at ${config.hostname}.`);
+    console.log(`${client.user.username}#${client.user.discriminator} has started, with ${client.users.size} users in ${client.guilds.size} servers.`);
     refreshActivity();
 });
 
