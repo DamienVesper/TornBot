@@ -1,6 +1,5 @@
 // Dependencies
 const Discord = require(`discord.js`);
-const Math = require(`math.js`);
 const fs = require(`fs`);
 const dotenv = require(`dotenv`).config();
 
@@ -28,20 +27,6 @@ client.api = require(`./api.js`);
 client.on(`ready`, async () => {
     console.log(`${client.user.username}#${client.user.discriminator} has started, with ${client.users.size} users in ${client.guilds.size} servers.`);
     refreshActivity();
-});
-
-// Load commands.
-client.events = new Discord.Collection();
-fs.readdir(`./src/events/`, (err, files) => {
-    if (err) console.error(err);
-
-    let jsFiles = files.filter(f => f.split(`.`).pop() == `js`);
-    if (jsFiles.length <= 0) return console.log(`No events to load!`);
-
-    /* Load Commands */
-    jsFiles.forEach(f => client.events.set(f.split(`.`)[0], require(`./events/${f}`)));
-    // console.log(`[${client.shard.id}]: Loaded ${jsFiles.length} event${jsFiles.length === 1 ? ``: `s`}!`);
-    console.log(`Loaded ${jsFiles.length} event${jsFiles.length === 1 ? null: `s`}!`);
 });
 
 /* Client Commands */
