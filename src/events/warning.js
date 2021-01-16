@@ -1,1 +1,0 @@
-const { config, client } = require(`../index.js`);

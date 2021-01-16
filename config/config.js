@@ -8,9 +8,8 @@ var config = {
         danger: 0xff0000
     },
 	developer: `DamienVesper`,
-	developerTag: `2257`,
+	developerTag: `0001`,
     developerID: `386940319666667521`,
-    hostname: `gateway.discord.gg`,
 	prefix: `;`,
     token: process.env.DISCORD_BOT_TOKEN,
     db: {

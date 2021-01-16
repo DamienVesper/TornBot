@@ -1,6 +1,8 @@
 const Discord = require(`discord.js`);
 const User = require(`../models/user.model`);
-const { config } = require(`../index.js`);
+const {
+    config
+} = require(`../index.js`);
 
 module.exports = {
     name: `ship`,
@@ -8,12 +10,12 @@ module.exports = {
     usage: `<rank>`
 }
 
-module.exports.run = async(client, message, args) => {
-    const ships = await require(`../databases/ships.json`);
-    
+module.exports.run = async (client, message, args) => {
+    const ships = require(`../../config/ships.json`);
+
     const ship = ships[args[0]];
-    if(!ship) return message.channel.send(`${message.author} That rank doesn't exist!`)
-    
+    if (!ship) return message.channel.send(`${message.author} That rank doesn't exist!`)
+
     let sEmbed = new Discord.RichEmbed()
         .setAuthor(`Ships | Rank ${args[0]}`, message.author.avatarURL)
         .setColor(0xffa500)

@@ -1,6 +1,8 @@
 const Discord = require(`discord.js`);
 const User = require(`../models/user.model`);
-const { config } = require(`../index.js`);
+const {
+    config
+} = require(`../index.js`);
 
 module.exports = {
     name: `help`,
@@ -8,7 +10,7 @@ module.exports = {
     usage: null
 }
 
-module.exports.run = async(client, message, args) => {
+module.exports.run = async (client, message, args) => {
     let sEmbed = new Discord.RichEmbed()
         .setAuthor(`Help Menu`, message.author.avatarURL)
         .addField(`Accounts`, `

@@ -1,6 +1,8 @@
 const Discord = require(`discord.js`);
 const User = require(`../models/user.model`);
-const { config } = require(`../index.js`);
+const {
+    config
+} = require(`../index.js`);
 
 module.exports = {
     name: `profile`,
@@ -8,7 +10,7 @@ module.exports = {
     usage: `[user::mention]`
 }
 
-module.exports.run = async(client, message, args) => {
+module.exports.run = async (client, message, args) => {
     const getUsers = await require(`../api.js`);
     const user = null;
 
