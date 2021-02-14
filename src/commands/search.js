@@ -26,7 +26,7 @@ module.exports.run = async (client, message, args) => {
 
     const sEmbed = new Discord.RichEmbed()
         .setAuthor(`#${tornUserObj.placement} | ${tornUserObj.displayName}`, client.user.avatarURL)
-        .setColor(tornUserObj.team == `Green` ? 0xbfff00 : tornUserObj.team == `Alien` ? 0xffc0cb : tornUserObj.team == `Human` ? 0x00b7eb : 0x00000)
+        .setColor(tornUserObj.team === `Green` ? 0xbfff00 : tornUserObj.team === `Alien` ? 0xffc0cb : tornUserObj.team === `Human` ? 0x00b7eb : 0x00000)
         .setDescription(`${dbUser ? `Owned by ${message.guild.members.get(dbUser.discordID)}.` : `This account has not been claimed yet!`}
         
             **Rank**: ${tornUserObj.rank}
