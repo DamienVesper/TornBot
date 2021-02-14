@@ -6,7 +6,8 @@
   "scripts": {
     "dist-test": "node ./src/index.js",
     "prod": "pm2 start ./src/index.js",
-    "dev": "nodemon ./src/index.js"
+    "dev": "nodemon ./src/index.js",
+    "dev:lint": "eslint . --fix -- ext.js"
   },
   "repository": {
     "type": "git",
@@ -22,6 +23,14 @@
     "url": "https://github.com/DamienVesper/torn-bot/issues"
   },
   "homepage": "https://github.com/DamienVesper/torn-bot#readme",
+  "devDependencies": {
+    "babel-eslint": "^10.1.0",
+    "eslint": "^7.20.0",
+    "eslint-config-standard": "^16.0.2",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^4.3.1"
+  },
   "dependencies": {
     "axios": "^0.21.1",
     "discord.js": "^11.5.1",
