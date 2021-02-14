@@ -8,10 +8,10 @@ module.exports = {
     name: `help`,
     description: `View help menu.`,
     usage: null
-}
+};
 
 module.exports.run = async (client, message, args) => {
-    let sEmbed = new Discord.RichEmbed()
+    const sEmbed = new Discord.RichEmbed()
         .setAuthor(`Help Menu`, message.author.avatarURL)
         .addField(`Accounts`, `
             \`${config.prefix}ship\` \`[rank]\` - View ships.
@@ -33,4 +33,4 @@ module.exports.run = async (client, message, args) => {
         .setTimestamp(new Date())
         .setFooter(config.footer);
     return message.channel.send(sEmbed);
-}
+};

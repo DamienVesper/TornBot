@@ -8,14 +8,14 @@ module.exports = {
     name: `profile`,
     description: `View a user's profile.`,
     usage: `[user::mention]`
-}
+};
 
 module.exports.run = async (client, message, args) => {
     const getUsers = await require(`../api.js`);
     const user = null;
 
     const tornUser = getUsers[user];
-    let sEmbed = new Discord.RichEmbed()
+    const sEmbed = new Discord.RichEmbed()
         .setAuthor(`#${tornUser.placement} | ${tornUser.displayName}`)
         .setDescription(`
             Rank: ${tornUser.rank}
@@ -27,4 +27,4 @@ module.exports.run = async (client, message, args) => {
         `)
         .setTimestamp(new Date())
         .setFooter(config.footer);
-}
+};

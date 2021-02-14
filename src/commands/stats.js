@@ -8,7 +8,7 @@ module.exports = {
     name: `stats`,
     description: `View user stats.`,
     usage: `[user]`
-}
+};
 
 module.exports.run = async (client, message, args) => {
     const tornUsers = await require(`../api.js`);
@@ -29,7 +29,7 @@ module.exports.run = async (client, message, args) => {
     if (!dbUser) return message.channel.send(`${message.author} That user is not linked to an account!`);
 
     const tornUserObj = tornUsers[dbUser.accountName];
-    let sEmbed = new Discord.RichEmbed()
+    const sEmbed = new Discord.RichEmbed()
         .setAuthor(`#${tornUserObj.placement} | ${tornUserObj.displayName}`, client.user.avatarURL)
         .setColor(tornUserObj.team == `Green` ? 0x32cd32 : tornUserObj.team == `Alien` ? 0xffc0cb : tornUserObj.team == `Human` ? 0x00b7eb : 0x00000)
         .setDescription(`
@@ -43,4 +43,4 @@ module.exports.run = async (client, message, args) => {
         .setTimestamp(new Date())
         .setFooter(config.footer);
     message.channel.send(sEmbed);
-}
+};

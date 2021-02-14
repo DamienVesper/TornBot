@@ -8,15 +8,15 @@ module.exports = {
     name: `ship`,
     description: `View ship stats.`,
     usage: `<rank>`
-}
+};
 
 module.exports.run = async (client, message, args) => {
     const ships = require(`../../config/ships.json`);
 
     const ship = ships[args[0]];
-    if (!ship) return message.channel.send(`${message.author} That rank doesn't exist!`)
+    if (!ship) return message.channel.send(`${message.author} That rank doesn't exist!`);
 
-    let sEmbed = new Discord.RichEmbed()
+    const sEmbed = new Discord.RichEmbed()
         .setAuthor(`Ships | Rank ${args[0]}`, message.author.avatarURL)
         .setColor(0xffa500)
         .setDescription(`
@@ -31,4 +31,4 @@ module.exports.run = async (client, message, args) => {
         .setTimestamp(new Date())
         .setFooter(config.footer);
     return message.channel.send(sEmbed);
-}
+};

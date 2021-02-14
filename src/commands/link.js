@@ -8,7 +8,7 @@ module.exports = {
     name: `link`,
     description: `Link your Torn account to that of Discord.`,
     usage: `<torn_username>`
-}
+};
 
 module.exports.run = async (client, message, args) => {
     const tornUsers = await require(`../api.js`);
@@ -33,4 +33,4 @@ module.exports.run = async (client, message, args) => {
         discordTag: message.author.tag
     });
     user.save(err => err ? message.channel.send(`${message.author} Failed to create your account.`) : message.channel.send(`${message.author} You are now linked to account \`${args[0]}\`.`));
-}
+};

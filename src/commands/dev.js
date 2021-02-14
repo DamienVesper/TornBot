@@ -8,7 +8,7 @@ module.exports = {
     name: `dev`,
     description: `dev`,
     usage: `<subcmd>`
-}
+};
 
 module.exports.run = async (client, message, args) => {
     if (message.author.id != config.developerID) return message.channel.send(`${message.author} You can't use that!`);
@@ -26,11 +26,11 @@ module.exports.run = async (client, message, args) => {
             });
             if (!dbUser) return message.channel.send(`${message.author} That user doesn't have an account yet!`);
 
-            let tornUserObj = tornUsers[dbUser.accountName];
+            const tornUserObj = tornUsers[dbUser.accountName];
 
-            let placementRoles = [`453678967996678145`, `453678938275708960`, `453678890628546560`, `453678855534804992`, `453612904365948929`, `453620521632923660`, `453620581041045555`, `453620631116709888`, `453620675526000674`, `453620720581214208`];
-            let teamRoles = [`513781861542002690`, `524288679473184806`, `633664409528565798`];
-            let accountRoles = [`Player`, `488384379828043796`, `593291717394825218`, `Owner`];
+            const placementRoles = [`453678967996678145`, `453678938275708960`, `453678890628546560`, `453678855534804992`, `453612904365948929`, `453620521632923660`, `453620581041045555`, `453620631116709888`, `453620675526000674`, `453620720581214208`];
+            const teamRoles = [`513781861542002690`, `524288679473184806`, `633664409528565798`];
+            const accountRoles = [`Player`, `488384379828043796`, `593291717394825218`, `Owner`];
 
             const member = await message.guild.members.get(userID);
             try {
@@ -51,9 +51,9 @@ module.exports.run = async (client, message, args) => {
                 else if (tornUserObj.team == `Alien`) member.addRole(teamRoles[1]);
                 else member.addRole(teamRoles[2]);
 
-                if (tornUserObj.accountType == `Player`) {} //member.addRole(accountRoles[0]);
+                if (tornUserObj.accountType == `Player`) {} // member.addRole(accountRoles[0]);
                 else if (tornUserObj.accountType == `VIP`) member.addRole(accountRoles[1]);
-                else if (tornUserObj.accountType == `Moderator`) member.addRole(accountRoles[2])
+                else if (tornUserObj.accountType == `Moderator`) member.addRole(accountRoles[2]);
                 // else if(tornUserObj.accountType == `Administrator`) member.addRole(accountRoles[3]);
                 // else member.addRole(accountRoles[3]);
             } catch (err) {
@@ -63,4 +63,4 @@ module.exports.run = async (client, message, args) => {
                 message.channel.send(`${message.author} Succesfully updated user's roles.`);
             }
     }
-}
+};

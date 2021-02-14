@@ -19,7 +19,7 @@ mongoose.connect(config.db.uri, config.db.uriParams).then(() => console.log(`Con
 module.exports = {
     config,
     client
-}
+};
 client.api = require(`./api.js`);
 
 // Load events.
@@ -33,16 +33,16 @@ client.commands = new Discord.Collection();
 fs.readdir(`./src/commands/`, (err, files) => {
     if (err) console.error(err);
 
-    let jsFiles = files.filter(f => f.split(`.`).pop() == `js`);
+    const jsFiles = files.filter(f => f.split(`.`).pop() == `js`);
     if (jsFiles.length <= 0) return console.log(`No commands to load!`);
 
     /* Load Commands */
     jsFiles.forEach(f => {
-        let props = require(`./commands/${f}`);
+        const props = require(`./commands/${f}`);
         client.commands.set(props.name, props);
     });
     // console.log(`[${client.shard.id}]: Loaded ${jsFiles.length} command${jsFiles.length === 1 ? ``: `s`}!`);
-    console.log(`Loaded ${jsFiles.length} command${jsFiles.length === 1 ? ``: `s`}!`);
+    console.log(`Loaded ${jsFiles.length} command${jsFiles.length === 1 ? `` : `s`}!`);
 });
 
 /* Client Checks */
@@ -54,7 +54,7 @@ const refreshActivity = async () => {
         },
         status: `dnd`
     });
-}
+};
 
 client.on(`message`, async message => {
     /* Botception & Message Handling */
@@ -68,7 +68,7 @@ client.on(`message`, async message => {
     const command = args.shift().toLowerCase();
 
     /* Validate Commands */
-    let cmd = client.commands.get(command);
+    const cmd = client.commands.get(command);
 
     if (!cmd) return;
     else if ((cmd.usage) && args.length < (cmd.usage.split(`<`).length) - 1) return message.channel.send(`${message.author} Proper usage is \`${config.prefix + cmd.name} ${cmd.usage}\`.`);
@@ -78,7 +78,7 @@ client.on(`message`, async message => {
             console.log(`${message.author.tag} ran command ${command} in ${message.guild.name} [${message.guild.id}].`);
             cmd.run(client, message, args);
         } catch (err) {
-            console.log(`There was an error executing command ${command} by ${message.author.tag}.`)
+            console.log(`There was an error executing command ${command} by ${message.author.tag}.`);
         }
     }
 });
