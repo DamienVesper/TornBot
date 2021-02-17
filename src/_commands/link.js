@@ -11,7 +11,7 @@ module.exports = {
 };
 
 module.exports.run = async (client, message, args) => {
-    const tornUsers = await require(`../api.js`);
+    const tornUsers = await require(`../utils/getTornUsers.js`);
     const tornUser = args[0].toString().toLowerCase();
 
     const accountRegistered = await User.findOne({

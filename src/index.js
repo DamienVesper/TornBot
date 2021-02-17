@@ -20,7 +20,7 @@ module.exports = {
     config,
     client
 };
-client.api = require(`./api.js`);
+client.api = require(`./utils/getTornUsers.js`);
 
 // Load events.
 client.on(`ready`, async () => {
