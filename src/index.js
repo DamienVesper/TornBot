@@ -19,6 +19,9 @@ const client = new Discord.Client({
     sync: true
 });
 
+// Uncaught handler.
+process.on(`uncaughtException`, e => log(`red`, e.stack));
+
 // Export client.
 module.exports = client;
 logASCII();
