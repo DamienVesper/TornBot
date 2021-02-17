@@ -1,4 +1,6 @@
 const Discord = require(`discord.js`);
+const User = require(`../models/user.model.js`);
+const getTornUsers = require(`../api.js`);
 
 module.exports = {
     desc: `View user stats.`,
@@ -6,5 +8,8 @@ module.exports = {
 };
 
 module.exports.run = async (client, message, args) => {
-    const getTornUsers = await require(`../api.js`);
+    const tornUsers = await getTornUsers();
+
+    let discUser;
+    if (args[0]) discUser = message.mentions.members.first() || args[0] || client.users.get(discUser);
 };
