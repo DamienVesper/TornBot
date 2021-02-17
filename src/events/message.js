@@ -14,7 +14,7 @@ module.exports = async (client, message) => {
     const command = args.shift().toLowerCase();
 
     // Grab the command from the handler and run it.
-    const cmd = client.commands.get(command);
+    const cmd = client.commands.find(cmd => cmd.name === command);
     if (!cmd) return;
 
     if ((cmd.usage) && args.length < (cmd.usage.split(`<`).length) - 1) return message.channel.send(`${message.author} Proper usage is \`${config.prefix + cmd.name} ${cmd.usage}\`.`);
