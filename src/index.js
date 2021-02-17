@@ -11,7 +11,6 @@ const logASCII = require(`./utils/logASCII.js`);
 
 const config = require(`../config/config.js`);
 
-
 const mongoose = require(`mongoose`);
 mongoose.connect(config.db.uri, config.db.uriParams).then(() => log(`green`, `Connected to database.`)).catch(err => log(`red`, err.stack));
 
