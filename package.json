@@ -6,7 +6,7 @@
   "scripts": {
     "dist-test": "node ./src/index.js",
     "prod": "pm2 start ./src/index.js",
-    "dev": "node ./src/index.js",
+    "dev": "node ./src/index.js --inspect",
     "dev:lint": "eslint . --fix --ext .js"
   },
   "repository": {
