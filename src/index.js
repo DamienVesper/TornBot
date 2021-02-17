@@ -21,10 +21,10 @@ module.exports = client;
 // Load events.
 const eventFiles = fs.readdirSync(path.resolve(__dirname, `./events`)).filter(file => file.endsWith(`js`));
 for (const file of eventFiles) {
-    const reqFile = require(`./events/${file}`);
+    const event = require(`./events/${file}`);
 
     log(`yellow`, `Loaded event ${file}.`);
-    client.on(file.split(`.`)[0], reqFile.bind(client));
+    client.on(file.split(`.`)[0], event.bind(null, client));
 }
 
 // Load commands.
