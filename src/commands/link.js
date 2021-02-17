@@ -1,5 +1,3 @@
-const Discord = require(`discord.js`);
-const { user } = require("../index.js");
 const User = require(`../models/user.model.js`);
 
 const getTornUsers = require(`../utils/getTornUsers.js`);
