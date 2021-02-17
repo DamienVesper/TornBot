@@ -1,8 +1,5 @@
 const Discord = require(`discord.js`);
-const User = require(`../models/user.model`);
-const {
-    config
-} = require(`../index.js`);
+const config = require(`../../config/config.js`);
 
 module.exports = {
     name: `ship`,

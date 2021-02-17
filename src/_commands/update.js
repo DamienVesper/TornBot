@@ -38,15 +38,12 @@ module.exports.run = async (client, message, args) => {
         else if (tornUserObj.placement <= 750) message.member.addRole(placementRoles[1]);
         else if (tornUserObj.placement <= 1000) message.member.addRole(placementRoles[0]);
 
-        if (tornUserObj.team == `Human`) message.member.addRole(teamRoles[0]);
-        else if (tornUserObj.team == `Alien`) message.member.addRole(teamRoles[1]);
+        if (tornUserObj.team === `Human`) message.member.addRole(teamRoles[0]);
+        else if (tornUserObj.team === `Alien`) message.member.addRole(teamRoles[1]);
         else message.member.addRole(teamRoles[2]);
 
-        if (tornUserObj.accountType == `Player`) {} // message.member.addRole(accountRoles[0]);
-        else if (tornUserObj.accountType == `VIP`) message.member.addRole(accountRoles[1]);
-        else if (tornUserObj.accountType == `Moderator`) message.member.addRole(accountRoles[2]);
-        // else if(tornUserObj.accountType == `Administrator`) message.member.addRole(accountRoles[3]);
-        // else message.member.addRole(accountRoles[3]);
+        if (tornUserObj.accountType === `VIP`) message.member.addRole(accountRoles[1]);
+        else if (tornUserObj.accountType === `Moderator`) message.member.addRole(accountRoles[2]);
     } catch (err) {
         console.error(err);
         return message.channel.send(`${message.author} There was an error executing that command. Please notify a developer.`);
