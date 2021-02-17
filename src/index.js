@@ -51,5 +51,6 @@ for (const file of commandFiles) {
         run: command.run
     });
 }
+
 logHeader();
 client.login(config.token).catch(() => log(`red`, `Failed to authenticate client with application.`));

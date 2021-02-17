@@ -1,4 +1,5 @@
-const dotenv = require(`dotenv`).config();
+require(`dotenv`).config();
+const pjson = require(`../package.json`);
 
 const config = {
     colors: {
@@ -13,15 +14,14 @@ const config = {
     prefix: `;`,
     token: process.env.DISCORD_BOT_TOKEN,
     db: {
-        uri: process.env.DATABASE_URI,
+        uri: process.env.MONGO_URI,
         uriParams: {
             useNewUrlParser: true,
             useUnifiedTopology: true
-        },
-        password: process.env.DATABASE_PASSWORD
+        }
     },
-    version: `0.0.1b`,
-    footer: `© Torn.Space 2020`
+    version: pjson.version,
+    footer: `© Created by ${pjson.author}`
 };
 
 config.footer += ` | v${config.version}`;
