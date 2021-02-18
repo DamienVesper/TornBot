@@ -19,7 +19,7 @@ module.exports.run = async (client, message, args) => {
     const dbUser = await User.findOne({ discordID: discordUser.id });
     if (!dbUser) return message.channel.send(`${m} That user does not have an account!`);
 
-    const tornUser = tornUsers.find(username => username === dbUser.accountName);
+    const tornUser = tornUsers.find(user => user.username === dbUser.accountName);
     const sEmbed = new Discord.RichEmbed()
         .setAuthor(`#${tornUser.placement} | ${tornUser.displayName}`, client.user.avatarURL)
         .setColor(tornUser.team === `Green` ? 0x32cd32 : tornUser.team === `Alien` ? 0xffc0cb : tornUser.team === `Human` ? 0x00b7eb : 0x00000)
