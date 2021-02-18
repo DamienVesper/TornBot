@@ -17,13 +17,15 @@ module.exports.run = async (client, message, args) => {
     const subCommand = args.shift();
     if (subCommand === `updateall`) {
         const dbUsers = await User.find({});
-        for (const dbUser of dbUsers) {
-            const discordMember = message.guild.members.get(dbUser.discordID);
+        dbUsers.forEach((dbUser, i) => {
+            setTimeout(() => {
+                const discordMember = message.guild.members.get(dbUser.discordID);
 
-            if (!discordMember) log(`cyan`, `User not found in Discord, skipping...`);
-            else updateRoles(client, discordMember, dbUser.accountName, tornUsers);
-        }
-        return message.channel.send(`${m} Updating roles for ${dbUsers.length} users.`);
+                if (!discordMember) log(`cyan`, `User not found in Discord, skipping...`);
+                else updateRoles(client, discordMember, dbUser.accountName, tornUsers);
+            }, 2e3 * i);
+        });
+        message.channel.send(`${m} Updating roles for ${dbUsers.length} users.`);
     }
     else if (subCommand === `registerall`) {
         message.channel.send(`${m} Registering users...`);
