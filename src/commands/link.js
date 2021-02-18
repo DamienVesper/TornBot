@@ -4,7 +4,7 @@ const getTornUsers = require(`../utils/getTornUsers.js`);
 
 module.exports = {
     desc: `View user stats.`,
-    usage: `[user]`
+    usage: `<user>`
 };
 
 module.exports.run = async (client, message, args) => {
