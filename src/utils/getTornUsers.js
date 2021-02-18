@@ -21,11 +21,23 @@ module.exports = async () => {
     for (const i in rawTD) {
         const curUser = rawTD[i];
         const rawTeamData = curUser[0].slice(13, 17);
+        const accountType = curUser[1].slice(0, 1) === `[`
+            ? curUser[1].slice(1, 2) === `V`
+                ? `VIP`
+                : curUser[1].slice(1, 2) === `M`
+                    ? `Moderator`
+                    : curUser[1].slice(1, 2) === `A`
+                        ? `Admin`
+                        : curUser[1].slice(1, 2) === `O`
+                            ? `Owner`
+                            : `Player`
+            : `Player`;
 
         tornUsers.push({
             username: curUser[1],
             placement: parseInt(curUser[0].slice(23, curUser[0].length - 1)),
-            team: rawTeamData === `cyan` ? 0 : rawTeamData === `pink` ? 1 : 2,
+            team: rawTeamData === `cyan` ? `Human` : rawTeamData === `pink` ? `Alien` : `Cyborg`,
+            type: accountType,
 
             xp: parseInt(curUser[2]),
             rank: parseInt(curUser[3]),
