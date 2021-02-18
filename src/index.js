@@ -1,15 +1,14 @@
 require(`dotenv`).config();
+const config = require(`../config/config.js`);
 
 const Discord = require(`discord.js`);
 const fs = require(`fs`);
 const path = require(`path`);
 
-// Bulky logging utilities.
+// Utilities.
 const log = require(`./utils/log.js`);
 const logHeader = require(`./utils/logHeader.js`);
 const logASCII = require(`./utils/logASCII.js`);
-
-const config = require(`../config/config.js`);
 
 const mongoose = require(`mongoose`);
 mongoose.connect(config.db.uri, config.db.uriParams).then(() => log(`green`, `Connected to database.`)).catch(err => log(`red`, err.stack));
