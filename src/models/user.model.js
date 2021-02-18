@@ -5,7 +5,7 @@ const userSchema = new mongoose.Schema({
         type: Boolean,
         required: true
     },
-    created: {
+    creationDate: {
         type: String,
         required: true
     },

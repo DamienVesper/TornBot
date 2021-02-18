@@ -20,6 +20,8 @@ module.exports = async () => {
     // Parse raw data and append to the array of users.
     for (const i in rawTD) {
         const curUser = rawTD[i];
+        if (curUser.length < 7) continue;
+
         const rawTeamData = curUser[0].slice(13, 17);
         const accountType = curUser[1].slice(0, 1) === `[`
             ? curUser[1].slice(1, 2) === `V`

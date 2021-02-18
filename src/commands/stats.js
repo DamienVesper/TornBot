@@ -13,7 +13,7 @@ module.exports.run = async (client, message, args) => {
     const m = `${message.author} »`;
     const tornUsers = await getTornUsers();
 
-    const discUser = message.mentions.members.first() || args[0];
+    const discUser = message.mentions.members.first() || args[0] || message.member.id;
     const discordUser = client.users.get(discUser);
 
     const dbUser = await User.findOne({ discordID: discordUser.id });
