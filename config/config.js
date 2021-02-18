@@ -11,6 +11,7 @@ const config = {
     developer: `DamienVesper`,
     developerTag: `0001`,
     developerID: `386940319666667521`,
+    botChannel: `493489353046097926`,
     prefix: `;`,
     token: process.env.DISCORD_BOT_TOKEN,
     db: {
