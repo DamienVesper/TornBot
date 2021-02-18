@@ -3,7 +3,7 @@ const User = require(`../models/user.model.js`);
 const getTornUsers = require(`../utils/getTornUsers.js`);
 
 module.exports = {
-    desc: `View user stats.`,
+    desc: `Link your Torn account to Discord.`,
     usage: `<user>`
 };
 
