@@ -16,8 +16,8 @@ module.exports.run = async (client, message, args) => {
     const discordUser = client.users.get(discUser);
 
     const dbUser = discordUser ? await User.findOne({ discordID: discordUser.id }) : undefined;
-
     const tornUser = tornUsers.find(user => user.username === (dbUser ? dbUser.accountName : discUser));
+
     const sEmbed = new Discord.RichEmbed()
         .setAuthor(`#${tornUser.placement} | ${tornUser.displayName}`, client.user.avatarURL)
         .setColor(tornUser.team === `Cyborg` ? 0x32cd32 : tornUser.team === `Alien` ? 0xffc0cb : tornUser.team === `Human` ? 0x00b7eb : 0x00000)
