@@ -7,7 +7,7 @@
     <img src="https://img.shields.io/github/last-commit/DamienVesper/TornBot?style=for-the-badge&color=1aa9f0">
     <img src="https://img.shields.io/github/contributors/DamienVesper/TornBot?style=for-the-badge&color=1aa9f0">
 </p>
-
+<br>
 
 **Local Bot Development Setup**
 <br>
