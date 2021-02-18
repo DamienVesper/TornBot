@@ -22,7 +22,7 @@ module.exports.run = async (client, message, args) => {
     const tornUser = tornUsers.find(user => user.username === dbUser.accountName);
     const sEmbed = new Discord.RichEmbed()
         .setAuthor(`#${tornUser.placement} | ${tornUser.displayName}`, client.user.avatarURL)
-        .setColor(tornUser.team === `Green` ? 0x32cd32 : tornUser.team === `Alien` ? 0xffc0cb : tornUser.team === `Human` ? 0x00b7eb : 0x00000)
+        .setColor(tornUser.team === `Cyborg` ? 0x32cd32 : tornUser.team === `Alien` ? 0xffc0cb : tornUser.team === `Human` ? 0x00b7eb : 0x00000)
         .setDescription(`**Rank**: ${tornUser.rank}\n**Experience**: ${tornUser.experience}\n**Kills**: ${tornUser.kills}\n**Money**:  ${tornUser.money}\n**Tech**: ${tornUser.tech}`)
         .setTimestamp(new Date())
         .setFooter(config.footer);
