@@ -10,7 +10,6 @@ module.exports = {
 module.exports.run = async (client, message, args) => {
     const m = `${message.author} »`;
     const tornUsers = await getTornUsers();
-    console.log(tornUsers);
 
     const userToLink = args[0].toString().toLowerCase();
 
