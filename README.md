@@ -26,3 +26,6 @@ Replace `<uri>` and `<discord bot token>` with your MongoDB URI and Discord bot 
 npm i
 npm run prod
 ```
+
+Note: You will need MongoDB and Node.js installed (with npm v7) to be able to build and run the bot.
+ 
