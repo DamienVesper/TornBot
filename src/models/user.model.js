@@ -6,7 +6,7 @@ const userSchema = new mongoose.Schema({
         required: true
     },
     creationDate: {
-        type: String,
+        type: Date,
         required: true
     },
     accountName: {
@@ -14,10 +14,6 @@ const userSchema = new mongoose.Schema({
         required: true
     },
     discordID: {
-        type: String,
-        required: true
-    },
-    discordTag: {
         type: String,
         required: true
     }
