@@ -20,9 +20,31 @@ module.exports.run = async (client, message, args) => {
         for (const dbUser of dbUsers) {
             const discordMember = message.guild.members.get(dbUser.discordID);
 
-            if (!discordMember) return log(`cyan`, `User not found in Discord, skipping...`);
-            updateRoles(client, discordMember, dbUser.accountName, tornUsers);
+            if (!discordMember) log(`cyan`, `User not found in Discord, skipping...`);
+            else updateRoles(client, discordMember, dbUser.accountName, tornUsers);
         }
         return message.channel.send(`${m} Updating roles for ${dbUsers.length} users.`);
+    }
+    else if (subCommand === `registerall`) {
+        message.channel.send(`${m} Registering users...`);
+        message.guild.members.forEach(async member => {
+            const discUser = client.users.get(member.user.id);
+            if (!discUser) return;
+
+            const tornUser = tornUsers.find(user => user.username === discUser.username.toLowerCase());
+            const userAlreadyExists = await User.findOne({ discordID: member.user.id });
+
+            if (!tornUser) log(`cyan`, `Torn account "${discUser.username}" not found in Discord, skipping...`);
+            else if (userAlreadyExists) log(`cyan`, `User "${discUser.username} already exists, skipping...`);
+            else {
+                const dbUser = new User({
+                    banned: false,
+                    creationDate: new Date(),
+                    accountName: discUser.username.toLowerCase(),
+                    discordID: discUser.id
+                });
+                dbUser.save(() => log(`blue`, `Created user account for ${discUser.username}.`));
+            }
+        });
     }
 };

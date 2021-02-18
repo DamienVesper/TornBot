@@ -11,11 +11,13 @@ const userSchema = new mongoose.Schema({
     },
     accountName: {
         type: String,
-        required: true
+        required: true,
+        unique: true
     },
     discordID: {
         type: String,
-        required: true
+        required: true,
+        unique: true
     }
 });
 

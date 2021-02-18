@@ -16,6 +16,7 @@ mongoose.connect(config.db.uri, config.db.uriParams).then(() => log(`green`, `Co
 
 const client = new Discord.Client({
     fetchAllMembers: true,
+    disableEveryone: true,
     sync: true
 });
 
