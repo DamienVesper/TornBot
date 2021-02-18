@@ -26,7 +26,7 @@ module.exports.run = async (client, message, args) => {
     }
 
     const commandName = args[0].toLowerCase();
-    const command = commands.find(command => command.name === commandName) || commands.find(c => c.aliases && c.aliases.includes(name));
+    const command = commands.find(command => command.name === commandName) || commands.find(c => c.aliases && c.aliases.includes(commandName));
 
     if (!command) return message.channel.send(`${m} That is not a valid command!`);
 
