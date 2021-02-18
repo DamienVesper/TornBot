@@ -1,9 +1,7 @@
 const axios = require(`axios`);
 
-const rawTornUsers = [];
-let tornUsers = {};
-
 module.exports = () => {
+    const tornUsers = [];
     axios.get(`https://torn.space/leaderboard`).then(res => {
         const body = res.data;
 
@@ -19,7 +17,23 @@ module.exports = () => {
         for (const i in rawTD)
             for (const j in rawTD[i]) rawTD[i][j] = rawTD[i][j].slice(4);
 
-        tornUsers = rawTD;
+        // Parse raw data and append to the array of users.
+        for (const i in rawTD) {
+            const curUser = rawTD[i];
+            const rawTeamData = curUser[0].slice(13, 17);
+
+            tornUsers.push({
+                username: curUser[1],
+                placement: parseInt(curUser[0].slice(23, curUser[0].length - 1)),
+                team: rawTeamData === `cyan` ? 0 : rawTeamData === `pink` ? 1 : 2,
+
+                xp: parseInt(curUser[2]),
+                rank: parseInt(curUser[3]),
+                kills: parseInt(curUser[4]),
+                money: curUser[5] ? curUser[5].split(` `).join(``) : undefined,
+                tech: parseFloat(curUser[6])
+            });
+        }
 
         return tornUsers;
     });
