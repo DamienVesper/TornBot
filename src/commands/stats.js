@@ -15,7 +15,7 @@ module.exports.run = async (client, message, args) => {
     const discUser = message.mentions.members.first() || args[0] || message.member.id;
     const discordUser = client.users.get(discUser);
 
-    const dbUser = await User.findOne({ discordID: discordUser.id });
+    const dbUser = discordUser ? await User.findOne({ discordID: discordUser.id }) : undefined;
 
     const tornUser = tornUsers.find(user => user.username === (dbUser ? dbUser.accountName : discUser));
     const sEmbed = new Discord.RichEmbed()
