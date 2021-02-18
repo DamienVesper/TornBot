@@ -35,8 +35,11 @@ module.exports = async () => {
                             : `Player`
             : `Player`;
 
+        const curUsername = accountType === `Player` ? curUser[1] : curUser[1].slice(3);
         tornUsers.push({
-            username: curUser[1],
+            username: curUsername,
+            displayName: curUser[1],
+
             placement: parseInt(curUser[0].slice(23, curUser[0].length - 1)),
             team: rawTeamData === `cyan` ? `Human` : rawTeamData === `pink` ? `Alien` : `Cyborg`,
             type: accountType,
