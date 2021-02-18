@@ -35,7 +35,7 @@ module.exports = async () => {
                             : `Player`
             : `Player`;
 
-        const curUsername = accountType === `Player` ? curUser[1] : curUser[1].slice(3);
+        const curUsername = accountType === `Player` ? curUser[1] : curUser[1].slice(4);
         tornUsers.push({
             username: curUsername,
             displayName: curUser[1],
