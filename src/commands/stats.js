@@ -10,7 +10,6 @@ module.exports = {
 };
 
 module.exports.run = async (client, message, args) => {
-    const m = `${message.author} »`;
     const tornUsers = await getTornUsers();
 
     const discUser = message.mentions.members.first() || args[0] || message.member.id;
