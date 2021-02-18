@@ -54,3 +54,4 @@ for (const file of commandFiles) {
 
 logHeader();
 client.login(config.token).catch(() => log(`red`, `Failed to authenticate client with application.`));
+client.setMaxListeners(255);

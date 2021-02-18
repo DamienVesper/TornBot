@@ -28,6 +28,6 @@ module.exports = async (client, member, tornUser, tornUsers) => {
         else if (curUser.team === `Alien`) member.addRole(teamRoles[1]);
         else member.addRole(teamRoles[2]);
 
-        log(`blue`, `Roles updated.`);
+        log(`blue`, `Roles updated for ${tornUser}.`);
     }, 2e3);
 };
