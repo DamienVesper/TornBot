@@ -26,11 +26,11 @@ module.exports = async client => {
                 updateRoles(client, discordMember, dbUser.accountName, tornUsers);
                 updateUserCount++;
             }
-        }, 2e3 * i);
+        }, 75e2 * i);
     });
 
     setTimeout(() => {
         channel.send(`Updated roles for ${updateUserCount} players.`);
         log(`blue`, `Updated roles for ${updateUserCount} users...`);
-    }, (dbUsers.length + 1) * 2e3);
+    }, (dbUsers.length + 1) * 75e2);
 };

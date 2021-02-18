@@ -23,7 +23,7 @@ module.exports.run = async (client, message, args) => {
 
                 if (!discordMember) log(`cyan`, `User not found in Discord, skipping...`);
                 else updateRoles(client, discordMember, dbUser.accountName, tornUsers);
-            }, 2e3 * i);
+            }, 75e2 * i);
         });
         message.channel.send(`${m} Updating roles for ${dbUsers.length} users.`);
     }

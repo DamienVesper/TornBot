@@ -29,5 +29,5 @@ module.exports = async (client, member, tornUser, tornUsers) => {
         else await member.addRole(teamRoles[2]);
 
         log(`blue`, `Roles updated for ${tornUser}.`);
-    }, 2e3);
+    }, 5e3);
 };
