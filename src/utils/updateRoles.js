@@ -1,8 +1,6 @@
-const getTornUsers = require(`./getTornUsers.js`);
 const log = require(`./log.js`);
 
-module.exports = async (client, member, tornUser) => {
-    const tornUsers = await getTornUsers();
+module.exports = async (client, member, tornUser, tornUsers) => {
     log(`cyan`, `Updating roles for ${tornUser}.`);
 
     const curUser = tornUsers.find(user => user.username === tornUser);

@@ -14,7 +14,7 @@ module.exports.run = async (client, message, args) => {
 
     if (!args[0]) {
         let helpTxt = ``;
-        commands.forEach(cmd => helpTxt += `\`${config.prefix + cmd.name + (cmd.usage ? ` ${cmd.usage}` : ``)}\` - ${cmd.desc}\n`);
+        commands.forEach(cmd => cmd.name !== `dev` ? helpTxt += `\`${config.prefix + cmd.name + (cmd.usage ? ` ${cmd.usage}` : ``)}\` - ${cmd.desc}\n` : null);
 
         const sEmbed = new Discord.RichEmbed()
             .setColor(0xcfcf53)
