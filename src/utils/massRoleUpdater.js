@@ -10,9 +10,6 @@ module.exports = async client => {
     const tornUsers = await getTornUsers();
     log(`cyan`, `Automatically updating roles for all users...`);
 
-    const channel = client.channels.get(config.botChannel);
-    channel.send(`Updating roles...`);
-
     let updateUserCount = 0;
 
     const dbUsers = await User.find({});
@@ -30,7 +27,6 @@ module.exports = async client => {
     });
 
     setTimeout(() => {
-        channel.send(`Updated roles for ${updateUserCount} players.`);
         log(`blue`, `Updated roles for ${updateUserCount} users...`);
     }, (dbUsers.length + 1) * 75e2);
 };
