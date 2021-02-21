@@ -14,7 +14,6 @@ module.exports = client => {
         status: `dnd`
     });
 
-    // Update all users' roles periodically.
-    setInterval(() => updateAllUsers(client), 15e5);
+    // Update all users' roles.
     updateAllUsers(client);
 };
