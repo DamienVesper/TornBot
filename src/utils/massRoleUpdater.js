@@ -1,7 +1,5 @@
 const User = require(`../models/user.model.js`);
 
-const config = require(`../../config/config.js`);
-
 const updateRoles = require(`./updateRoles.js`);
 const getTornUsers = require(`./getTornUsers.js`);
 const log = require(`./log.js`);
@@ -15,7 +13,7 @@ module.exports = async client => {
     const dbUsers = await User.find({});
     dbUsers.forEach((dbUser, i) => {
         setTimeout(() => {
-            const discordMember = channel.guild.members.get(dbUser.discordID);
+            const discordMember = client.guilds.get(`247490958374076416`).members.get(dbUser.discordID);
             const tornUser = tornUsers.find(user => user.username === dbUser.accountName);
 
             if (!discordMember || !tornUser) dbUser.delete();
