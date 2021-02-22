@@ -23,19 +23,34 @@ module.exports = async () => {
         if (curUser.length < 7) continue;
 
         const rawTeamData = curUser[0].slice(13, 17);
-        const accountType = curUser[1].slice(0, 1) === `[`
-            ? curUser[1].slice(1, 2) === `V`
-                ? `VIP`
-                : curUser[1].slice(1, 2) === `M`
-                    ? `Moderator`
-                    : curUser[1].slice(1, 2) === `A`
-                        ? `Admin`
-                        : curUser[1].slice(1, 2) === `O`
-                            ? `Owner`
-                            : `Player`
-            : `Player`;
 
-        const curUsername = accountType === `Player` ? curUser[1] : curUser[1].slice(4);
+        const accountHasTag = curUser[1].slice(0, 1) === `[`;
+        let accountType;
+
+        if (accountHasTag) {
+            switch (curUser[1].slice(1, 2)) {
+                case `V`:
+                    accountType = `VIP`;
+                    break;
+                case `M`:
+                    accountType = `Moderator`;
+                    break;
+                case `D`:
+                    accountType = `Developer`;
+                    break;
+                case `A`:
+                    accountType = `Admin`;
+                    break;
+                case `O`:
+                    accountType = `Owner`;
+                    break;
+                default:
+                    accountType = `Player`;
+                    break;
+            }
+        } else accountType = `Player`;
+
+        const curUsername = accountHasTag ? curUser[1].slice(curUser[1].indexOf(`]`) + 2) : curUser[1];
         tornUsers.push({
             username: curUsername,
             displayName: curUser[1],

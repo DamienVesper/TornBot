@@ -24,7 +24,7 @@ module.exports.run = async (client, message, args) => {
     const sEmbed = new Discord.RichEmbed()
         .setAuthor(`#${tornUser.placement} | ${tornUser.displayName}`, client.user.avatarURL)
         .setColor(tornUser.team === `Cyborg` ? 0x32cd32 : tornUser.team === `Alien` ? 0xffc0cb : tornUser.team === `Human` ? 0x00b7eb : 0x00000)
-        .setDescription(`**Rank**: ${tornUser.rank}\n**Experience**: ${tornUser.xp}\n**Kills**: ${tornUser.kills}\n**Money**:  ${tornUser.money}\n**Tech**: ${tornUser.tech}`)
+        .setDescription(`This user is a ${tornUser.type.toLowerCase()}.\n\n**Rank**: ${tornUser.rank}\n**Experience**: ${tornUser.xp}\n**Kills**: ${tornUser.kills}\n**Money**:  ${tornUser.money}\n**Tech**: ${tornUser.tech}`)
         .setTimestamp(new Date())
         .setFooter(config.footer);
 
