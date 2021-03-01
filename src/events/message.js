@@ -24,7 +24,7 @@ module.exports = async (client, message) => {
     if ((cmd.usage) && args.length < (cmd.usage.split(`<`).length) - 1) return message.channel.send(`${m} Proper usage is \`${config.prefix + cmd.name} ${cmd.usage}\`.`);
     else {
         try {
-            const userIsBanned = await User.find({
+            const userIsBanned = await User.findOne({
                 discordID: message.author.id,
                 banned: true
             });
