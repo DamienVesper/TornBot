@@ -1,7 +1,11 @@
 const config = require(`../../config/config.js`);
 const log = require(`../utils/log.js`);
 
+const User = require(`../models/user.model.js`);
+
 module.exports = async (client, message) => {
+    const m = `${message.author} »`;
+
     // Botception and prefix handling.
     if (message.author.bot || message.channel.type === `dm`) return;
     if (message.content.slice(0, config.prefix.length).toString().toLowerCase() !== config.prefix) return;
@@ -17,10 +21,19 @@ module.exports = async (client, message) => {
     const cmd = client.commands.find(cmd => cmd.name === command || (cmd.aliases && cmd.aliases.includes(command)));
     if (!cmd) return;
 
-    if ((cmd.usage) && args.length < (cmd.usage.split(`<`).length) - 1) return message.channel.send(`${message.author} Proper usage is \`${config.prefix + cmd.name} ${cmd.usage}\`.`);
+    if ((cmd.usage) && args.length < (cmd.usage.split(`<`).length) - 1) return message.channel.send(`${m} Proper usage is \`${config.prefix + cmd.name} ${cmd.usage}\`.`);
     else {
         try {
-            log(`magenta`, `${message.author.tag} ran command ${command} in ${message.guild.name} [${message.guild.id}].`);
+            const userIsBanned = await User.find({
+                discordID: message.author.id,
+                banned: true
+            });
+
+            if (userIsBanned) {
+                log(`cyan`, `${message.author.tag} attempted to run ${command} in ${message.guild.name} but is blacklisted.`);
+                return message.channel.send(`${m} You are currently banned from the bot!`);
+            }
+            log(`magenta`, `${message.author.tag} ran command ${command} in ${message.guild.name}.`);
             cmd.run(client, message, args);
         } catch (err) {
             log(`err`, err.stack);
