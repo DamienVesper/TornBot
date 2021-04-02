@@ -9,11 +9,11 @@ export const config = {
         success: 0x47d66d,
         info: 0xcfcf53,
 
-        teams: {
-            cyborg: 0x32cd32,
-            alien: 0xffc0cb,
-            human: 0x00b7eb
-        }
+        teams: [
+            0x00b7eb,
+            0xffc0cb,
+            0x32cd32
+        ]
     },
 
     developerID: `386940319666667521`,

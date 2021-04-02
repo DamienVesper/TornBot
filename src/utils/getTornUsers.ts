@@ -1,12 +1,12 @@
 import axios from 'axios';
 
-export interface tornUser {
+export interface tornAccount {
     username: string,
     displayName: string,
 
     placement: number,
     team: number,
-    type: number,
+    type: string,
 
     xp: number,
     rank: number,
@@ -16,7 +16,7 @@ export interface tornUser {
 }
 
 export const getTornUsers = async () => {
-    const tornUsers: tornUser[] = [];
+    const tornUsers: tornAccount[] = [];
     const res = await axios.get(`https://torn.space/leaderboard`);
     const body = res.data;
 
@@ -39,8 +39,8 @@ export const getTornUsers = async () => {
 
         const rawTeamData = curUser[0].slice(13, 17);
 
-        const accountHasTag = curUser[1].slice(0, 1) === `[`;
-        let accountType;
+        const accountHasTag: boolean = curUser[1].slice(0, 1) === `[`;
+        let accountType: string;
 
         if (accountHasTag) {
             switch (curUser[1].slice(1, 2)) {
@@ -65,7 +65,7 @@ export const getTornUsers = async () => {
             }
         } else accountType = `Player`;
 
-        const curUsername = accountHasTag ? curUser[1].slice(curUser[1].indexOf(`]`) + 2) : curUser[1];
+        const curUsername: string = accountHasTag ? curUser[1].slice(curUser[1].indexOf(`]`) + 2) : curUser[1];
         tornUsers.push({
             username: curUsername,
             displayName: curUser[1],
