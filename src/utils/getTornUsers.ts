@@ -1,6 +1,6 @@
-const axios = require(`axios`);
+import axios from 'axios';
 
-module.exports = async () => {
+export const getTornUsers = async () => {
     const tornUsers = [];
     const res = await axios.get(`https://torn.space/leaderboard`);
     const body = res.data;

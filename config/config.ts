@@ -7,7 +7,13 @@ export const config = {
     colors: {
         danger: 0xf82055,
         success: 0x47d66d,
-        info: 0xcfcf53
+        info: 0xcfcf53,
+
+        teams: {
+            cyborg: 0x32cd32,
+            alien: 0xffc0cb,
+            human: 0x00b7eb
+        }
     },
 
     developerID: `386940319666667521`,
