@@ -3,11 +3,13 @@ import * as mongoose from 'mongoose';
 const userSchema = new mongoose.Schema({
     banned: {
         type: Boolean,
-        required: true
+        required: false,
+        default: false
     },
     creationDate: {
         type: Date,
-        required: true
+        required: false,
+        default: new Date()
     },
     accountName: {
         type: String,

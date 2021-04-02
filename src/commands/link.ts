@@ -1,13 +1,15 @@
-const User = require(`../models/user.model.js`);
+import * as Discord from 'discord.js';
+import { Client } from '../index';
 
-const getTornUsers = require(`../utils/getTornUsers.js`);
+import { User } from '../models/user.model';
+import { getTornUsers } from '../utils/getTornUsers';
 
-module.exports = {
+export default {
     desc: `Link your Torn account to Discord.`,
     usage: `<user>`
 };
 
-module.exports.run = async (client, message, args) => {
+export const run = async (client: Client, message: Discord.Message, args: any[]) => {
     const m = `${message.author} »`;
     const tornUsers = await getTornUsers();
 
@@ -21,10 +23,9 @@ module.exports.run = async (client, message, args) => {
     else if (!tornUsers.find(user => user.username === userToLink)) return message.channel.send(`${m} That account does not exist!`);
 
     const user = new User({
-        banned: false,
-        creationDate: new Date(),
         accountName: userToLink,
         discordID: message.author.id
     });
+
     user.save(() => message.channel.send(`${m} You are now linked to account \`${userToLink}\`.`));
 };
