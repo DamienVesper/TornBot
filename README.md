@@ -28,4 +28,3 @@ npm run dev
 ```
 
 Note: You will need MongoDB and Node.js installed (with npm v7) to be able to build and run the bot.
- 
