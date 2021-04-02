@@ -5,16 +5,16 @@ dotenv.config();
 
 export const config = {
     colors: {
-        success: 0x00ff00,
-        primary: 0x1e90ff,
-        warning: 0xffa500,
-        danger: 0xff0000
+        danger: 0xf82055,
+        success: 0x47d66d,
+        info: 0xcfcf53
     },
-    developer: `DamienVesper`,
-    developerTag: `0001`,
+
     developerID: `386940319666667521`,
     botChannel: `493489353046097926`,
+
     prefix: `;`,
+
     token: process.env.DISCORD_BOT_TOKEN,
     db: {
         uri: process.env.MONGO_URI,
