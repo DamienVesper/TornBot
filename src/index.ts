@@ -49,6 +49,7 @@ for (const file of commandFiles) {
         name: file.split(`.`)[0],
         desc: command.default.desc,
         usage: command.default.usage,
+        aliases: command.default.aliases,
         run: command.run
     });
 }
