@@ -1,7 +1,22 @@
 import axios from 'axios';
 
+export interface tornUser {
+    username: string,
+    displayName: string,
+
+    placement: number,
+    team: number,
+    type: number,
+
+    xp: number,
+    rank: number,
+    kills: number,
+    money: number,
+    tech: number
+}
+
 export const getTornUsers = async () => {
-    const tornUsers = [];
+    const tornUsers: tornUser[] = [];
     const res = await axios.get(`https://torn.space/leaderboard`);
     const body = res.data;
 
@@ -56,13 +71,13 @@ export const getTornUsers = async () => {
             displayName: curUser[1],
 
             placement: parseInt(curUser[0].slice(23, curUser[0].length - 1)),
-            team: rawTeamData === `cyan` ? `Human` : rawTeamData === `pink` ? `Alien` : `Cyborg`,
+            team: rawTeamData === `cyan` ? 0 : rawTeamData === `pink` ? 1 : 2,
             type: accountType,
 
             xp: parseInt(curUser[2]),
             rank: parseInt(curUser[3]),
             kills: parseInt(curUser[4]),
-            money: curUser[5] ? curUser[5].split(` `).join(``) : undefined,
+            money: curUser[5] ? curUser[5].split(` `).join(``) : 0,
             tech: parseFloat(curUser[6])
         });
     }
