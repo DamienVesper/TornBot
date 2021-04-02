@@ -10,9 +10,6 @@ module.exports = async (client, message) => {
     if (message.author.bot || message.channel.type === `dm`) return;
     if (message.content.slice(0, config.prefix.length).toString().toLowerCase() !== config.prefix) return;
 
-    // Lock usage to designated channel in official server.
-    if (message.guild.id === `247490958374076416` & message.channel.id !== `493489353046097926`) return message.delete();
-
     // Parse arguments and command.
     const args = message.content.slice(config.prefix.length).trim().split(/ +/g);
     const command = args.shift().toLowerCase();
@@ -23,7 +20,6 @@ module.exports = async (client, message) => {
 
     if ((cmd.usage) && args.length < (cmd.usage.split(`<`).length) - 1) return message.channel.send(`${m} Proper usage is \`${config.prefix + cmd.name} ${cmd.usage}\`.`);
     else {
-        try {
             const userIsBanned = await User.findOne({
                 discordID: message.author.id,
                 banned: true
@@ -35,8 +31,5 @@ module.exports = async (client, message) => {
             }
             log(`magenta`, `${message.author.tag} ran command ${command} in ${message.guild.name}.`);
             cmd.run(client, message, args);
-        } catch (err) {
-            log(`err`, err.stack);
-        }
     }
 };
