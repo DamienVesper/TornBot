@@ -20,16 +20,16 @@ module.exports = async (client, message) => {
 
     if ((cmd.usage) && args.length < (cmd.usage.split(`<`).length) - 1) return message.channel.send(`${m} Proper usage is \`${config.prefix + cmd.name} ${cmd.usage}\`.`);
     else {
-            const userIsBanned = await User.findOne({
-                discordID: message.author.id,
-                banned: true
-            });
+        const userIsBanned = await User.findOne({
+            discordID: message.author.id,
+            banned: true
+        });
 
-            if (userIsBanned) {
-                log(`cyan`, `${message.author.tag} attempted to run ${command} in ${message.guild.name} but is blacklisted.`);
-                return message.channel.send(`${m} You are currently banned from the bot!`);
-            }
-            log(`magenta`, `${message.author.tag} ran command ${command} in ${message.guild.name}.`);
-            cmd.run(client, message, args);
+        if (userIsBanned) {
+            log(`cyan`, `${message.author.tag} attempted to run ${command} in ${message.guild.name} but is blacklisted.`);
+            return message.channel.send(`${m} You are currently banned from the bot!`);
+        }
+        log(`magenta`, `${message.author.tag} ran command ${command} in ${message.guild.name}.`);
+        cmd.run(client, message, args);
     }
 };
