@@ -1,10 +1,13 @@
-const User = require(`../models/user.model.js`);
+import { User } from '../models/user.model';
 
-module.exports = {
+import * as Discord from 'discord.js';
+import { Client } from '../index';
+
+export default {
     desc: `Unlink your Torn account from Discord.`
 };
 
-module.exports.run = async (client, message, args) => {
+export const run = async (client: Client, message: Discord.Message, args: any[]) => {
     const m = `${message.author} »`;
 
     const account = await User.findOne({ discordID: message.author.id });
