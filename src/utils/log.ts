@@ -1,4 +1,6 @@
-module.exports = (color, ...content) => {
+import { author, version } from '../../package.json';
+
+export const log = (color: string, ...content: any[]) => {
     // Set timing variables.
     const time = new Date();
     const second = time.getSeconds().toString().padStart(2, `0`);
@@ -45,4 +47,22 @@ module.exports = (color, ...content) => {
     }
 
     console.log(logColor || `\x1b[37m`, formattedTime, logContent);
+};
+
+export const logHeader = () => {
+    console.log(`\x1b[34m`, `--------------------------------------------------`);
+};
+
+export const logSplash = () => {
+    console.log(`\x1b[34m`, `
+    
+    ████████╗ ██████╗ ██████╗ ███╗   ██╗██████╗  ██████╗ ████████╗
+    ╚══██╔══╝██╔═══██╗██╔══██╗████╗  ██║██╔══██╗██╔═══██╗╚══██╔══╝
+       ██║   ██║   ██║██████╔╝██╔██╗ ██║██████╔╝██║   ██║   ██║   
+       ██║   ██║   ██║██╔══██╗██║╚██╗██║██╔══██╗██║   ██║   ██║   
+       ██║   ╚██████╔╝██║  ██║██║ ╚████║██████╔╝╚██████╔╝   ██║   
+       ╚═╝    ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═══╝╚═════╝  ╚═════╝    ╚═╝   
+                                                                                                  
+       Created by ${author} | v${version}
+    `);
 };

@@ -1,9 +1,12 @@
-const config = require(`../../config/config.js`);
-const log = require(`../utils/log.js`);
+import * as Discord from 'discord.js';
+import { Client } from '../index';
 
-const User = require(`../models/user.model.js`);
+import { config } from '../../config/config';
+import { log } from '../utils/log';
 
-module.exports = async (client, message) => {
+import { User } from '../models/user.model';
+
+export default async (client: Client, message: Discord.Message) => {
     const m = `${message.author} »`;
 
     // Botception and prefix handling.
