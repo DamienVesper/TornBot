@@ -27,4 +27,5 @@ npm i
 npm run dev
 ```
 
-Note: You will need MongoDB, Node.js, and a code editor capable of Typescript IntelliSense installed to be able to build and run the bot.
+Note: You will need MongoDB and Node.js installed (with npm v7) to be able to build and run the bot.
+ 
