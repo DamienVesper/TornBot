@@ -1,12 +1,14 @@
-const Discord = require(`discord.js`);
-const config = require(`../../config/config.js`);
+import { config } from '../../config/config';
 
-module.exports = {
-    desc: `View the help menu.`,
-    usage: `[command]`
+import * as Discord from 'discord.js';
+import { Client } from '../index';
+
+export default {
+    desc: `View all commands.`,
+    aliases: [`h`, `?`]
 };
 
-module.exports.run = async (client, message, args) => {
+export const run = async (client: Client, message: Discord.Message, args: any[]) => {
     const m = `${message.author} »`;
 
     const commands = client.commands;
@@ -14,10 +16,10 @@ module.exports.run = async (client, message, args) => {
 
     if (!args[0]) {
         let helpTxt = ``;
-        commands.forEach(cmd => cmd.name !== `dev` ? helpTxt += `\`${config.prefix + cmd.name + (cmd.usage ? ` ${cmd.usage}` : ``)}\` - ${cmd.desc}\n` : null);
+        commands.forEach(cmd => helpTxt += `\`${config.prefix + cmd.name + (cmd.usage ? ` ${cmd.usage}` : ``)}\` - ${cmd.desc}\n`);
 
-        const sEmbed = new Discord.RichEmbed()
-            .setColor(0xcfcf53)
+        const sEmbed: Discord.MessageEmbed = new Discord.MessageEmbed()
+            .setColor(config.colors.info)
             .setAuthor(`Help Menu`)
             .setDescription(helpTxt)
             .setTimestamp(new Date())
@@ -33,8 +35,8 @@ module.exports.run = async (client, message, args) => {
     if (command.usage) data.push(`**Usage:** \`${config.prefix}${command.name} ${command.usage}\``);
     if (command.aliases) data.push(`**Aliases:** ${command.aliases.join(`, `)}`);
 
-    const sEmbed = new Discord.RichEmbed()
-        .setColor(0xcfcf53)
+    const sEmbed: Discord.MessageEmbed = new Discord.MessageEmbed()
+        .setColor(config.colors.info)
         .setAuthor(`Help Menu | ${command.name.slice(0, 1).toUpperCase() + command.name.slice(1)}`)
         .setDescription(`${command.desc}\n\n${data.join(`\n`)}`)
         .setTimestamp(new Date())
