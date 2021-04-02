@@ -2,7 +2,7 @@ import * as Discord from 'discord.js';
 import { Client } from '../index';
 
 import { User } from '../models/user.model';
-import { getTornUsers } from '../utils/getTornUsers';
+import { tornAccount, getTornUsers } from '../utils/getTornUsers';
 
 export default {
     desc: `Link your Torn account to Discord.`,
@@ -11,7 +11,7 @@ export default {
 
 export const run = async (client: Client, message: Discord.Message, args: any[]) => {
     const m = `${message.author} »`;
-    const tornUsers = await getTornUsers();
+    const tornUsers: tornAccount[] = await getTornUsers();
 
     const userToLink = args[0].toString().toLowerCase();
 
