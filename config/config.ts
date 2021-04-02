@@ -1,7 +1,9 @@
-require(`dotenv`).config();
-const pjson = require(`../package.json`);
+import { author, version } from '../package.json';
 
-const config = {
+import * as dotenv from 'dotenv';
+dotenv.config();
+
+export const config = {
     colors: {
         success: 0x00ff00,
         primary: 0x1e90ff,
@@ -21,9 +23,6 @@ const config = {
             useUnifiedTopology: true
         }
     },
-    version: pjson.version,
-    footer: `© Created by ${pjson.author}`
+    version,
+    footer: `© Created by ${author} | v${version}`
 };
-
-config.footer += ` | v${config.version}`;
-module.exports = config;
