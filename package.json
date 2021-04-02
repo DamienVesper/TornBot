@@ -4,10 +4,11 @@
   "description": "A bot for the online game Torn.Space.",
   "main": "index.js",
   "scripts": {
-    "dist-test": "node ./src/index.js",
-    "prod": "pm2 start ./src/index.js",
-    "dev": "node ./src/index.js --inspect",
-    "dev:lint": "eslint . --fix --ext .js"
+    "build": "tsc",
+    "dist": "node ./build/src/index.js",
+    "prod": "pm2 start ./build/src/index.js",
+    "dev": "ts-node-dev --ignore-watch data ./src/index.ts",
+    "dev:lint": "eslint . --fix --ext .ts"
   },
   "repository": {
     "type": "git",
