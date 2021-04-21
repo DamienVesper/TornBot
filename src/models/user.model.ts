@@ -1,13 +1,13 @@
-import * as mongoose from 'mongoose';
+import * as Mongoose from 'mongoose';
 
-interface userDoc extends mongoose.Document {
+interface userDoc extends Mongoose.Document {
     banned: boolean,
     creationDate: Date,
     accountName: string,
     discordID: string
 }
 
-const userSchema = new mongoose.Schema({
+const userSchema = new Mongoose.Schema({
     banned: {
         type: Boolean,
         required: false,
@@ -30,4 +30,4 @@ const userSchema = new mongoose.Schema({
     }
 });
 
-export const User = mongoose.model<userDoc>(`User`, userSchema);
+export const User = Mongoose.model<userDoc>(`User`, userSchema);
