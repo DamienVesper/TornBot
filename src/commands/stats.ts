@@ -12,7 +12,8 @@ export default {
 };
 
 export const run = async (client: Client, message: Discord.Message, args: any[]) => {
-    const m = `${message.author} »`;
+    const m: String = `${message.author} »`;
+
     const tornUsers = await getTornUsers();
 
     const discUser = message.mentions.members.first()?.id || args[0] || message.member.id;

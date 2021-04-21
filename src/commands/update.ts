@@ -12,8 +12,9 @@ export default {
 };
 
 export const run = async (client: Client, message: Discord.Message, args: any[]) => {
+    const m: String = `${message.author} »`;
+
     const tornUsers: tornAccount[] = await getTornUsers();
-    const m = `${message.author} »`;
 
     const dbUser = await User.findOne({ discordID: message.author.id });
     if (!dbUser) return message.channel.send(`${m} You don't have an account yet!`);

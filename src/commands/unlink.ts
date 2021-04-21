@@ -8,7 +8,7 @@ export default {
 };
 
 export const run = async (client: Client, message: Discord.Message, args: any[]) => {
-    const m = `${message.author} »`;
+    const m: String = `${message.author} »`;
 
     const account = await User.findOne({ discordID: message.author.id });
     if (!account) return message.channel.send(`${m} You are not linked to an account!`);

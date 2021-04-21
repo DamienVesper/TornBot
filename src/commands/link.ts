@@ -10,7 +10,8 @@ export default {
 };
 
 export const run = async (client: Client, message: Discord.Message, args: any[]) => {
-    const m = `${message.author} »`;
+    const m: String = `${message.author} »`;
+
     const tornUsers: tornAccount[] = await getTornUsers();
 
     const userToLink = args[0].toString().toLowerCase();
