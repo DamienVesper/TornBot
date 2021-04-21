@@ -6,7 +6,7 @@ import * as path from 'path';
 
 import * as mongoose from 'mongoose';
 
-import { config } from '../config/config';
+import config from '../config/config';
 import { log, logHeader, logSplash } from './utils/log';
 
 dotenv.config();

@@ -1,4 +1,4 @@
-import { config } from '../../config/config';
+import config from '../../config/config';
 
 import * as Discord from 'discord.js';
 import { Client } from '../index';

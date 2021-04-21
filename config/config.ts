@@ -3,7 +3,7 @@ import { author, version } from '../package.json';
 import * as dotenv from 'dotenv';
 dotenv.config();
 
-export const config = {
+const config = {
     colors: {
         danger: 0xf82055,
         success: 0x47d66d,
@@ -34,3 +34,5 @@ export const config = {
     version,
     footer: `© Created by ${author} | v${version}`
 };
+
+export default config;
