@@ -1,10 +1,10 @@
-import { User } from '../models/user.model';
+import User from '../models/user.model';
 
 import * as Discord from 'discord.js';
 import { Client } from '../index';
 
 import { tornAccount, getTornUsers } from '../utils/getTornUsers';
-import { updateRoles } from '../utils/updateRoles';
+import updateRoles from '../utils/updateRoles';
 
 export default {
     desc: `Update your roles.`,

@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export interface tornAccount {
+interface tornAccount {
     username: string,
     displayName: string,
 
@@ -15,7 +15,7 @@ export interface tornAccount {
     tech: number
 }
 
-export const getTornUsers = async () => {
+const getTornUsers = async () => {
     const tornUsers: tornAccount[] = [];
     const res = await axios.get(`https://torn.space/leaderboard`);
     const body = res.data;
@@ -83,4 +83,9 @@ export const getTornUsers = async () => {
     }
 
     return tornUsers;
+};
+
+export {
+    tornAccount,
+    getTornUsers
 };

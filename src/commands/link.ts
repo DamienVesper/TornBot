@@ -1,7 +1,7 @@
 import * as Discord from 'discord.js';
 import { Client } from '../index';
 
-import { User } from '../models/user.model';
+import User from '../models/user.model';
 import { tornAccount, getTornUsers } from '../utils/getTornUsers';
 
 export default {

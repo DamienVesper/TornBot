@@ -1,4 +1,4 @@
-import { User } from '../models/user.model';
+import User from '../models/user.model';
 
 import * as Discord from 'discord.js';
 import { Client } from '../index';

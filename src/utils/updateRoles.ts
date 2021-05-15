@@ -4,7 +4,7 @@ import { Client } from '../index';
 import { log } from './log';
 import { tornAccount } from './getTornUsers';
 
-export const updateRoles = async (client: Client, member: Discord.GuildMember, tornUser: string, tornUsers: tornAccount[]) => {
+const updateRoles = async (client: Client, member: Discord.GuildMember, tornUser: string, tornUsers: tornAccount[]) => {
     log(`cyan`, `Updating roles for ${tornUser}.`);
 
     const curUser = tornUsers.find(user => user.username === tornUser);
@@ -36,3 +36,5 @@ export const updateRoles = async (client: Client, member: Discord.GuildMember, t
         log(`blue`, `Roles updated for ${tornUser}.`);
     }, 5e3);
 };
+
+export default updateRoles;

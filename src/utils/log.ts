@@ -1,6 +1,6 @@
 import { author, version } from '../../package.json';
 
-export const log = (color: string, ...content: any[]) => {
+const log = (color: string, ...content: any[]) => {
     // Set timing variables.
     const time = new Date();
     const second = time.getSeconds().toString().padStart(2, `0`);
@@ -49,11 +49,11 @@ export const log = (color: string, ...content: any[]) => {
     console.log(logColor || `\x1b[37m`, formattedTime, logContent);
 };
 
-export const logHeader = () => {
+const logHeader = () => {
     console.log(`\x1b[34m`, `--------------------------------------------------`);
 };
 
-export const logSplash = () => {
+const logSplash = () => {
     console.log(`\x1b[34m`, `
     
     ████████╗ ██████╗ ██████╗ ███╗   ██╗██████╗  ██████╗ ████████╗
@@ -65,4 +65,10 @@ export const logSplash = () => {
                                                                                                   
        Created by ${author} | v${version}
     `);
+};
+
+export {
+    log,
+    logHeader,
+    logSplash
 };
