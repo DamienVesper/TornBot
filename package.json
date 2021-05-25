@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "build": "tsc",
-    "dist": "node ./build/src/index.js",
-    "dev": "ts-node-dev --ignore-watch data ./src/index.ts",
+    "dist": "yarn build && yarn dev",
+    "dev": "node ./build/src/index.js",
     "dev:lint": "eslint . --fix --ext .ts"
   },
   "repository": {
@@ -14,11 +14,11 @@
     "url": "git+https://github.com/DamienVesper/TornBot.git"
   },
   "keywords": [
-    "Torn.Space",
+    "torn-space",
     "discord.js"
   ],
   "author": "DamienVesper",
-  "license": "ISC",
+  "license": "AGPL-3.0",
   "bugs": {
     "url": "https://github.com/DamienVesper/TornBot/issues"
   },
@@ -32,7 +32,6 @@
     "eslint-plugin-import": "^2.23.3",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^5.1.0",
-    "ts-node-dev": "^1.1.6",
     "typescript": "^4.2.3"
   },
   "dependencies": {
