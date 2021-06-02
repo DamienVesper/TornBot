@@ -1,11 +1,15 @@
-import { Client } from '../index';
-import { log, logHeader } from '../utils/log';
+import { Client } from '../types/discord';
+import log from '../utils/log';
+import { logHeader } from '../utils/logExtra';
 
 import refreshActivity from '../utils/refreshActivity';
 
 export default async (client: Client) => {
-    log(`green`, `${client.user.tag} has started, with ${client.users.cache.size} users in ${client.guilds.cache.size} servers.`);
-    logHeader();
+    log(`green`, `Client has started, with ${client.users.cache.size} user(s) in ${client.guilds.cache.size} guild(s).`);
 
-    refreshActivity(client);
+    logHeader(() => {
+        refreshActivity(client, () => {
+            setInterval(() => refreshActivity(client), 6e5);
+        });
+    });
 };
