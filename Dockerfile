@@ -16,8 +16,5 @@ RUN yarn install
 # Copy the rest of the files.
 COPY . .
 
-# Build the project.
-RUN yarn build
-
-# Run the project.
+# Build and run the project.
 CMD ["yarn", "dist"]
