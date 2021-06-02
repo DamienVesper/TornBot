@@ -17,7 +17,7 @@ Testing the application using a database on your own machine will require a loca
 2. Inside of the `.env` file, include the following:
 ```
 DISCORD_TOKEN="<token>"
-MONGO_URI="<uri>"
+MONGODB_URI="<uri>"
 ```
 Replace `<uri>` and `<discord bot token>` with your MongoDB URI and Discord bot token.
 
