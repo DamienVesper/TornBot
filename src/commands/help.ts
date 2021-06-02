@@ -8,8 +8,8 @@ const cmd: CommandConfig = {
     aliases: [`h`, `?`]
 };
 
-const run = async (client: Client, message: Discord.Message, args: any[]) => {
-    const m: String = `${message.author} »`;
+const run = async (client: Client, message: Discord.Message, args: string[]) => {
+    const m = `${message.author} »`;
 
     const commands = client.commands;
     const data = [];

@@ -12,7 +12,7 @@ const cmd: CommandConfig = {
     usage: `[user]`
 };
 
-const run = async (client: Client, message: Discord.Message, args: any[]) => {
+const run = async (client: Client, message: Discord.Message, args: string[]) => {
     const m = `${message.author} »`;
 
     const tornUsers = await getTornUsers();

@@ -7,7 +7,7 @@ const cmd: CommandConfig = {
     desc: `Unlink your Torn account from Discord.`
 };
 
-const run = async (client: Client, message: Discord.Message, args: any[]) => {
+const run = async (client: Client, message: Discord.Message, args: string[]) => {
     const m = `${message.author} »`;
 
     const account = await User.findOne({ discordID: message.author.id });
