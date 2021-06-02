@@ -1,7 +1,7 @@
 import config from '../../config/config';
 
 import * as Discord from 'discord.js';
-import { Client } from '../index';
+import { Client } from '../types/discord';
 
 export default {
     desc: `View all commands.`,
@@ -17,7 +17,7 @@ export const run = async (client: Client, message: Discord.Message, args: any[])
     if (!args[0]) {
         let helpTxt = ``;
         commands.forEach(cmd => {
-            helpTxt += `\`${config.prefix + cmd.name + (cmd.usage ? ` ${cmd.usage}` : ``)}\` - ${cmd.desc}\n`;
+            helpTxt += `\`${config.prefix + cmd.name + (cmd.config.usage ? ` ${cmd.config.usage}` : ``)}\` - ${cmd.config.desc}\n`;
         });
 
         const sEmbed: Discord.MessageEmbed = new Discord.MessageEmbed()
@@ -30,17 +30,17 @@ export const run = async (client: Client, message: Discord.Message, args: any[])
     }
 
     const commandName = args[0].toLowerCase();
-    const command = commands.find(command => command.name === commandName) || commands.find(c => c.aliases && c.aliases.includes(name));
+    const command = commands.find(command => command.name === commandName) || commands.find(c => c.config.aliases && c.config.aliases.includes(commandName));
 
     if (!command) return message.channel.send(`${m} That is not a valid command!`);
 
-    if (command.usage) data.push(`**Usage:** \`${config.prefix}${command.name} ${command.usage}\``);
-    if (command.aliases) data.push(`**Aliases:** ${command.aliases.join(`, `)}`);
+    if (command.config.usage) data.push(`**Usage:** \`${config.prefix}${command.name} ${command.config.usage}\``);
+    if (command.config.aliases) data.push(`**Aliases:** ${command.config.aliases.join(`, `)}`);
 
     const sEmbed: Discord.MessageEmbed = new Discord.MessageEmbed()
         .setColor(config.colors.info)
         .setAuthor(`Help Menu | ${command.name.slice(0, 1).toUpperCase() + command.name.slice(1)}`)
-        .setDescription(`${command.desc}\n\n${data.join(`\n`)}`)
+        .setDescription(`${command.config.desc}\n\n${data.join(`\n`)}`)
         .setTimestamp(new Date())
         .setFooter(config.footer);
     return message.channel.send(sEmbed);
