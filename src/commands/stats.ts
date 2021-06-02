@@ -22,9 +22,8 @@ const run = async (client: Client, message: Discord.Message, args: string[]) => 
     const query = getQuery(message, args);
 
     const dbUser = await User.findOne(query);
-    if (!dbUser) return message.channel.send(`${m} That user does not exist!`);
 
-    const tornUser: tornAccount = tornUsers.find(user => user.username === dbUser.accountName);
+    const tornUser: tornAccount = tornUsers.find(user => user.username === (dbUser?.accountName || args[0]));
     if (!tornUser) return message.channel.send(`${m} That user does not exist!`);
 
     const sEmbed: Discord.MessageEmbed = new Discord.MessageEmbed()
