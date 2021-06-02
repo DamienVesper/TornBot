@@ -24,7 +24,6 @@ const loadCommands = (client: Client, callback?: any) => {
                 name: fileName,
                 config: {
                     desc: command.cmd.desc,
-                    category: command.cmd.category,
                     usage: command.cmd.usage || ``,
                     aliases: command.cmd.aliases || []
                 },

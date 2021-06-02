@@ -1,15 +1,15 @@
 import * as Discord from 'discord.js';
-import { Client } from '../index';
-
 import User from '../models/user.model';
+
+import { Client, CommandConfig } from '../types/discord';
 import { tornAccount, getTornUsers } from '../utils/getTornUsers';
 
-export default {
+const cmd: CommandConfig = {
     desc: `Link your Torn account to Discord.`,
     usage: `<user>`
 };
 
-export const run = async (client: Client, message: Discord.Message, args: any[]) => {
+const run = async (client: Client, message: Discord.Message, args: any[]) => {
     const m: String = `${message.author} »`;
 
     const tornUsers: tornAccount[] = await getTornUsers();
@@ -29,4 +29,9 @@ export const run = async (client: Client, message: Discord.Message, args: any[])
     });
 
     user.save(() => message.channel.send(`${m} You are now linked to account \`${userToLink}\`.`));
+};
+
+export {
+    cmd,
+    run
 };
