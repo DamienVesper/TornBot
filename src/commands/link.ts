@@ -2,7 +2,9 @@ import * as Discord from 'discord.js';
 import User from '../models/user.model';
 
 import { Client, CommandConfig } from '../types/discord';
-import { tornAccount, getTornUsers } from '../utils/getTornUsers';
+import tornAccount from '../types/account';
+
+import getTornUsers from '../utils/getTornUsers';
 
 const cmd: CommandConfig = {
     desc: `Link your Torn account to Discord.`,
