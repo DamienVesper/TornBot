@@ -1,14 +1,14 @@
 import config from '../../config/config';
 
 import * as Discord from 'discord.js';
-import { Client } from '../types/discord';
+import { Client, CommandConfig } from '../types/discord';
 
-export default {
+const cmd: CommandConfig = {
     desc: `View all commands.`,
     aliases: [`h`, `?`]
 };
 
-export const run = async (client: Client, message: Discord.Message, args: any[]) => {
+const run = async (client: Client, message: Discord.Message, args: any[]) => {
     const m: String = `${message.author} »`;
 
     const commands = client.commands;
@@ -44,4 +44,9 @@ export const run = async (client: Client, message: Discord.Message, args: any[])
         .setTimestamp(new Date())
         .setFooter(config.footer);
     return message.channel.send(sEmbed);
+};
+
+export {
+    cmd,
+    run
 };

@@ -1,4 +1,4 @@
-import { Client } from '../index';
+import { Client } from '../types/discord';
 
 const refreshActivity = (client: Client) => {
     client.user.setPresence({
