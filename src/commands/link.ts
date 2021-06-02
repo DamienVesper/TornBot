@@ -2,7 +2,7 @@ import * as Discord from 'discord.js';
 import User from '../models/user.model';
 
 import { Client, CommandConfig } from '../types/discord';
-import tornAccount from '../types/account';
+import { tornAccount } from '../types/account';
 
 import getTornUsers from '../utils/getTornUsers';
 
@@ -11,8 +11,8 @@ const cmd: CommandConfig = {
     usage: `<user>`
 };
 
-const run = async (client: Client, message: Discord.Message, args: any[]) => {
-    const m: String = `${message.author} »`;
+const run = async (client: Client, message: Discord.Message, args: string[]) => {
+    const m = `${message.author} »`;
 
     const tornUsers: tornAccount[] = await getTornUsers();
 
