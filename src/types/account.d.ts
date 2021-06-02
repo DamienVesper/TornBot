@@ -13,4 +13,4 @@ interface tornAccount {
     tech: number
 }
 
-export default tornAccount;
+export { tornAccount };

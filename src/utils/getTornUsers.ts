@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import tornAccount from '../types/account';
+import { tornAccount } from '../types/account';
 
 const getTornUsers = async () => {
     const tornUsers: tornAccount[] = [];

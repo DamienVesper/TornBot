@@ -2,7 +2,7 @@ import config from '../../config/config';
 
 import * as Discord from 'discord.js';
 import { Client, CommandConfig } from '../types/discord';
-import tornAccount from '../types/account';
+import { tornAccount } from '../types/account';
 
 import User from '../models/user.model';
 import getTornUsers from '../utils/getTornUsers';

@@ -1,11 +1,6 @@
 import * as Mongoose from 'mongoose';
 
-interface userDoc extends Mongoose.Document {
-    banned: boolean,
-    creationDate: Date,
-    accountName: string,
-    discordID: string
-}
+import { UserDoc } from '../types/models';
 
 const userSchema = new Mongoose.Schema({
     banned: {
@@ -30,6 +25,6 @@ const userSchema = new Mongoose.Schema({
     }
 });
 
-const User = Mongoose.model<userDoc>(`User`, userSchema);
+const User = Mongoose.model<UserDoc>(`User`, userSchema);
 
 export default User;
