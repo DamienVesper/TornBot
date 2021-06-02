@@ -1,18 +1,19 @@
 import config from '../../config/config';
 
 import * as Discord from 'discord.js';
-import { Client } from '../types/discord';
+import { Client, CommandConfig } from '../types/discord';
+import { tornAccount } from '../types/account';
 
 import User from '../models/user.model';
-import { tornAccount, getTornUsers } from '../utils/getTornUsers';
+import getTornUsers from '../utils/getTornUsers';
 
-export default {
+const cmd: CommandConfig = {
     desc: `View user stats.`,
     usage: `[user]`
 };
 
-export const run = async (client: Client, message: Discord.Message, args: any[]) => {
-    const m: String = `${message.author} »`;
+const run = async (client: Client, message: Discord.Message, args: any[]) => {
+    const m = `${message.author} »`;
 
     const tornUsers = await getTornUsers();
 
@@ -32,4 +33,9 @@ export const run = async (client: Client, message: Discord.Message, args: any[])
         .setFooter(config.footer);
 
     return message.channel.send(sEmbed);
+};
+
+export {
+    cmd,
+    run
 };
