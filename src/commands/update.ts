@@ -1,17 +1,18 @@
+import * as Discord from 'discord.js';
 import User from '../models/user.model';
 
-import * as Discord from 'discord.js';
-import { Client } from '../index';
+import { Client, CommandConfig } from '../types/discord';
+import { tornAccount } from '../types/account';
 
-import { tornAccount, getTornUsers } from '../utils/getTornUsers';
+import getTornUsers from '../utils/getTornUsers';
 import updateRoles from '../utils/updateRoles';
 
-export default {
+const cmd: CommandConfig = {
     desc: `Update your roles.`,
     aliases: [`h`, `?`]
 };
 
-export const run = async (client: Client, message: Discord.Message, args: any[]) => {
+const run = async (client: Client, message: Discord.Message, args: any[]) => {
     const m: String = `${message.author} »`;
 
     const tornUsers: tornAccount[] = await getTornUsers();
@@ -21,4 +22,9 @@ export const run = async (client: Client, message: Discord.Message, args: any[])
 
     updateRoles(client, message.member, dbUser.accountName, tornUsers);
     message.channel.send(`${m} Updating roles...`);
+};
+
+export {
+    cmd,
+    run
 };
