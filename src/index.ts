@@ -1,57 +1,44 @@
-import * as fs from 'fs';
 import * as Discord from 'discord.js';
-import * as path from 'path';
+import mongoose from 'mongoose';
 
-import * as mongoose from 'mongoose';
+import { Client } from './types/discord';
+import log from './utils/log';
 
-import { log, logHeader, logSplash } from './utils/log';
+import * as logExtra from './utils/logExtra';
+import * as loader from './utils/loader';
 
 import * as dotenv from 'dotenv';
 dotenv.config();
-
-mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true });
-
-export interface Client extends Discord.Client {
-    commands?: any[]
-    events?: any[]
-}
 
 const client: Client = new Discord.Client({
     disableMentions: `everyone`,
     fetchAllMembers: true
 });
 
-// Uncaught handler.
+// Uncaught exception handler.
 process.on(`uncaughtException`, e => log(`red`, e.stack));
 
-logSplash();
+// Bot startup.
+const startBot = async () => {
+    logExtra.logSplash(async () => {
+        loader.loadCommands(client, async () => {
+            loader.loadEvents(client, async () => {
+                logExtra.logHeader(async () => {
+                    await mongoose.connect(process.env.MONGODB_URI, {
+                        useNewUrlParser: true,
+                        useUnifiedTopology: true
+                    });
 
-// Load events.
-logHeader();
-const eventFiles = fs.readdirSync(path.resolve(__dirname, `./events`));
-for (const file of eventFiles) {
-    const event = require(`./events/${file}`).default;
+                    log(`green`, `Connected to database.`);
 
-    log(`yellow`, `Loaded event ${file}.`);
-    client.on(file.split(`.`)[0], event.bind(null, client));
-}
-
-// Load commands.
-logHeader();
-client.commands = [];
-const commandFiles = fs.readdirSync(path.resolve(__dirname, `./commands`));
-for (const file of commandFiles) {
-    const command = require(`./commands/${file}`);
-
-    log(`yellow`, `Loaded command ${file}.`);
-    client.commands.push({
-        name: file.split(`.`)[0],
-        desc: command.default.desc,
-        usage: command.default.usage,
-        aliases: command.default.aliases,
-        run: command.run
+                    logExtra.logHeader(async () => {
+                        await client.login(process.env.DISCORD_TOKEN).catch(() => log(`red`, `Failed to authenticate client with application.`));
+                    });
+                });
+            });
+        });
     });
-}
+};
 
-logHeader();
-client.login(process.env.DISCORD_BOT_TOKEN).catch(() => log(`red`, `Failed to authenticate client with application.`));
+// Actually start the bot.
+startBot();
