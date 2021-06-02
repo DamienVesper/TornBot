@@ -23,14 +23,6 @@ const config = {
 
     prefix: `;`,
 
-    token: process.env.DISCORD_BOT_TOKEN,
-    db: {
-        uri: process.env.MONGO_URI,
-        uriParams: {
-            useNewUrlParser: true,
-            useUnifiedTopology: true
-        }
-    },
     version,
     footer: `© Created by ${author} | v${version}`
 };

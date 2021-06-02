@@ -1,16 +1,15 @@
-import * as dotenv from 'dotenv';
-
 import * as fs from 'fs';
 import * as Discord from 'discord.js';
 import * as path from 'path';
 
 import * as mongoose from 'mongoose';
 
-import config from '../config/config';
 import { log, logHeader, logSplash } from './utils/log';
 
+import * as dotenv from 'dotenv';
 dotenv.config();
-mongoose.connect(config.db.uri, config.db.uriParams);
+
+mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true });
 
 export interface Client extends Discord.Client {
     commands?: any[]
@@ -55,4 +54,4 @@ for (const file of commandFiles) {
 }
 
 logHeader();
-client.login(process.env.DISCORD_TOKEN).catch(() => log(`red`, `Failed to authenticate client with application.`));
+client.login(process.env.DISCORD_BOT_TOKEN).catch(() => log(`red`, `Failed to authenticate client with application.`));
