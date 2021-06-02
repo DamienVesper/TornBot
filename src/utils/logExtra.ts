@@ -15,8 +15,8 @@ const logSplash = (callback?: any) => {
        ██║   ██║   ██║██╔══██╗██║╚██╗██║██╔══██╗██║   ██║   ██║   
        ██║   ╚██████╔╝██║  ██║██║ ╚████║██████╔╝╚██████╔╝   ██║   
        ╚═╝    ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═══╝╚═════╝  ╚═════╝    ╚═╝   
-                                                                                                  
-       Created by ${author} | v${version}
+
+               Created by ${author} | v${version}
     `);
 
     if (callback !== undefined) return callback();
