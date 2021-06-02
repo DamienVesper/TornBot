@@ -1,8 +1,8 @@
 import * as Discord from 'discord.js';
-import { Client } from '../index';
+import log from './log';
 
-import { log } from './log';
-import { tornAccount } from './getTornUsers';
+import { Client } from '../types/discord';
+import { tornAccount } from '../types/account';
 
 const updateRoles = async (client: Client, member: Discord.GuildMember, tornUser: string, tornUsers: tornAccount[]) => {
     log(`cyan`, `Updating roles for ${tornUser}.`);
