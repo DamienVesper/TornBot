@@ -1,19 +1,6 @@
 import axios from 'axios';
 
-interface tornAccount {
-    username: string,
-    displayName: string,
-
-    placement: number,
-    team: number,
-    type: string,
-
-    xp: number,
-    rank: number,
-    kills: number,
-    money: number,
-    tech: number
-}
+import tornAccount from '../types/account';
 
 const getTornUsers = async () => {
     const tornUsers: tornAccount[] = [];
@@ -85,7 +72,4 @@ const getTornUsers = async () => {
     return tornUsers;
 };
 
-export {
-    tornAccount,
-    getTornUsers
-};
+export default getTornUsers;
