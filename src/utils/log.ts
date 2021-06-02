@@ -1,5 +1,3 @@
-import { author, version } from '../../package.json';
-
 const log = (color: string, ...content: any[]) => {
     // Set timing variables.
     const time = new Date();
@@ -48,3 +46,5 @@ const log = (color: string, ...content: any[]) => {
 
     console.log(logColor || `\x1b[37m`, formattedTime, logContent);
 };
+
+export default log;
