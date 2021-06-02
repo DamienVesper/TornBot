@@ -26,7 +26,9 @@ const startBot = async () => {
                 logExtra.logHeader(async () => {
                     await mongoose.connect(process.env.MONGODB_URI, {
                         useNewUrlParser: true,
-                        useUnifiedTopology: true
+                        useUnifiedTopology: true,
+                        useCreateIndex: true,
+                        useFindAndModify: true
                     });
 
                     log(`green`, `Connected to database.`);
