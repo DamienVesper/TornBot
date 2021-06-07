@@ -1,11 +1,11 @@
-name: Node.js CI
+name: Lint
 
 on:
   push:
   pull_request:
 
 jobs:
-  build:
+  lint:
     name: Lint
     runs-on: ubuntu-latest
 
