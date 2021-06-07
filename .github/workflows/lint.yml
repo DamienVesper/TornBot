@@ -1,4 +1,4 @@
-name: Lint
+name: Node.js CI
 
 on:
   push:
@@ -6,6 +6,7 @@ on:
 
 jobs:
   lint:
+    name: Lint
     runs-on: ubuntu-latest
 
     strategy:
