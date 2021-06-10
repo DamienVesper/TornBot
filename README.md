@@ -15,16 +15,20 @@ Testing the application using a database on your own machine will require a loca
 
 1. Create a `.env` in the root directory of the repository.
 2. Inside of the `.env` file, include the following:
-```
+```env
 DISCORD_TOKEN="<token>"
 MONGODB_URI="<uri>"
 ```
 Replace `<uri>` and `<discord bot token>` with your MongoDB URI and Discord bot token.
 
-**Running The Bot**
+Then, in a command line at the top directory of where you have cloned the project, run:
+```sh
+yarn
 ```
-npm i
-npm run dev
+
+Then, to compile and execute the project, run:
+```
+yarn dist
 ```
 
 Note: You will need MongoDB and Node.js installed (with npm v7) to be able to build and run the bot.
