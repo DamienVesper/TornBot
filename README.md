@@ -31,4 +31,4 @@ Then, to compile and execute the project, run:
 yarn dist
 ```
 
-Note: You will need MongoDB and Node.js installed (with npm v7) to be able to build and run the bot.
+Note: You will need MongoDB and Node.js installed to be able to build and run the bot.
