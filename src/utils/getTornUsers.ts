@@ -1,5 +1,4 @@
 import axios from 'axios';
-
 import { TornAccount } from '../types/account';
 
 const getTornUsers = async () => {
@@ -36,9 +35,6 @@ const getTornUsers = async () => {
                     break;
                 case `M`:
                     accountType = `Moderator`;
-                    break;
-                case `D`:
-                    accountType = `Developer`;
                     break;
                 case `A`:
                     accountType = `Admin`;
