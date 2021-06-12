@@ -1,13 +1,13 @@
-import config from '../../config/config';
+import config from '../../../config/config';
 
 import * as Discord from 'discord.js';
-import User from '../models/user.model';
+import User from '../../models/user.model';
 
-import { Client, CommandConfig } from '../types/discord';
-import { tornAccount } from '../types/account';
+import { Client, CommandConfig } from '../../types/discord';
+import { tornAccount } from '../../types/account';
 
-import getTornUsers from '../utils/getTornUsers';
-import getQuery from '../utils/getQuery';
+import getTornUsers from '../../utils/getTornUsers';
+import getQuery from '../../utils/getQuery';
 
 const cmd: CommandConfig = {
     desc: `View user stats.`,

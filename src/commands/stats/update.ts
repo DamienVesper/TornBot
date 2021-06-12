@@ -1,11 +1,11 @@
 import * as Discord from 'discord.js';
-import User from '../models/user.model';
+import User from '../../models/user.model';
 
-import { Client, CommandConfig } from '../types/discord';
-import { tornAccount } from '../types/account';
+import { Client, CommandConfig } from '../../types/discord';
+import { tornAccount } from '../../types/account';
 
-import getTornUsers from '../utils/getTornUsers';
-import updateRoles from '../utils/updateRoles';
+import getTornUsers from '../../utils/getTornUsers';
+import updateRoles from '../../utils/updateRoles';
 
 const cmd: CommandConfig = {
     desc: `Update your roles.`,

@@ -1,7 +1,7 @@
-import config from '../../config/config';
+import config from '../../../config/config';
 
 import * as Discord from 'discord.js';
-import { Client, CommandConfig } from '../types/discord';
+import { Client, CommandConfig } from '../../types/discord';
 
 const cmd: CommandConfig = {
     desc: `View all commands.`,

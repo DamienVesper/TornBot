@@ -1,7 +1,7 @@
 import * as Discord from 'discord.js';
-import config from '../../config/config';
+import config from '../../../config/config';
 
-import { Client, CommandConfig } from '../types/discord';
+import { Client, CommandConfig } from '../../types/discord';
 
 const cmd: CommandConfig = {
     desc: `View the wiki.`
