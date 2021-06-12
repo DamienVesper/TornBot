@@ -7,6 +7,6 @@ const leaderboardSchema = new Mongoose.Schema({
     accounts: { type: Array, required: true }
 });
 
-const User = Mongoose.model<LeaderboardDoc>(`Leaderboard`, leaderboardSchema);
+const Leaderboard = Mongoose.model<LeaderboardDoc>(`Leaderboard`, leaderboardSchema);
 
-export default User;
+export default Leaderboard;
