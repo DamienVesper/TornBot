@@ -1,4 +1,5 @@
 import * as Mongoose from 'mongoose';
+import { TornAccount } from './account';
 
 interface UserDoc extends Mongoose.Document {
     banned: boolean;
@@ -8,4 +9,12 @@ interface UserDoc extends Mongoose.Document {
     discordID: string;
 }
 
-export { UserDoc };
+interface LeaderboardDoc extends Mongoose.Document {
+    creationDate: string;
+    accounts: TornAccount[];
+}
+
+export {
+    UserDoc,
+    LeaderboardDoc
+};
