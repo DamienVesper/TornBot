@@ -1,9 +1,9 @@
 import axios from 'axios';
 
-import { tornAccount } from '../types/account';
+import { TornAccount } from '../types/account';
 
 const getTornUsers = async () => {
-    const tornUsers: tornAccount[] = [];
+    const tornUsers: TornAccount[] = [];
     const res = await axios.get(`https://torn.space/leaderboard`);
     const body = res.data;
 

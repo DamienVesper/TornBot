@@ -4,7 +4,7 @@ import * as Discord from 'discord.js';
 import User from '../../models/user.model';
 
 import { Client, CommandConfig } from '../../types/discord';
-import { tornAccount } from '../../types/account';
+import { TornAccount } from '../../types/account';
 
 import getTornUsers from '../../utils/getTornUsers';
 import getQuery from '../../utils/getQuery';
@@ -23,7 +23,7 @@ const run = async (client: Client, message: Discord.Message, args: string[]) => 
 
     const dbUser = await User.findOne(query);
 
-    const tornUser: tornAccount = tornUsers.find(user => user.username === (dbUser?.accountName || args[0]));
+    const tornUser: TornAccount = tornUsers.find(user => user.username === (dbUser?.accountName || args[0]));
     if (!tornUser) return message.channel.send(`${m} That user does not exist!`);
 
     const sEmbed: Discord.MessageEmbed = new Discord.MessageEmbed()

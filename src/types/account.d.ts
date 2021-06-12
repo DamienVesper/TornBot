@@ -1,4 +1,4 @@
-interface tornAccount {
+interface TornAccount {
     username: string;
     displayName: string;
 
@@ -13,4 +13,4 @@ interface tornAccount {
     tech: number;
 }
 
-export { tornAccount };
+export { TornAccount };
