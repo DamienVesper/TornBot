@@ -20,26 +20,23 @@ process.on(`uncaughtException`, e => log(`red`, e.stack));
 
 // Bot startup.
 const startBot = async () => {
-    logExtra.logSplash(async () => {
-        loader.loadCommands(client, async () => {
-            loader.loadEvents(client, async () => {
-                logExtra.logHeader(async () => {
-                    await mongoose.connect(process.env.MONGODB_URI, {
-                        useNewUrlParser: true,
-                        useUnifiedTopology: true,
-                        useCreateIndex: true,
-                        useFindAndModify: true
-                    });
+    logExtra.logSplash();
 
-                    log(`green`, `Connected to database.`);
+    await loader.loadCommands(client);
+    await loader.loadEvents(client);
 
-                    logExtra.logHeader(async () => {
-                        await client.login(process.env.DISCORD_TOKEN).catch(() => log(`red`, `Failed to authenticate client with application.`));
-                    });
-                });
-            });
-        });
+    logExtra.logHeader();
+    await mongoose.connect(process.env.MONGODB_URI, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+        useCreateIndex: true,
+        useFindAndModify: true
     });
+
+    log(`green`, `Connected to database.`);
+
+    logExtra.logHeader();
+    await client.login(process.env.DISCORD_TOKEN).catch(() => log(`red`, `Failed to authenticate client with application.`));
 };
 
 // Actually start the bot.
