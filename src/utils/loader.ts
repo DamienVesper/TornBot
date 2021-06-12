@@ -6,7 +6,7 @@ import { Client } from '../types/discord';
 import log from './log';
 import { logHeader } from './logExtra';
 
-const loadCommands = (client: Client, callback?: any) => {
+const loadCommands = (client: Client) => {
     logHeader();
 
     // Initialize the commands array.
@@ -30,8 +30,6 @@ const loadCommands = (client: Client, callback?: any) => {
                 run: command.run
             });
         }
-
-        if (callback !== undefined) return callback();
     });
 };
 
@@ -56,8 +54,6 @@ const loadEvents = (client: Client, callback?: any) => {
                 callback: event
             });
         }
-
-        if (callback !== undefined) return callback();
     });
 };
 
