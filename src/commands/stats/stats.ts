@@ -1,13 +1,13 @@
 import config from '../../../config/config';
 
 import * as Discord from 'discord.js';
-import User from '../../models/user.model';
-
 import { Client, CommandConfig } from '../../types/discord';
+
+import getQuery from '../../utils/getQuery';
 import { TornAccount } from '../../types/account';
 
-import getTornUsers from '../../utils/getTornUsers';
-import getQuery from '../../utils/getQuery';
+import User from '../../models/user.model';
+import Leaderboard from '../../models/leaderboard.model';
 
 const cmd: CommandConfig = {
     desc: `View user stats.`,
@@ -17,7 +17,7 @@ const cmd: CommandConfig = {
 const run = async (client: Client, message: Discord.Message, args: string[]) => {
     const m = `${message.author} »`;
 
-    const tornUsers = await getTornUsers();
+    const tornUsers: TornAccount[] = (await Leaderboard.findOne()).accounts;
 
     const query = getQuery(message, args);
 

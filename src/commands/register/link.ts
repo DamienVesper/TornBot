@@ -1,10 +1,10 @@
 import * as Discord from 'discord.js';
-import User from '../../models/user.model';
 
 import { Client, CommandConfig } from '../../types/discord';
 import { TornAccount } from '../../types/account';
 
-import getTornUsers from '../../utils/getTornUsers';
+import User from '../../models/user.model';
+import Leaderboard from '../../models/leaderboard.model';
 
 const cmd: CommandConfig = {
     desc: `Link your Torn account to Discord.`,
@@ -13,8 +13,7 @@ const cmd: CommandConfig = {
 
 const run = async (client: Client, message: Discord.Message, args: string[]) => {
     const m = `${message.author} »`;
-
-    const tornUsers: TornAccount[] = await getTornUsers();
+    const tornUsers: TornAccount[] = (await Leaderboard.findOne()).accounts;
 
     const userToLink = args[0].toString().toLowerCase();
 
