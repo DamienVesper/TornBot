@@ -7,9 +7,8 @@ import refreshActivity from '../utils/refreshActivity';
 export default async (client: Client) => {
     log(`green`, `Client has started, with ${client.users.cache.size} user(s) in ${client.guilds.cache.size} guild(s).`);
 
-    logHeader(() => {
-        refreshActivity(client, () => {
-            setInterval(() => refreshActivity(client), 6e5);
-        });
-    });
+    logHeader();
+    await refreshActivity(client);
+
+    setInterval(async () => (await refreshActivity(client)), 6e5);
 };
