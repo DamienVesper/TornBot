@@ -16,7 +16,7 @@ const loadCommands = async (client: Client) => {
     const files = readDirectory(path.resolve(__dirname, `../commands`));
 
     for (const file of files) {
-        const fileName = file.split(`\\`).pop().split(`.`)[0];
+        const fileName = file.split(process.platform === `win32` ? `\\` : `/`).pop().split(`.`)[0];
         log(`yellow`, `Loaded command ${fileName}.`);
 
         const command = await import(file);
