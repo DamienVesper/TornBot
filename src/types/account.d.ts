@@ -8,6 +8,7 @@ interface TornAccount {
 
     xp: number;
     rank: number;
+    elo: number;
     kills: number;
     money: number;
     tech: number;

@@ -58,10 +58,11 @@ const getTornUsers = async () => {
             type: accountType,
 
             xp: parseInt(curUser[2]),
-            rank: parseInt(curUser[3]),
-            kills: parseInt(curUser[4]),
-            money: curUser[5] ? curUser[5].split(` `).join(``) : 0,
-            tech: parseFloat(curUser[6])
+            elo: parseInt(curUser[3]),
+            rank: parseInt(curUser[4]),
+            kills: parseInt(curUser[5]),
+            money: curUser[5] ? curUser[6].split(` `).join(``) : 0,
+            tech: parseFloat(curUser[7])
         });
     }
 
