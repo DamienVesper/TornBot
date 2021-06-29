@@ -27,9 +27,9 @@ const run = async (client: Client, message: Discord.Message, args: string[]) => 
     if (!tornUser) return message.channel.send(`${m} That user does not exist!`);
 
     const sEmbed: Discord.MessageEmbed = new Discord.MessageEmbed()
-        .setAuthor(`#${tornUser.placement} | [${tornUser.elo}] ${tornUser.displayName}`, client.user.avatarURL())
+        .setAuthor(`#${tornUser.placement} | ${tornUser.displayName}`, client.user.avatarURL())
         .setColor(config.colors.teams[tornUser.team])
-        .setDescription(`This user is a ${tornUser.type.toLowerCase()}.\n\n**Rank**: ${tornUser.rank}\n**Experience**: ${tornUser.xp}\n**Kills**: ${tornUser.kills}\n**Money**:  ${tornUser.money}\n**Tech**: ${tornUser.tech}`)
+        .setDescription(`This user has an ELO of ${tornUser.elo}. \n\n**Rank**: ${tornUser.rank}\n**Experience**: ${tornUser.xp}\n**Kills**: ${tornUser.kills}\n**Money**:  ${tornUser.money}\n**Tech**: ${tornUser.tech}`)
         .setTimestamp(new Date())
         .setFooter(config.footer);
 
