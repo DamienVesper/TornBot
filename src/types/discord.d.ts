@@ -6,19 +6,17 @@ interface CommandConfig {
     aliases?: string[];
 }
 interface Command {
-    name: string;
     config: CommandConfig;
     run: any;
 }
 
 interface Event {
-    name: string;
     callback: any;
 }
 
 interface Client extends Discord.Client {
-    commands?: Command[];
-    events?: Event[];
+    commands?: Map<string, Command>;
+    events?: Map<string, Event>;
 }
 
 export {
