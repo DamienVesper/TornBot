@@ -4,6 +4,10 @@ import { TornAccount } from '../types/accounts';
 import getTornUsers from '../utils/getTornUsers';
 import log from '../utils/log';
 
+/**
+ * Initialize a new cached leaderboard.
+ * @returns A fulfillment promise.
+ */
 const createLeaderboard = async () => {
     const tornUsers: Map<string, TornAccount> = await getTornUsers();
 
@@ -15,6 +19,9 @@ const createLeaderboard = async () => {
     return await lb.save();
 };
 
+/**
+ * Update the current cached leaderboard.
+ */
 const updateLeaderboard = async () => {
     log(`cyan`, `Updating leaderboard...`);
     const currentLB = await Leaderboard.findOne();

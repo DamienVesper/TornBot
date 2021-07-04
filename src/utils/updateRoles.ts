@@ -3,6 +3,12 @@ import log from './log';
 
 import { TornAccount } from '../types/accounts';
 
+/**
+ * Update the roles of a member.
+ * @param member The member to update.
+ * @param tornUser The torn account of the member.
+ * @param tornUsers The map of cached torn users.
+ */
 const updateRoles = async (member: Discord.GuildMember, tornUser: string, tornUsers: Map<string, TornAccount>) => {
     log(`cyan`, `Updating roles for ${tornUser}.`);
 

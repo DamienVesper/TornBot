@@ -1,3 +1,9 @@
+/**
+ * Log something to console.
+ * @author DamienVesper
+ * @param color The color to log as.
+ * @param content The content to log.
+ */
 const log = (color: string, ...content: any[]) => {
     // Set timing variables.
     const time = new Date();
