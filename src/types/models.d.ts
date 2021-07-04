@@ -1,5 +1,5 @@
 import * as Mongoose from 'mongoose';
-import { TornAccount } from './account';
+import { TornAccount } from './accounts';
 
 interface UserDoc extends Mongoose.Document {
     banned: boolean;
@@ -11,7 +11,7 @@ interface UserDoc extends Mongoose.Document {
 
 interface LeaderboardDoc extends Mongoose.Document {
     creationDate: string;
-    accounts: TornAccount[];
+    accounts: Map<string, TornAccount>;
 }
 
 export {

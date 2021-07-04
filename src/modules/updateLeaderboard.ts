@@ -1,11 +1,11 @@
 import Leaderboard from '../models/leaderboard.model';
-import { TornAccount } from '../types/account';
+import { TornAccount } from '../types/accounts';
 
 import getTornUsers from '../utils/getTornUsers';
 import log from '../utils/log';
 
 const createLeaderboard = async () => {
-    const tornUsers: TornAccount[] = await getTornUsers();
+    const tornUsers: Map<string, TornAccount> = await getTornUsers();
 
     const lb = new Leaderboard({
         creationDate: new Date().toString(),
