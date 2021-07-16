@@ -10,7 +10,7 @@ const refreshActivity = async (client: Client) => {
 
     await client.user.setPresence({
         activity: {
-            name: `${(await client.guilds.fetch(`247490958374076416`)).memberCount} players on Torn.Space`,
+            name: `Torn.Space`,
             type: `WATCHING`
         },
 
