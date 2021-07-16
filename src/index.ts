@@ -13,7 +13,7 @@ dotenv.config();
 const client: Client = new Discord.Client({
     disableMentions: `everyone`,
 
-    cacheGuilds: false,
+    cacheGuilds: true,
     cacheChannels: false,
     cacheOverwrites: false,
     cacheRoles: false,
