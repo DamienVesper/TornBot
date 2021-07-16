@@ -1,4 +1,4 @@
-import * as Discord from 'discord.js';
+import * as Discord from 'discord.js-light';
 
 /**
  * Get a valid MongoDB query from a message.

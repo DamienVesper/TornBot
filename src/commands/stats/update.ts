@@ -1,4 +1,4 @@
-import * as Discord from 'discord.js';
+import * as Discord from 'discord.js-light';
 import { Client, CommandConfig } from '../../types/discord';
 
 import updateRoles from '../../utils/updateRoles';
