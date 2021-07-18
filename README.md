@@ -26,9 +26,19 @@ Then, in a command line at the top directory of where you have cloned the projec
 yarn
 ```
 
-Then, to compile and execute the project, run:
+Then, to compile the project, run
+```
+yarn build
+```
+
+To execute the project, run
 ```
 yarn dist
+```
+
+Alternatively, you could simply run a single command in development:
+```
+yarn dev
 ```
 
 Note: You will need MongoDB and Node.js installed to be able to build and run the bot.
