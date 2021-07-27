@@ -1,0 +1,10 @@
+[Unit]
+Description=Torn.Space Discord bot.
+
+[Service]
+Type=simple
+WorkingDirectory=/opt/TornBot
+ExecStart=/usr/bin/yarn dist
+
+[Install]
+WantedBy=multi-user.target
