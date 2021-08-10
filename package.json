@@ -7,7 +7,7 @@
     "build": "tsc",
     "dev": "ts-node ./src/index.ts",
     "dist": "node ./build/src/index.js",
-    "dev:lint": "eslint . --fix --ext .ts"
+    "dev:lint": "eslint . --ext .ts --fix"
   },
   "repository": {
     "type": "git",
