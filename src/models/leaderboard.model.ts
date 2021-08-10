@@ -1,6 +1,6 @@
 import * as Mongoose from 'mongoose';
 
-import { LeaderboardDoc } from '../types/models';
+import { LeaderboardDoc } from '../typings/models';
 
 const leaderboardSchema = new Mongoose.Schema({
     creationDate: { type: String, required: false, default: new Date().toString() },

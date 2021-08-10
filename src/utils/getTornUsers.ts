@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { LBAccount, TornAccount } from '../types/accounts';
+import { LBAccount, TornAccount } from '../typings/accounts';
 
 /**
  * Grab all accounts from the leaderboard.

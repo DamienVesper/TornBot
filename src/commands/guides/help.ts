@@ -1,7 +1,7 @@
 import config from '../../../config/config';
 
-import * as Discord from 'discord.js-light';
-import { Client, CommandConfig } from '../../types/discord';
+import * as Discord from 'discord.js';
+import { Client, CommandConfig } from '../../typings/discord';
 
 const cmd: CommandConfig = {
     desc: `View all commands.`,
@@ -27,7 +27,7 @@ const run = async (client: Client, message: Discord.Message, args: string[]) => 
             .setDescription(helpTxt)
             .setTimestamp(new Date())
             .setFooter(config.footer);
-        return message.channel.send(sEmbed);
+        return message.channel.send({ embeds: [sEmbed] });
     }
 
     const commandName = args[0].toLowerCase();
@@ -45,7 +45,7 @@ const run = async (client: Client, message: Discord.Message, args: string[]) => 
         .setDescription(`${command.config.desc}\n\n${data.join(`\n`)}`)
         .setTimestamp(new Date())
         .setFooter(config.footer);
-    message.channel.send(sEmbed);
+    message.channel.send({ embeds: [sEmbed] });
 };
 
 export {

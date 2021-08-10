@@ -1,10 +1,10 @@
 import config from '../../../config/config';
 
-import * as Discord from 'discord.js-light';
-import { Client, CommandConfig } from '../../types/discord';
+import * as Discord from 'discord.js';
+import { Client, CommandConfig } from '../../typings/discord';
 
 import getQuery from '../../utils/getQuery';
-import { TornAccount } from '../../types/accounts';
+import { TornAccount } from '../../typings/accounts';
 
 import User from '../../models/user.model';
 import Leaderboard from '../../models/leaderboard.model';
@@ -34,7 +34,7 @@ const run = async (client: Client, message: Discord.Message, args: string[]) => 
         .setTimestamp(new Date())
         .setFooter(config.footer);
 
-    message.channel.send(sEmbed);
+    message.channel.send({ embeds: [sEmbed] });
 };
 
 export {

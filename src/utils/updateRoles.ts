@@ -1,7 +1,7 @@
-import * as Discord from 'discord.js-light';
+import * as Discord from 'discord.js';
 import log from './log';
 
-import { TornAccount } from '../types/accounts';
+import { TornAccount } from '../typings/accounts';
 
 /**
  * Update the roles of a member.

@@ -1,7 +1,7 @@
-import * as Discord from 'discord.js-light';
+import * as Discord from 'discord.js';
 import config from '../../../config/config';
 
-import { Client, CommandConfig } from '../../types/discord';
+import { Client, CommandConfig } from '../../typings/discord';
 
 const cmd: CommandConfig = {
     desc: `View the wiki.`
@@ -14,7 +14,7 @@ const run = async (client: Client, message: Discord.Message, args: string[]) => 
         .setDescription(`Click [here](https://tornspace.fandom.com) to view the Torn.Space wiki.`)
         .setTimestamp(new Date())
         .setFooter(config.footer);
-    message.channel.send(sEmbed);
+    message.channel.send({ embeds: [sEmbed] });
 };
 
 export {

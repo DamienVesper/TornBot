@@ -1,7 +1,7 @@
-import * as Discord from 'discord.js-light';
+import Discord, { Intents } from 'discord.js';
 import mongoose from 'mongoose';
 
-import { Client } from './types/discord';
+import { Client } from './typings/discord';
 import log from './utils/log';
 
 import * as logExtra from './utils/logExtra';
@@ -11,14 +11,14 @@ import * as dotenv from 'dotenv';
 dotenv.config();
 
 const client: Client = new Discord.Client({
-    disableMentions: `everyone`,
-
-    cacheGuilds: true,
-    cacheChannels: false,
-    cacheOverwrites: false,
-    cacheRoles: true,
-    cacheEmojis: false,
-    cachePresences: false
+    intents: [
+        Intents.FLAGS.DIRECT_MESSAGES,
+        Intents.FLAGS.GUILD_BANS,
+        Intents.FLAGS.GUILD_MEMBERS,
+        Intents.FLAGS.GUILD_MESSAGES,
+        Intents.FLAGS.GUILD_VOICE_STATES,
+        Intents.FLAGS.GUILDS
+    ]
 });
 
 // Uncaught exception handler.

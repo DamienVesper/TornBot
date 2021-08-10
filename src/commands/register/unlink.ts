@@ -1,7 +1,7 @@
-import * as Discord from 'discord.js-light';
+import * as Discord from 'discord.js';
 
 import User from '../../models/user.model';
-import { Client, CommandConfig } from '../../types/discord';
+import { Client, CommandConfig } from '../../typings/discord';
 
 const cmd: CommandConfig = {
     desc: `Unlink your Torn account from Discord.`

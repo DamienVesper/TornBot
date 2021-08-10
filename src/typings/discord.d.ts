@@ -1,4 +1,4 @@
-import * as Discord from 'discord.js-light';
+import * as Discord from 'discord.js';
 
 interface CommandConfig {
     desc: string;

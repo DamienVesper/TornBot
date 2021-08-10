@@ -1,8 +1,8 @@
-import * as Discord from 'discord.js-light';
-import { Client, CommandConfig } from '../../types/discord';
+import * as Discord from 'discord.js';
+import { Client, CommandConfig } from '../../typings/discord';
 
 import updateRoles from '../../utils/updateRoles';
-import { TornAccount } from '../../types/accounts';
+import { TornAccount } from '../../typings/accounts';
 
 import User from '../../models/user.model';
 import Leaderboard from '../../models/leaderboard.model';

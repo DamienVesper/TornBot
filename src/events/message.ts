@@ -1,5 +1,5 @@
-import * as Discord from 'discord.js-light';
-import { Client } from '../types/discord';
+import * as Discord from 'discord.js';
+import { Client } from '../typings/discord';
 
 import config from '../../config/config';
 import log from '../utils/log';
@@ -8,7 +8,7 @@ export default async (client: Client, message: Discord.Message) => {
     const m = `${message.author} »`;
 
     // Botception and prefix handling.
-    if (message.author.bot || message.channel.type === `dm`) return;
+    if (message.author.bot || message.channel.type === `DM`) return;
     if (message.content.slice(0, config.prefix.length).toString().toLowerCase() !== config.prefix) return;
 
     // Parse arguments and command.
@@ -17,7 +17,7 @@ export default async (client: Client, message: Discord.Message) => {
 
     // Grab the command from the handler.
     const cmd = client.commands.get(command) ||
-        client.commands.get([...client.commands.keys()][[...client.commands.values()].indexOf([...client.commands.values()].find(cmd => cmd.config.aliases.includes(command)))]);
+        client.commands.get([...client.commands.keys()][[...client.commands.values()].indexOf([...client.commands.values()].find(cmd => cmd.config.aliases?.includes(command)))]);
 
     if (!cmd) return;
 

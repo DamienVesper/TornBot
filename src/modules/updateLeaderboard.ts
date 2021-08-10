@@ -1,5 +1,5 @@
 import Leaderboard from '../models/leaderboard.model';
-import { TornAccount } from '../types/accounts';
+import { TornAccount } from '../typings/accounts';
 
 import getTornUsers from '../utils/getTornUsers';
 import log from '../utils/log';
