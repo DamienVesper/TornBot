@@ -1,6 +1,6 @@
 {
   "name": "tornbot",
-  "version": "1.8.0",
+  "version": "1.8.1",
   "description": "A bot for the online game Torn.Space.",
   "main": "index.js",
   "scripts": {
