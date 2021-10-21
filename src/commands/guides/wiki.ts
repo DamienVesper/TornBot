@@ -14,7 +14,7 @@ const run = async (client: Client, message: Discord.Message, args: string[]) => 
         .setDescription(`Click [here](https://tornspace.fandom.com) to view the Torn.Space wiki.`)
         .setTimestamp(new Date())
         .setFooter(config.footer);
-    message.channel.send({ embeds: [sEmbed] });
+    message.reply({ embeds: [sEmbed] });
 };
 
 export {

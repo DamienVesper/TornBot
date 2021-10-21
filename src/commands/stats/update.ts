@@ -13,15 +13,13 @@ const cmd: CommandConfig = {
 };
 
 const run = async (client: Client, message: Discord.Message, args: string[]) => {
-    const m = `${message.author} »`;
-
     const tornUsers: Map<string, TornAccount> = (await Leaderboard.findOne()).accounts;
 
     const dbUser = await User.findOne({ discordID: message.author.id });
-    if (!dbUser) return message.channel.send(`${m} You don't have an account yet!`);
+    if (!dbUser) return message.reply(`You don't have an account yet!`);
 
     updateRoles(message.member, dbUser.accountName, tornUsers);
-    message.channel.send(`${m} Updating roles...`);
+    message.reply(`Updating roles...`);
 };
 
 export {

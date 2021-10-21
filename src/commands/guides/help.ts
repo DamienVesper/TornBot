@@ -9,8 +9,6 @@ const cmd: CommandConfig = {
 };
 
 const run = async (client: Client, message: Discord.Message, args: string[]) => {
-    const m = `${message.author} »`;
-
     const commands = client.commands;
     const data = [];
 
@@ -27,14 +25,14 @@ const run = async (client: Client, message: Discord.Message, args: string[]) => 
             .setDescription(helpTxt)
             .setTimestamp(new Date())
             .setFooter(config.footer);
-        return message.channel.send({ embeds: [sEmbed] });
+        return message.reply({ embeds: [sEmbed] });
     }
 
     const commandName = args[0].toLowerCase();
     const command = client.commands.get(commandName) ||
         client.commands.get([...client.commands.keys()][[...client.commands.values()].indexOf([...client.commands.values()].find(cmd => cmd.config.aliases.includes(commandName)))]);
 
-    if (!command) return message.channel.send(`${m} That is not a valid command!`);
+    if (!command) return message.reply(`That is not a valid command!`);
 
     if (command.config.usage) data.push(`**Usage:** \`${config.prefix}${commandName} ${command.config.usage}\``);
     if (command.config.aliases) data.push(`**Aliases:** ${command.config.aliases.join(`, `)}`);
@@ -45,7 +43,7 @@ const run = async (client: Client, message: Discord.Message, args: string[]) => 
         .setDescription(`${command.config.desc}\n\n${data.join(`\n`)}`)
         .setTimestamp(new Date())
         .setFooter(config.footer);
-    message.channel.send({ embeds: [sEmbed] });
+    message.reply({ embeds: [sEmbed] });
 };
 
 export {

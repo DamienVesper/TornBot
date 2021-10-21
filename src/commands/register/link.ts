@@ -12,7 +12,6 @@ const cmd: CommandConfig = {
 };
 
 const run = async (client: Client, message: Discord.Message, args: string[]) => {
-    const m = `${message.author} »`;
     const tornUsers: Map<string, TornAccount> = (await Leaderboard.findOne()).accounts;
 
     const userToLink = args[0].toString().toLowerCase();
@@ -20,16 +19,16 @@ const run = async (client: Client, message: Discord.Message, args: string[]) => 
     const userIsRegistered = await User.findOne({ discordID: message.author.id });
     const accountIsRegistered = await User.findOne({ accountName: userToLink });
 
-    if (userIsRegistered) return message.channel.send(`${m} You are already linked to an account!`);
-    else if (accountIsRegistered) return message.channel.send(`${m} That account has already been registered!`);
-    else if (!tornUsers.get(userToLink)) return message.channel.send(`${m} That account does not exist!`);
+    if (userIsRegistered) return message.reply(`You are already linked to an account!`);
+    else if (accountIsRegistered) return message.reply(`That account has already been registered!`);
+    else if (!tornUsers.get(userToLink)) return message.reply(`That account does not exist!`);
 
     const user = new User({
         accountName: userToLink,
         discordID: message.author.id
     });
 
-    user.save(() => message.channel.send(`${m} You are now linked to account \`${userToLink}\`.`));
+    user.save(() => message.reply(`You are now linked to account \`${userToLink}\`.`));
 };
 
 export {

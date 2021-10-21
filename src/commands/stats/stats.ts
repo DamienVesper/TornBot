@@ -15,8 +15,6 @@ const cmd: CommandConfig = {
 };
 
 const run = async (client: Client, message: Discord.Message, args: string[]) => {
-    const m = `${message.author} »`;
-
     const tornUsers: Map<string, TornAccount> = (await Leaderboard.findOne()).accounts;
 
     const query = getQuery(message, args);
@@ -25,7 +23,7 @@ const run = async (client: Client, message: Discord.Message, args: string[]) => 
     const username = dbUser?.accountName || args[0];
 
     const tornUser: TornAccount = tornUsers.get(username);
-    if (!tornUser) return message.channel.send(`${m} That user does not exist!`);
+    if (!tornUser) return message.reply(`That user does not exist!`);
 
     const sEmbed: Discord.MessageEmbed = new Discord.MessageEmbed()
         .setAuthor(`#${tornUser.spot} | ${username}`, client.user.avatarURL())
@@ -34,7 +32,7 @@ const run = async (client: Client, message: Discord.Message, args: string[]) => 
         .setTimestamp(new Date())
         .setFooter(config.footer);
 
-    message.channel.send({ embeds: [sEmbed] });
+    message.reply({ embeds: [sEmbed] });
 };
 
 export {
