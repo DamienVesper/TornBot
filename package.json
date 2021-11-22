@@ -1,13 +1,19 @@
 {
   "name": "tornbot",
-  "version": "1.8.1",
   "description": "A bot for the online game Torn.Space.",
-  "main": "index.js",
+  "packageManager": "yarn@3.1.0",
+  "version": "1.8.2",
+  "main": "src/index.ts",
   "scripts": {
     "build": "tsc",
     "dev": "ts-node ./src/index.ts",
-    "dist": "node ./build/src/index.js",
-    "dev:lint": "eslint . --ext .ts --fix"
+    "start": "node ./dist/src/index.js",
+    "dev:lint": "eslint . --ext .ts --fix",
+    "dev:lint:ci": "eslint . --ext .ts"
+  },
+  "engines": {
+    "yarn": ">=3.1.0",
+    "node": ">=16.10.0"
   },
   "repository": {
     "type": "git",
@@ -24,10 +30,10 @@
   },
   "homepage": "https://github.com/DamienVesper/TornBot#readme",
   "devDependencies": {
-    "@types/node": "^16.11.8",
-    "@typescript-eslint/eslint-plugin": "^4.33.0",
-    "@typescript-eslint/parser": "^4.33.0",
-    "eslint": "^7.32.0",
+    "@types/node": "^16.11.9",
+    "@typescript-eslint/eslint-plugin": "^5.4.0",
+    "@typescript-eslint/parser": "^5.4.0",
+    "eslint": "^8.3.0",
     "eslint-config-standard": "^16.0.3",
     "eslint-plugin-import": "^2.25.3",
     "eslint-plugin-node": "^11.1.0",
