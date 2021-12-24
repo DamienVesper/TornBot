@@ -8,7 +8,7 @@ import { logHeader } from './logExtra';
 import { Client } from '../typings/discord';
 
 const deployCommands = async (client: Client): Promise<void> => {
-    const rest = new REST({ version: `9` }).setToken(process.env.DISCORD_TOKEN);
+    const rest = new REST({ version: `9` }).setToken((process.env.DISCORD_TOKEN as string));
 
     const commands: Object[] = [];
     for (const [name, command] of client.commands) {
@@ -17,11 +17,10 @@ const deployCommands = async (client: Client): Promise<void> => {
         commands.push(command.cmd.toJSON());
     }
 
-    await rest.put(Routes.applicationGuildCommands(process.env.DISCORD_ID, process.env.GUILD_ID), { body: commands })
-        .then(() => {
-            log(`green`, `Successfully registered application commands.`);
-            logHeader();
-        }).catch(err => log(`red`, err));
+    await rest.put(Routes.applicationGuildCommands((process.env.DISCORD_ID as string), (process.env.GUILD_ID as string), { body: commands });
+
+    log(`green`, `Successfully registered application commands.`);
+    logHeader();
 };
 
 export default deployCommands;

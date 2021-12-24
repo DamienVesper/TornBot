@@ -10,7 +10,7 @@ export default async (client: Client, interaction: Discord.Interaction) => {
     const cmd = client.commands.get(interaction.commandName);
 
     // If the command doesn't exist, return.
-    if (!cmd) return;
+    if (cmd == null) return;
 
     // Execute the command.
     log(`magenta`, `${interaction.user.tag} [${interaction.user.id}] ran command ${interaction.commandName} in ${interaction.guild.name}.`);

@@ -17,7 +17,7 @@ const run = async (client: Client, interaction: Discord.CommandInteraction) => {
     const tornUsers: Map<string, TornAccount> = (await Leaderboard.findOne()).accounts;
 
     const dbUser = await User.findOne({ discordID: interaction.user.id });
-    if (!dbUser) return interaction.reply({ content: `You don't have an account yet!`, ephemeral: true });
+    if (dbUser == null) return await interaction.reply({ content: `You don't have an account yet!`, ephemeral: true });
 
     interaction.reply({ content: `Updating roles...`, ephemeral: true });
     await updateRoles((await interaction.guild.members.fetch(interaction.user.id)), dbUser.accountName, tornUsers);

@@ -26,7 +26,7 @@ const updateLeaderboard = async () => {
     log(`cyan`, `Updating leaderboard...`);
     const currentLB = await Leaderboard.findOne();
 
-    if (!currentLB) await createLeaderboard();
+    if (currentLB == null) await createLeaderboard();
     else {
         await currentLB.delete();
         await createLeaderboard();

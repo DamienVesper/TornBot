@@ -10,19 +10,21 @@ const getTornUsers = async () => {
     const res = await axios.get(`https://torn.space/leaderboard/players.json`);
 
     // Parse player data
-    for (const player of (res.data as LBAccount[])) tornUsers.set(player.name, {
-        spot: player.spot,
-        team: player.team === `blue` ? 0 : player.team === `red` ? 1 : 2,
+    for (const player of (res.data as LBAccount[])) {
+        tornUsers.set(player.name, {
+            spot: player.spot,
+            team: player.team === `blue` ? 0 : player.team === `red` ? 1 : 2,
 
-        xp: player.xp,
-        elo: player.elo,
-        tech: player.tech,
+            xp: player.xp,
+            elo: player.elo,
+            tech: player.tech,
 
-        kills: player.kills,
-        money: player.money,
-        rank: player.rank
+            kills: player.kills,
+            money: player.money,
+            rank: player.rank
 
-    });
+        });
+    }
 
     return tornUsers;
 };

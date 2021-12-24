@@ -1,35 +1,30 @@
 {
     "env": {
-        "browser": true,
-        "commonjs": true,
-        "es6": true,
-        "node": true
+        "node": true,
+        "es2021": true
     },
     "extends": [
-        "standard",
-        "eslint:recommended"
+        "plugin:@typescript-eslint/recommended",
+        "eslint:recommended",
+        "standard-with-typescript"
     ],
     "parser": "@typescript-eslint/parser",
-    "plugins": [
-        "@typescript-eslint",
-        "import",
-        "node",
-        "promise"
-    ],
     "parserOptions": {
-        "ecmaVersion": 6
+        "ecmaVersion": 12,
+        "sourceType": "module",
+        "project": "./tsconfig.json"
     },
+    "plugins": [
+        "@typescript-eslint"
+    ],
     "rules": {
-        "indent": ["error", 4, {
-            "SwitchCase": 1
-        }],
-        "semi": [2, "always"],
-        "quotes": [2, "backtick", "avoid-escape"],
-
-        "no-mixed-operators": 0,
-        "curly": 0,
-
-        "prefer-arrow-callback": 1,
-        "prefer-template": 1
+        "@typescript-eslint/indent": ["error", 4, { "SwitchCase": 1 }],
+        "@typescript-eslint/semi": [2, "always"],
+        "@typescript-eslint/quotes": [2, "backtick", "avoid-escape"],
+        "no-use-before-define": 0,
+        "no-unused-vars": 0,
+        "prefer-arrow-callback": 2,
+        "prefer-template": 2,
+        "@typescript-eslint/curly": 0
     }
 }

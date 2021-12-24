@@ -2,16 +2,16 @@ import * as Mongoose from 'mongoose';
 import { TornAccount } from './accounts';
 
 interface UserDoc extends Mongoose.Document {
-    banned: boolean;
-    creationDate: String;
+    banned: boolean
+    creationDate: string
 
-    accountName: string;
-    discordID: string;
+    accountName: string
+    discordID: string
 }
 
 interface LeaderboardDoc extends Mongoose.Document {
-    creationDate: string;
-    accounts: Map<string, TornAccount>;
+    creationDate: string
+    accounts: Map<string, TornAccount>
 }
 
 export {
