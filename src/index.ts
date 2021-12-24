@@ -18,24 +18,21 @@ const client: Client = new Discord.Client({
     ]
 });
 
-// Uncaught exception handler.
-process.on(`uncaughtException`, e => log(`red`, e.stack));
-
 /**
  * Start up the bot.
  */
-const startBot = async () => {
+const main = async (): Promise<void> => {
     logExtra.logSplash();
 
     await loader.loadCommands(client);
     await loader.loadEvents(client);
 
     logExtra.logHeader();
-    await mongoose.connect(process.env.MONGODB_URI);
+    if (process.env.MONGODB_URI !== undefined) await mongoose.connect(process.env.MONGODB_URI);
 
     log(`green`, `Connected to database.`);
 
-    if (process.env.DEV_ENV) {
+    if (process.env.DEV_ENV !== undefined) {
         logExtra.logHeader();
         await deployCommands(client);
     }
@@ -44,5 +41,5 @@ const startBot = async () => {
     await client.login(process.env.DISCORD_TOKEN).catch(() => log(`red`, `Failed to authenticate client with application.`));
 };
 
-// Actually start the bot.
-startBot();
+// Start the programe.
+void main();
