@@ -1,5 +1,3 @@
-import config from '../../../config/config';
-
 import * as Discord from 'discord.js';
 import { SlashCommandBuilder } from '@discordjs/builders';
 
