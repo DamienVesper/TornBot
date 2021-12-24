@@ -8,7 +8,7 @@ import log from '../utils/log';
  * Initialize a new cached leaderboard.
  * @returns A fulfillment promise.
  */
-const createLeaderboard = async () => {
+const createLeaderboard = async (): Promise<void> => {
     const tornUsers: Map<string, TornAccount> = await getTornUsers();
 
     const lb = new Leaderboard({
@@ -16,13 +16,13 @@ const createLeaderboard = async () => {
         accounts: tornUsers
     });
 
-    return await lb.save();
+    await lb.save();
 };
 
 /**
  * Update the current cached leaderboard.
  */
-const updateLeaderboard = async () => {
+const updateLeaderboard = async (): Promise<void> => {
     log(`cyan`, `Updating leaderboard...`);
     const currentLB = await Leaderboard.findOne();
 
