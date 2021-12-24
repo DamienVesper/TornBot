@@ -5,7 +5,7 @@ import { LBAccount, TornAccount } from '../typings/accounts';
  * Grab all accounts from the leaderboard.
  * @returns An array representation of users.
  */
-const getTornUsers = async () => {
+const getTornUsers = async (): Promise<Map<string, TornAccount>> => {
     const tornUsers: Map<string, TornAccount> = new Map();
     const res = await axios.get(`https://torn.space/leaderboard/players.json`);
 
