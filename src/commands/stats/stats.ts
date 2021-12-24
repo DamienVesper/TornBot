@@ -17,10 +17,11 @@ const cmd: Omit<SlashCommandBuilder, `addSubcommand` | `addSubcommandGroup`> = n
 const run = async (client: Client, interaction: Discord.CommandInteraction) => {
     const tornUsers: Map<string, TornAccount> = (await Leaderboard.findOne()).accounts;
 
-    const username = interaction.options.getString(`account`).toLowerCase();
+    const username = interaction.options.getString(`account`)?.toLowerCase();
+    if (!username) return await interaction.reply({ content: `You must specify a user!`, ephemeral: true });
 
     const tornUser: TornAccount = tornUsers.get(username);
-    if (!tornUser) return await interaction.reply({ content: `You must specify a user!`, ephemeral: true });
+    if (!tornUser) return await interaction.reply({ content: `That user does not exist!`, ephemeral: true });
 
     const sEmbed: Discord.MessageEmbed = new Discord.MessageEmbed()
         .setAuthor({
