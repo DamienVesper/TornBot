@@ -3,11 +3,11 @@ import { SlashCommandBuilder } from '@discordjs/builders';
 
 interface Command {
     config: SlashCommandBuilder;
-    run: any;
+    run: (client: Discord.Client, interaction: Discord.CommandInteraction) => void;
 }
 
 interface Event {
-    callback: any;
+    callback: (...any) => void;
 }
 
 interface Client extends Discord.Client {
