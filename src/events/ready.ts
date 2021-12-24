@@ -7,7 +7,7 @@ import refreshActivity from '../utils/refreshActivity';
 import updateLeaderboard from '../modules/updateLeaderboard';
 
 export default {
-    event: `ready`,
+    name: `ready`,
     run: async (client: Client) => {
         log(`green`, `Client has started, with ${client.users.cache.size} user(s) in ${client.guilds.cache.size} guild(s).`);
         logHeader();
