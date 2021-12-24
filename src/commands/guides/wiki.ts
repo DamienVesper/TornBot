@@ -9,12 +9,12 @@ const cmd: SlashCommandBuilder = new SlashCommandBuilder()
     .setName(`wiki`)
     .setDescription(`View the wiki.`);
 
-const run = async (client: Client, interaction: Discord.CommandInteraction) => {
+const run = async (client: Client, interaction: Discord.CommandInteraction): Promise<void> => {
     const sEmbed: Discord.MessageEmbed = new Discord.MessageEmbed()
         .setColor(config.colors.purple)
         .setAuthor({
             name: `Torn.Space Wiki`,
-            iconURL: interaction.user.avatarURL(),
+            iconURL: (client?.user?.avatarURL() as string),
             url: `https://tornspace.fandom.com`
         })
         .setDescription(`Click [here](https://tornspace.fandom.com) to view the Torn.Space wiki.`)
