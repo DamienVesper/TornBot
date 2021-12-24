@@ -1,25 +1,26 @@
 import * as Discord from 'discord.js';
-import { Client, CommandConfig } from '../../typings/discord';
-
-import updateRoles from '../../utils/updateRoles';
-import { TornAccount } from '../../typings/accounts';
+import { SlashCommandBuilder } from '@discordjs/builders';
 
 import User from '../../models/user.model';
 import Leaderboard from '../../models/leaderboard.model';
 
-const cmd: CommandConfig = {
-    desc: `Update your roles.`,
-    aliases: [`h`, `?`]
-};
+import updateRoles from '../../utils/updateRoles';
 
-const run = async (client: Client, message: Discord.Message, args: string[]) => {
+import { Client } from '../../typings/discord';
+import { TornAccount } from '../../typings/accounts';
+
+const cmd: SlashCommandBuilder = new SlashCommandBuilder()
+    .setName(`update`)
+    .setDescription(`Update your roles.`);
+
+const run = async (client: Client, interaction: Discord.CommandInteraction) => {
     const tornUsers: Map<string, TornAccount> = (await Leaderboard.findOne()).accounts;
 
-    const dbUser = await User.findOne({ discordID: message.author.id });
-    if (!dbUser) return message.reply(`You don't have an account yet!`);
+    const dbUser = await User.findOne({ discordID: interaction.user.id });
+    if (!dbUser) return interaction.reply({ content: `You don't have an account yet!`, ephemeral: true });
 
-    updateRoles(message.member, dbUser.accountName, tornUsers);
-    message.reply(`Updating roles...`);
+    interaction.reply({ content: `Updating roles...`, ephemeral: true });
+    await updateRoles((await interaction.guild.members.fetch(interaction.user.id)), dbUser.accountName, tornUsers);
 };
 
 export {
