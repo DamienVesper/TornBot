@@ -6,16 +6,17 @@ import Leaderboard from '../../models/leaderboard.model';
 
 import { Client } from '../../typings/discord';
 import { TornAccount } from '../../typings/accounts';
+import { LeaderboardDoc } from '../../typings/models';
 
 const cmd: Omit<SlashCommandBuilder, `addSubcommand` | `addSubcommandGroup`> = new SlashCommandBuilder()
     .setName(`link`)
     .setDescription(`Link your Torn account to Discord.`)
-    .addStringOption(option => option.setName(`account`).setDescription(`The account you want to link.`));
+    .addStringOption(option => option.setName(`account`).setDescription(`The account you want to link.`).setRequired(true));
 
-const run = async (client: Client, interaction: Discord.CommandInteraction) => {
-    const tornUsers: Map<string, TornAccount> = (await Leaderboard.findOne()).accounts;
+const run = async (client: Client, interaction: Discord.CommandInteraction): Promise<void> => {
+    const tornUsers: Map<string, TornAccount> = ((await Leaderboard.findOne()) as LeaderboardDoc)?.accounts;
 
-    const userToLink = interaction.options.getString(`account`).toLowerCase();
+    const userToLink = (interaction.options.getString(`account`) as string).toLowerCase();
 
     const userIsRegistered = await User.findOne({ discordID: interaction.user.id });
     const accountIsRegistered = await User.findOne({ accountName: userToLink });
@@ -29,7 +30,9 @@ const run = async (client: Client, interaction: Discord.CommandInteraction) => {
         discordID: interaction.user.id
     });
 
-    user.save(async () => await interaction.reply(`You are now linked to account \`${userToLink}\`.`));
+    user.save(() => {
+        void interaction.reply(`You are now linked to account \`${userToLink}\`.`);
+    });
 };
 
 export {
