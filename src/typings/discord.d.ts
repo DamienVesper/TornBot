@@ -1,12 +1,8 @@
 import * as Discord from 'discord.js';
+import { SlashCommandBuilder } from '@discordjs/builders';
 
-interface CommandConfig {
-    desc: string;
-    usage?: string;
-    aliases?: string[];
-}
 interface Command {
-    config: CommandConfig;
+    config: SlashCommandBuilder;
     run: any;
 }
 
@@ -22,6 +18,5 @@ interface Client extends Discord.Client {
 export {
     Client,
     Command,
-    CommandConfig,
     Event
 };
