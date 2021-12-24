@@ -1,18 +1,11 @@
 import * as path from 'path';
 
-import { Client, Command, Event } from '../typings/discord';
+import { Client } from '../typings/discord';
 
 import log from '../utils/log';
 import { logHeader } from '../utils/logExtra';
 
 import readDirectory from '../utils/readDirectory';
-
-interface CommandFile {
-    default: Command
-}
-interface EventFile {
-    default: Event
-}
 
 /**
  * Load all commands.
@@ -33,7 +26,11 @@ const loadCommands = async (client: Client) => {
 
         const command = await import(file);
         client.commands.set(fileName, {
-            config: command.cmd,
+            config: {
+                desc: command.cmd.desc,
+                usage: command.cmd.usage || null,
+                aliases: command.cmd.aliases || null
+            },
             run: command.run
         });
     }
@@ -56,10 +53,10 @@ const loadEvents = async (client: Client) => {
         const fileName = file.split(process.platform === `win32` ? `\\` : `/`).pop().split(`.`)[0];
         log(`yellow`, `Loaded event ${fileName}.`);
 
-        const event: EventFile = await import(file);
+        const event = await import(file);
 
-        client.on(event.default.name, event.default.run.bind(null, client));
-        client.events.set(fileName, event.default);
+        client.on(fileName, event.default.bind(null, client));
+        client.events.set(fileName, { callback: event });
     }
 };
 

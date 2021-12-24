@@ -7,8 +7,7 @@ interface Command {
 }
 
 interface Event {
-    name: string;
-    run: (...any) => void;
+    callback: (...any) => void;
 }
 
 interface Client extends Discord.Client {

@@ -4,7 +4,7 @@ import { Client } from '../typings/discord';
 import log from '../utils/log';
 
 export default {
-    name: `interactionCreate`,
+    event: `interactionCreate`,
     run: async (client: Client, interaction: Discord.Interaction) => {
         if (!interaction.isCommand()) return;
 
