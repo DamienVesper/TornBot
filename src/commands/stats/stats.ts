@@ -1,20 +1,22 @@
 import config from '../../../config/config';
 
 import * as Discord from 'discord.js';
-import { Client, CommandConfig } from '../../typings/discord';
-
-import getQuery from '../../utils/getQuery';
-import { TornAccount } from '../../typings/accounts';
+import { SlashCommandBuilder } from '@discordjs/builders';
 
 import User from '../../models/user.model';
 import Leaderboard from '../../models/leaderboard.model';
 
-const cmd: CommandConfig = {
-    desc: `View user stats.`,
-    usage: `[user]`
-};
+import getQuery from '../../utils/getQuery';
 
-const run = async (client: Client, message: Discord.Message, args: string[]) => {
+import { Client } from '../../typings/discord';
+import { TornAccount } from '../../typings/accounts';
+
+const cmd: Omit<SlashCommandBuilder, `addSubcommand` | `addSubcommandGroup`> = new SlashCommandBuilder()
+    .setName(`stats`)
+    .setDescription(`View user stats.`)
+    .addStringOption(option => option.setName(`user`).setDescription(`The account you want to view.`));
+
+const run = async (client: Client, interaction: Discord.CommandInteraction) => {
     const tornUsers: Map<string, TornAccount> = (await Leaderboard.findOne()).accounts;
 
     const query = getQuery(message, args);
