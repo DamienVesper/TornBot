@@ -3,7 +3,7 @@ import config from '../../../config/config';
 import * as Discord from 'discord.js';
 import { SlashCommandBuilder } from '@discordjs/builders';
 
-import User from '../../models/user.model';
+// import User from '../../models/user.model';
 import Leaderboard from '../../models/leaderboard.model';
 
 import { Client } from '../../typings/discord';
@@ -17,15 +17,10 @@ const cmd: Omit<SlashCommandBuilder, `addSubcommand` | `addSubcommandGroup`> = n
 const run = async (client: Client, interaction: Discord.CommandInteraction) => {
     const tornUsers: Map<string, TornAccount> = (await Leaderboard.findOne()).accounts;
 
-    const interactUser = interaction.options.getString(`account`).toLowerCase();
-
-    const dbUser = await User.findOne({ accountName: interactUser });
-    if (dbUser == null || !dbUser) return await interaction.reply({ content: `That user does not exist!`, ephemeral: true });
-
-    const username = dbUser.accountName;
+    const username = interaction.options.getString(`account`).toLowerCase();
 
     const tornUser: TornAccount = tornUsers.get(username);
-    if (!tornUser) return await interaction.reply({ content: `That user does not exist!`, ephemeral: true });
+    if (!tornUser) return await interaction.reply({ content: `You must specify a user!`, ephemeral: true });
 
     const sEmbed: Discord.MessageEmbed = new Discord.MessageEmbed()
         .setAuthor({
