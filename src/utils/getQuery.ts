@@ -1,25 +1,26 @@
 import * as Discord from 'discord.js';
 
-/**
- * Get a valid MongoDB query from a message.
- * @param message The Discord message to pull from.
- * @param args The arguments passed in the command.
- * @returns The MongoDB query to use.
- */
-const getQuery = (message: Discord.Message, args: string[]) => {
-    let query = {};
-    let queryParam = message.mentions.members.first()?.id;
+import User from '../models/user.model';
 
-    if (queryParam) query = { discordID: queryParam };
-    else {
-        queryParam = args[0];
-        if (queryParam) {
-            const isID = parseInt(queryParam);
-            query = isID ? { discordID: queryParam } : { accountName: queryParam.toLowerCase() };
-        } else query = { discordID: message.author.id };
+const getQuery = async (interaction: Discord.CommandInteraction, username: string): Promise<string> => {
+    if (!username) {
+        username = (await User.findOne({ discordID: interaction.user.id }))?.accountName;
+        if (!username) return undefined;
+    } else {
+        const dbUsername = (await User.findOne({ accountName: username }))?.accountName;
+        if (dbUsername) username = dbUsername;
+        else {
+            const dbIDUsername = (await User.findOne({
+                discordID:
+                    username.startsWith(`<`)
+                        ? username.slice(3, -1)
+                        : username
+            }))?.accountName;
+            if (dbIDUsername) username = dbIDUsername;
+        }
     }
 
-    return query;
+    return username;
 };
 
 export default getQuery;

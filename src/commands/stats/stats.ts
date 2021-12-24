@@ -3,11 +3,12 @@ import config from '../../../config/config';
 import * as Discord from 'discord.js';
 import { SlashCommandBuilder } from '@discordjs/builders';
 
-// import User from '../../models/user.model';
 import Leaderboard from '../../models/leaderboard.model';
 
 import { Client } from '../../typings/discord';
 import { TornAccount } from '../../typings/accounts';
+
+import getQuery from '../../utils/getQuery';
 
 const cmd: Omit<SlashCommandBuilder, `addSubcommand` | `addSubcommandGroup`> = new SlashCommandBuilder()
     .setName(`stats`)
@@ -17,8 +18,8 @@ const cmd: Omit<SlashCommandBuilder, `addSubcommand` | `addSubcommandGroup`> = n
 const run = async (client: Client, interaction: Discord.CommandInteraction) => {
     const tornUsers: Map<string, TornAccount> = (await Leaderboard.findOne()).accounts;
 
-    const username = interaction.options.getString(`account`)?.toLowerCase();
-    if (!username) return await interaction.reply({ content: `You must specify a user!`, ephemeral: true });
+    const username = await getQuery(interaction, interaction.options.getString(`account`)?.toLowerCase());
+    if (username === undefined) return await interaction.reply({ content: `You must either link an account or specify a user!`, ephemeral: true });
 
     const tornUser: TornAccount = tornUsers.get(username);
     if (!tornUser) return await interaction.reply({ content: `That user does not exist!`, ephemeral: true });
