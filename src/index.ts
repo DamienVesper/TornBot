@@ -35,7 +35,10 @@ const startBot = async () => {
 
     log(`green`, `Connected to database.`);
 
-    if (process.env.DEV_ENV) await deployCommands(client);
+    if (process.env.DEV_ENV) {
+        logExtra.logHeader();
+        await deployCommands(client);
+    }
 
     logExtra.logHeader();
     await client.login(process.env.DISCORD_TOKEN).catch(() => log(`red`, `Failed to authenticate client with application.`));
