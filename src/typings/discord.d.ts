@@ -2,7 +2,7 @@ import * as Discord from 'discord.js';
 import { SlashCommandBuilder } from '@discordjs/builders';
 
 interface Command {
-    config: SlashCommandBuilder;
+    cmd: SlashCommandBuilder;
     run: (client: Discord.Client, interaction: Discord.CommandInteraction) => void;
 }
 
