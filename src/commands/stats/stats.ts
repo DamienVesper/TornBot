@@ -7,6 +7,7 @@ import Leaderboard from '../../models/leaderboard.model';
 
 import { Client } from '../../typings/discord';
 import { TornAccount } from '../../typings/accounts';
+import { LeaderboardDoc } from '../../typings/models';
 
 import getQuery from '../../utils/getQuery';
 
@@ -15,19 +16,19 @@ const cmd: Omit<SlashCommandBuilder, `addSubcommand` | `addSubcommandGroup`> = n
     .setDescription(`View user stats.`)
     .addStringOption(option => option.setName(`account`).setDescription(`The account you want to view.`));
 
-const run = async (client: Client, interaction: Discord.CommandInteraction) => {
-    const tornUsers: Map<string, TornAccount> = (await Leaderboard.findOne()).accounts;
+const run = async (client: Client, interaction: Discord.CommandInteraction): Promise<void> => {
+    const tornUsers: Map<string, TornAccount> = ((await Leaderboard.findOne()) as LeaderboardDoc)?.accounts;
 
     const username = await getQuery(interaction, interaction.options.getString(`account`)?.toLowerCase());
     if (username === undefined) return await interaction.reply({ content: `You must either link an account or specify a user!`, ephemeral: true });
 
-    const tornUser: TornAccount = tornUsers.get(username);
-    if (!tornUser) return await interaction.reply({ content: `That user does not exist!`, ephemeral: true });
+    const tornUser: TornAccount | undefined = tornUsers.get(username);
+    if (tornUser === undefined) return await interaction.reply({ content: `That user does not exist!`, ephemeral: true });
 
     const sEmbed: Discord.MessageEmbed = new Discord.MessageEmbed()
         .setAuthor({
             name: `#${tornUser.spot} | ${username}`,
-            iconURL: client.user.avatarURL(),
+            iconURL: (client?.user?.avatarURL() as string),
             url: `https://torn.space/leaderboard/`
         })
         .setColor(config.colors.teams[tornUser.team])
