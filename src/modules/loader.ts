@@ -12,7 +12,7 @@ import readDirectory from '../utils/readDirectory';
  * @author DamienVesper
  * @param client The client to register commands to.
  */
-const loadCommands = async (client: Client) => {
+const loadCommands = async (client: Client): Promise<void> => {
     logHeader();
 
     // Initialize the commands array.
@@ -21,7 +21,7 @@ const loadCommands = async (client: Client) => {
     const files = readDirectory(path.resolve(__dirname, `../commands`));
 
     for (const file of files) {
-        const fileName = file.split(process.platform === `win32` ? `\\` : `/`).pop().split(`.`)[0];
+        const fileName = (file.split(process.platform === `win32` ? `\\` : `/`).pop() as string).split(`.`)[0];
         log(`yellow`, `Loaded command ${fileName}.`);
 
         const command = await import(file);
@@ -37,7 +37,7 @@ const loadCommands = async (client: Client) => {
  * @author DamienVesper
  * @param client The client to register events to.
  */
-const loadEvents = async (client: Client) => {
+const loadEvents = async (client: Client): Promise<void> => {
     logHeader();
 
     // Initialize client events.
@@ -46,7 +46,7 @@ const loadEvents = async (client: Client) => {
     const files = readDirectory(path.resolve(__dirname, `../events`));
 
     for (const file of files) {
-        const fileName = file.split(process.platform === `win32` ? `\\` : `/`).pop().split(`.`)[0];
+        const fileName = (file.split(process.platform === `win32` ? `\\` : `/`).pop() as string).split(`.`)[0];
         log(`yellow`, `Loaded event ${fileName}.`);
 
         const event = await import(file);
