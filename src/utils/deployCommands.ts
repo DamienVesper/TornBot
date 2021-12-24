@@ -3,7 +3,6 @@ import { REST } from '@discordjs/rest';
 import { Routes } from 'discord-api-types/v9';
 
 import log from './log';
-import { logHeader } from './logExtra';
 
 import { Client } from '../typings/discord';
 
@@ -12,7 +11,6 @@ const deployCommands = async (client: Client): Promise<void> => {
 
     const commands: Object[] = [];
     for (const [name, command] of client.commands) {
-        logHeader();
         log(`yellow`, `Registering command ${name}...`);
         commands.push(command.cmd.toJSON());
     }
@@ -20,7 +18,6 @@ const deployCommands = async (client: Client): Promise<void> => {
     await rest.put(Routes.applicationGuildCommands(process.env.DISCORD_ID, process.env.GUILD_ID), { body: commands })
         .then(() => {
             log(`green`, `Successfully registered application commands.`);
-            logHeader();
         }).catch(err => log(`red`, err));
 };
 

@@ -35,6 +35,7 @@ const startBot = async () => {
 
     log(`green`, `Connected to database.`);
 
+    logExtra.logHeader();
     if (process.env.DEV_ENV) await deployCommands(client);
 
     logExtra.logHeader();
