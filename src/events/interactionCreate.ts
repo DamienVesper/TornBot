@@ -3,16 +3,16 @@ import { Client } from '../typings/discord';
 
 import log from '../utils/log';
 
-export default async (client: Client, interaction: Discord.Interaction) => {
+export default async (client: Client, interaction: Discord.Interaction): Promise<void> => {
     if (!interaction.isCommand()) return;
 
     // Grab the command from the handler.
-    const cmd = client.commands.get(interaction.commandName);
+    const cmd = client?.commands?.get(interaction.commandName);
 
     // If the command doesn't exist, return.
     if (cmd == null) return;
 
     // Execute the command.
-    log(`magenta`, `${interaction.user.tag} [${interaction.user.id}] ran command ${interaction.commandName} in ${interaction.guild.name}.`);
+    log(`magenta`, `${interaction.user.tag} [${interaction.user.id}] ran command ${interaction.commandName} in ${(interaction.guild as Discord.Guild)?.name}.`);
     cmd.run(client, interaction);
 };
