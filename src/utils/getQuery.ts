@@ -8,7 +8,7 @@ const getQuery = async (interaction: Discord.CommandInteraction, username: strin
         if (username === undefined) return undefined;
     } else {
         const dbUsername = (await User.findOne({ accountName: username }))?.accountName;
-        if (dbUsername === undefined) username = dbUsername;
+        if (dbUsername !== undefined) username = dbUsername;
         else {
             const dbIDUsername = (await User.findOne({
                 discordID:
@@ -16,7 +16,7 @@ const getQuery = async (interaction: Discord.CommandInteraction, username: strin
                         ? username.slice(3, -1)
                         : username
             }))?.accountName;
-            if (dbIDUsername === undefined) username = dbIDUsername;
+            if (dbIDUsername !== undefined) username = dbIDUsername;
         }
     }
 
