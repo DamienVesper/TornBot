@@ -7,10 +7,17 @@
     <img src="https://img.shields.io/github/contributors/DamienVesper/TornBot?style=for-the-badge&color=1aa9f0">
     <img src="https://img.shields.io/github/languages/code-size/DamienVesper/TornBot?style=for-the-badge&color=1aa9f0">
 </p>
-
-
-**Local Bot Development Setup**
 <br>
+
+
+## Prerequisites
+ * [Node.js 16.10+](https://nodejs.org)
+ * [MongoDB 4.4+](https://mongodb.org)
+ * [pnpm](https://pnpm.io)
+Note: You will need [MongoDB](https://mongodb.org), [Node.js](https://nodejs.org), and [pnpm](https://pnpm.io) to be able to run this project.
+<br>
+
+## Development
 Testing the application using a database on your own machine will require a localhost database setup:
 
 1. Create a `.env` in the root directory of the repository.
@@ -23,22 +30,20 @@ Replace `<uri>` and `<discord bot token>` with your MongoDB URI and Discord bot 
 
 Then, in a command line at the top directory of where you have cloned the project, run:
 ```sh
-yarn
+pnpm i
 ```
 
 Then, to compile the project, run
 ```
-yarn build
+pnpm build
 ```
 
 To execute the project, run
 ```
-yarn dist
+pnpm dist
 ```
 
 Alternatively, you could simply run a single command in development:
 ```
-yarn dev
+pnpm dev
 ```
-
-Note: You will need MongoDB and Node.js installed to be able to build and run the bot.
