@@ -14,7 +14,6 @@
  * [Node.js 16.10+](https://nodejs.org)
  * [MongoDB 4.4+](https://mongodb.org)
  * [pnpm](https://pnpm.io)
-Note: You will need [MongoDB](https://mongodb.org), [Node.js](https://nodejs.org), and [pnpm](https://pnpm.io) to be able to run this project.
 <br>
 
 ## Development
