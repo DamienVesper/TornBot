@@ -6,7 +6,7 @@ import log from '../utils/log';
 export default async (client: Client, interaction: Discord.Interaction): Promise<void> => {
     if (interaction.isCommand()) {
         // Grab the command from the handler.
-        const cmd = client?.commands?.get(interaction.commandName);
+        const cmd = client.commands?.get(interaction.commandName);
 
         // If the command doesn't exist, return.
         if (cmd == null) return;
