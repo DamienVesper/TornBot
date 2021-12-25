@@ -11,7 +11,7 @@
     "dev:lint:ci": "eslint . --ext .ts"
   },
   "engines": {
-    "yarn": ">=3.1.0",
+    "pnpm": ">=6.0.0",
     "node": ">=16.10.0"
   },
   "repository": {
