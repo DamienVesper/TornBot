@@ -22,6 +22,7 @@ const client: Client = new Discord.Client({
  * Start up the bot.
  */
 const main = async (): Promise<void> => {
+    console.clear();
     logExtra.logSplash();
 
     await loader.loadCommands(client);
