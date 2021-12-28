@@ -28,10 +28,11 @@ const main = async (): Promise<void> => {
     await loader.loadCommands(client);
     await loader.loadEvents(client);
 
-    logExtra.logHeader();
-    if (process.env.MONGODB_URI !== undefined) await mongoose.connect(process.env.MONGODB_URI);
-
-    log(`green`, `Connected to database.`);
+    if (process.env.MONGODB_URI !== undefined) {
+        logExtra.logHeader();
+        await mongoose.connect(process.env.MONGODB_URI);
+        log(`green`, `Connected to database.`);
+    }
 
     if (process.env.DEV_ENV !== undefined) {
         logExtra.logHeader();
