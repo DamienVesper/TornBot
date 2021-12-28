@@ -23,7 +23,6 @@ const createLeaderboard = async (): Promise<void> => {
  * Update the current cached leaderboard.
  */
 const updateLeaderboard = async (): Promise<void> => {
-    log(`cyan`, `Updating leaderboard...`);
     const currentLB = await Leaderboard.findOne();
 
     if (currentLB == null) await createLeaderboard();
