@@ -2,13 +2,13 @@ import Discord, { Intents } from 'discord.js';
 import mongoose from 'mongoose';
 
 import { Client } from './typings/discord';
-import log from './utils/log';
-
-import * as logExtra from './utils/logExtra';
 import * as loader from './modules/loader';
 
-import * as dotenv from 'dotenv';
+import log from './utils/log';
+import * as logExtra from './utils/logExtra';
 import deployCommands from './utils/deployCommands';
+
+import * as dotenv from 'dotenv';
 dotenv.config();
 
 const client: Client = new Discord.Client({
