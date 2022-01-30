@@ -14,7 +14,7 @@ const run = async (client: Client, interaction: Discord.CommandInteraction): Pro
         .setColor(config.colors.purple)
         .setAuthor({
             name: `Torn.Space Wiki`,
-            iconURL: (client?.user?.avatarURL() as string),
+            iconURL: (client.user?.avatarURL() as string),
             url: `https://tornspace.fandom.com`
         })
         .setDescription(`Click [here](https://tornspace.fandom.com) to view the Torn.Space wiki.`)

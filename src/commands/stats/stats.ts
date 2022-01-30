@@ -28,7 +28,7 @@ const run = async (client: Client, interaction: Discord.CommandInteraction): Pro
     const sEmbed: Discord.MessageEmbed = new Discord.MessageEmbed()
         .setAuthor({
             name: `#${tornUser.spot} | ${username}`,
-            iconURL: (client?.user?.avatarURL() as string),
+            iconURL: (client.user?.avatarURL() as string),
             url: `https://torn.space/leaderboard/`
         })
         .setColor(config.colors.teams[tornUser.team])

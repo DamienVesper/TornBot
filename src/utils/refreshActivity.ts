@@ -6,7 +6,7 @@ import log from '../utils/log';
  * @param client The Discord client to use.
  */
 const refreshActivity = async (client: Client): Promise<void> => {
-    client?.user?.setPresence({
+    client.user?.setPresence({
         activities: [{
             name: `Torn.Space`,
             type: `WATCHING`
