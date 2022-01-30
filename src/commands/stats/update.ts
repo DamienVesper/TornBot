@@ -15,7 +15,7 @@ const cmd: SlashCommandBuilder = new SlashCommandBuilder()
     .setDescription(`Update your roles.`);
 
 const run = async (client: Client, interaction: Discord.CommandInteraction): Promise<void> => {
-    if (interaction.guild?.id !== process.env.GUILD_ID) return await interaction.reply({ content: `This command can only be ran in the official Torn.Space server!`, ephemeral: true });
+    if (interaction.guild?.id !== process.env.TORN_GUILD_ID) return await interaction.reply({ content: `This command can only be ran in the official Torn.Space server!`, ephemeral: true });
 
     const tornUsers: Map<string, TornAccount> = ((await Leaderboard.findOne()) as LeaderboardDoc)?.accounts;
 
