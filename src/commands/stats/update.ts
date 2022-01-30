@@ -22,7 +22,7 @@ const run = async (client: Client, interaction: Discord.CommandInteraction): Pro
     const dbUser = await User.findOne({ discordID: interaction.user.id });
     if (dbUser == null) return await interaction.reply({ content: `You don't have an account yet!`, ephemeral: true });
 
-    await interaction.reply({ content: `Updating roles...` });
+    await interaction.deferReply();
     await updateRoles((await (interaction.guild as Discord.Guild)?.members.fetch(interaction.user.id)), dbUser.accountName, tornUsers);
 
     await interaction.editReply({ content: `Your roles have been updated!`});
