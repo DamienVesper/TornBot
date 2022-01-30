@@ -25,7 +25,7 @@ const run = async (client: Client, interaction: Discord.CommandInteraction): Pro
     await interaction.deferReply();
     await updateRoles((await (interaction.guild as Discord.Guild)?.members.fetch(interaction.user.id)), dbUser.accountName, tornUsers);
 
-    await interaction.editReply({ content: `Your roles have been updated!`});
+    await interaction.editReply({ content: `Your roles have been updated!` });
 };
 
 export {
