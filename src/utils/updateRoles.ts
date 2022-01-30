@@ -26,21 +26,19 @@ const updateRoles = async (member: Discord.GuildMember, tornUser: string, tornUs
 
     await member.roles.add(accountRoles[0]);
 
-    setTimeout(() => {
-        if (curUser.spot <= 5) void member.roles.add(placementRoles[9]);
-        else if (curUser.spot <= 10) void member.roles.add(placementRoles[8]);
-        else if (curUser.spot <= 25) void member.roles.add(placementRoles[7]);
-        else if (curUser.spot <= 50) void member.roles.add(placementRoles[6]);
-        else if (curUser.spot <= 75) void member.roles.add(placementRoles[5]);
-        else if (curUser.spot <= 100) void member.roles.add(placementRoles[4]);
-        else if (curUser.spot <= 250) void member.roles.add(placementRoles[3]);
-        else if (curUser.spot <= 500) void member.roles.add(placementRoles[2]);
-        else if (curUser.spot <= 750) void member.roles.add(placementRoles[1]);
-        else if (curUser.spot <= 1000) void member.roles.add(placementRoles[0]);
+    if (curUser.spot <= 5) await member.roles.add(placementRoles[9]);
+    else if (curUser.spot <= 10) await member.roles.add(placementRoles[8]);
+    else if (curUser.spot <= 25) await member.roles.add(placementRoles[7]);
+    else if (curUser.spot <= 50) await member.roles.add(placementRoles[6]);
+    else if (curUser.spot <= 75) await member.roles.add(placementRoles[5]);
+    else if (curUser.spot <= 100) await member.roles.add(placementRoles[4]);
+    else if (curUser.spot <= 250) await member.roles.add(placementRoles[3]);
+    else if (curUser.spot <= 500) await member.roles.add(placementRoles[2]);
+    else if (curUser.spot <= 750) await member.roles.add(placementRoles[1]);
+    else if (curUser.spot <= 1000) await member.roles.add(placementRoles[0]);
 
-        void member.roles.add(teamRoles[curUser.team]);
-        log(`blue`, `Roles updated for ${tornUser}.`);
-    }, 5e3);
+    await member.roles.add(teamRoles[curUser.team]);
+    log(`blue`, `Roles updated for ${tornUser}.`);
 };
 
 export default updateRoles;
