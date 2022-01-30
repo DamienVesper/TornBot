@@ -4,7 +4,7 @@ import { UserDoc } from '../typings/models';
 
 const userSchema = new Mongoose.Schema({
     banned: { type: Boolean, required: false, default: false },
-    creationDate: { type: String, required: false, default: new Date().toString() },
+    creationDate: { type: String, required: true },
 
     accountName: { type: String, required: true, unique: true },
     discordID: { type: String, required: true, unique: true }

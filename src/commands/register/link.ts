@@ -26,6 +26,7 @@ const run = async (client: Client, interaction: Discord.CommandInteraction): Pro
     else if (tornUsers.get(userToLink) == null) return await interaction.reply({ content: `That account does not exist!`, ephemeral: true });
 
     const user = new User({
+        creationDate: new Date().toString(),
         accountName: userToLink,
         discordID: interaction.user.id
     });
