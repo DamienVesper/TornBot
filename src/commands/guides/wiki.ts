@@ -18,7 +18,7 @@ const run = async (client: Client, interaction: Discord.CommandInteraction): Pro
             url: `https://tornspace.fandom.com`
         })
         .setDescription(`Click [here](https://tornspace.fandom.com) to view the Torn.Space wiki.`)
-        .setTimestamp(new Date())
+        .setTimestamp()
         .setFooter({ text: config.footer });
 
     await interaction.reply({ embeds: [sEmbed] });

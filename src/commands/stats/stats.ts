@@ -33,7 +33,7 @@ const run = async (client: Client, interaction: Discord.CommandInteraction): Pro
         })
         .setColor(config.colors.teams[tornUser.team])
         .setDescription(`This user has an ELO of ${tornUser.elo}. \n\n**Rank**: ${tornUser.rank}\n**Experience**: ${tornUser.xp}\n**Kills**: ${tornUser.kills}\n**Money**:  ${tornUser.money}\n**Tech**: ${tornUser.tech}`)
-        .setTimestamp(new Date())
+        .setTimestamp()
         .setFooter({ text: config.footer });
 
     await interaction.reply({ embeds: [sEmbed] });
