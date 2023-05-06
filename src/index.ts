@@ -19,6 +19,11 @@ const client: Client = new Discord.Client({
 });
 
 /**
+ * Prevents crash on error.
+ */
+process.on(`uncaughtException`, err => log(`red`, err.stack ?? err.message));
+
+/**
  * Start up the bot.
  */
 const main = async (): Promise<void> => {
