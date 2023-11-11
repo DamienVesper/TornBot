@@ -4,7 +4,7 @@ Description=Torn.Space Discord bot.
 [Service]
 Type=simple
 WorkingDirectory=/opt/TornBot
-ExecStart=/usr/bin/yarn dist
+ExecStart=/usr/bin/pnpm start
 
 [Install]
 WantedBy=multi-user.target
