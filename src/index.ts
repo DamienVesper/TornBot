@@ -43,9 +43,9 @@ const main = async (): Promise<void> => {
     console.clear();
     logExtra.logSplash();
 
-    if (process.env.MONGODB_URI !== undefined) {
+    if (process.env.MONGO_URI !== undefined) {
         logExtra.logHeader();
-        await mongoose.connect(process.env.MONGODB_URI);
+        await mongoose.connect(process.env.MONGO_URI);
         log(`green`, `Connected to database.`);
     }
 

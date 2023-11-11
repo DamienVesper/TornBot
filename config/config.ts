@@ -47,7 +47,7 @@ const config: Config = {
         help
     },
 
-    guild: `1077043833621184563`,
+    guild: `247490958374076416`,
 
     colors,
     cooldowns,

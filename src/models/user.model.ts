@@ -1,8 +1,8 @@
-import * as Mongoose from 'mongoose';
+import Mongoose, { Schema } from 'mongoose';
 
 import type { UserDoc } from '../typings/models';
 
-const userSchema = new Mongoose.Schema({
+const userSchema = new Schema({
     banned: { type: Boolean, required: false, default: false },
     creationDate: { type: String, required: true },
 
