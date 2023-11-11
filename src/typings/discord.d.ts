@@ -1,5 +1,5 @@
-import * as Discord from 'discord.js';
-import { SlashCommandBuilder } from '@discordjs/builders';
+import type * as Discord from 'discord.js';
+import { type SlashCommandBuilder } from '@discordjs/builders';
 
 interface Command {
     cmd: SlashCommandBuilder
@@ -15,7 +15,7 @@ interface Client extends Discord.Client {
     events?: Map<string, Event>
 }
 
-export {
+export type {
     Client,
     Command,
     Event

@@ -1,16 +1,21 @@
 import config from '../../../config/config';
 
-import * as Discord from 'discord.js';
 import { SlashCommandBuilder } from '@discordjs/builders';
+import {
+    type ChatInputCommandInteraction,
+    EmbedBuilder
+} from 'discord.js';
 
-import { Client } from '../../typings/discord';
+import type { Client } from '../../typings/discord';
 
-const cmd: SlashCommandBuilder = new SlashCommandBuilder()
+const cmd = new SlashCommandBuilder()
     .setName(`wiki`)
     .setDescription(`View the wiki.`);
 
-const run = async (client: Client, interaction: Discord.CommandInteraction): Promise<void> => {
-    const sEmbed: Discord.MessageEmbed = new Discord.MessageEmbed()
+const run = async (client: Client, interaction: ChatInputCommandInteraction): Promise<void> => {
+    if (interaction.guild?.rulesChannel === null) return;
+
+    const sEmbed = new EmbedBuilder()
         .setColor(config.colors.purple)
         .setAuthor({
             name: `Torn.Space Wiki`,

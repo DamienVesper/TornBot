@@ -1,5 +1,5 @@
-import * as fs from 'fs';
-import * as path from 'path';
+import { readdirSync, statSync } from 'fs';
+import { resolve } from 'path';
 
 /**
  * Recursively read a directory.
@@ -9,11 +9,11 @@ import * as path from 'path';
  */
 const readDirectory = (dir: string): string[] => {
     let results: string[] = [];
-    const files = fs.readdirSync(dir);
+    const files = readdirSync(dir);
 
     for (const file of files) {
-        const filePath = path.resolve(dir, file);
-        const stat = fs.statSync(filePath);
+        const filePath = resolve(dir, file);
+        const stat = statSync(filePath);
 
         if (stat?.isDirectory()) {
             const res = readDirectory(filePath);

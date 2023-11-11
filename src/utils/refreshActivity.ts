@@ -1,5 +1,8 @@
-import { Client } from '../typings/discord';
+import { ActivityType, PresenceUpdateStatus } from 'discord.js';
+
 import log from '../utils/log';
+
+import type { Client } from '../typings/discord';
 
 /**
  * Refresh the activity of the client.
@@ -9,10 +12,10 @@ const refreshActivity = async (client: Client): Promise<void> => {
     client.user?.setPresence({
         activities: [{
             name: `Torn.Space`,
-            type: `WATCHING`
+            type: ActivityType.Watching
         }],
 
-        status: `online`
+        status: PresenceUpdateStatus.Online
     });
 
     log(`green`, `Status updated.`);

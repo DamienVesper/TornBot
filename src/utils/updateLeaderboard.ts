@@ -1,8 +1,9 @@
 import Leaderboard from '../models/leaderboard.model';
-import { TornAccount } from '../typings/accounts';
 
-import getTornUsers from '../utils/getTornUsers';
-import log from '../utils/log';
+import log from './log';
+import getTornUsers from './getTornUsers';
+
+import type { TornAccount } from '../typings/accounts';
 
 /**
  * Initialize a new cached leaderboard.
@@ -27,7 +28,7 @@ const updateLeaderboard = async (): Promise<void> => {
 
     if (currentLB == null) await createLeaderboard();
     else {
-        await currentLB.delete();
+        await Leaderboard.deleteOne({ _id: currentLB._id });
         await createLeaderboard();
     }
 

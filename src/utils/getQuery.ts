@@ -1,8 +1,8 @@
-import * as Discord from 'discord.js';
+import type { CommandInteraction } from 'discord.js';
 
 import User from '../models/user.model';
 
-const getQuery = async (interaction: Discord.CommandInteraction, username: string | undefined): Promise<string | undefined> => {
+const getQuery = async (interaction: CommandInteraction, username: string | undefined): Promise<string | undefined> => {
     if (username === undefined) {
         username = (await User.findOne({ discordID: interaction.user.id }))?.accountName;
         if (username === undefined) return undefined;

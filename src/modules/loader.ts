@@ -1,6 +1,6 @@
 import * as path from 'path';
 
-import { Client } from '../typings/discord';
+import type { Client } from '../typings/discord';
 
 import log from '../utils/log';
 import { logHeader } from '../utils/logExtra';
@@ -22,13 +22,15 @@ const loadCommands = async (client: Client): Promise<void> => {
 
     for (const file of files) {
         const fileName = (file.split(process.platform === `win32` ? `\\` : `/`).pop() as string).split(`.`)[0];
-        log(`yellow`, `Loaded command ${fileName}.`);
-
         const command = await import(file);
-        client.commands.set(fileName, {
-            cmd: command.cmd,
-            run: command.run
-        });
+
+        if (command.cmd !== undefined) {
+            log(`yellow`, `Loaded command ${fileName}.`);
+            client.commands.set(fileName, {
+                cmd: command.cmd,
+                run: command.run
+            });
+        }
     }
 };
 
@@ -51,8 +53,10 @@ const loadEvents = async (client: Client): Promise<void> => {
 
         const event = await import(file);
 
-        client.on(fileName, event.default.bind(null, client));
-        client.events.set(fileName, { callback: event });
+        if (event.default?.bind !== undefined) {
+            client.on(fileName, event.default.bind(null, client));
+            client.events.set(fileName, { callback: event });
+        }
     }
 };
 

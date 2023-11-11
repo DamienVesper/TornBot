@@ -1,5 +1,5 @@
-import * as Mongoose from 'mongoose';
-import { TornAccount } from './accounts';
+import type * as Mongoose from 'mongoose';
+import { type TornAccount } from './accounts';
 
 interface UserDoc extends Mongoose.Document {
     banned: boolean
@@ -14,7 +14,7 @@ interface LeaderboardDoc extends Mongoose.Document {
     accounts: Map<string, TornAccount>
 }
 
-export {
+export type {
     UserDoc,
     LeaderboardDoc
 };

@@ -1,10 +1,15 @@
-import * as Discord from 'discord.js';
-import { Client } from '../typings/discord';
+import config from '../../config/config';
+
+import { ChannelType, type Interaction } from 'discord.js';
 
 import log from '../utils/log';
 
-export default async (client: Client, interaction: Discord.Interaction): Promise<void> => {
-    if (interaction.isCommand()) {
+import type { Client } from '../typings/discord';
+
+export default async (client: Client, interaction: Interaction): Promise<void> => {
+    if (interaction.isChatInputCommand() && interaction.guild !== null && interaction.channel?.type === ChannelType.GuildText) {
+        if (process.env.NODE_ENV === `development` && !config.developers.includes(interaction.user.id)) return;
+
         // Grab the command from the handler.
         const cmd = client.commands?.get(interaction.commandName);
 
@@ -12,7 +17,7 @@ export default async (client: Client, interaction: Discord.Interaction): Promise
         if (cmd == null) return;
 
         // Execute the command.
-        log(`magenta`, `${interaction.user.tag} [${interaction.user.id}] ran command ${interaction.commandName} in ${(interaction.guild as Discord.Guild)?.name}.`);
+        log(`magenta`, `${interaction.user.tag} [${interaction.user.id}] ran command ${interaction.commandName} in ${interaction.guild.name}.`);
         cmd.run(client, interaction);
     }
 };

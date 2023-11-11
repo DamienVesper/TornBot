@@ -25,7 +25,7 @@ interface LBAccount {
     rank: number
 }
 
-export {
+export type {
     TornAccount,
     LBAccount
 };

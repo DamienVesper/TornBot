@@ -1,9 +1,9 @@
 import * as Mongoose from 'mongoose';
 
-import { LeaderboardDoc } from '../typings/models';
+import type { LeaderboardDoc } from '../typings/models';
 
 const leaderboardSchema = new Mongoose.Schema({
-    creationDate: { type: String, required: false, default: new Date().toString() },
+    creationDate: { type: String, required: true },
     accounts: { type: Map, required: true }
 });
 
