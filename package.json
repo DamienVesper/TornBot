@@ -47,6 +47,6 @@
     "axios": "^1.6.1",
     "discord-api-types": "^0.37.63",
     "discord.js": "^14.13.0",
-    "mongoose": "^7.6.4"
+    "mongoose": "^8.0.0"
   }
 }
