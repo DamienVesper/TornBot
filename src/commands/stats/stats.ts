@@ -5,11 +5,10 @@ import type { ChatInputCommandInteraction } from 'discord.js';
 
 import Leaderboard from '../../models/leaderboard.model';
 
+import getQuery from '../../utils/getQuery';
+
 import type { Client } from '../../typings/discord';
 import type { TornAccount } from '../../typings/accounts';
-import type { LeaderboardDoc } from '../../typings/models';
-
-import getQuery from '../../utils/getQuery';
 
 const cmd = new SlashCommandBuilder()
     .setName(`stats`)
@@ -17,7 +16,11 @@ const cmd = new SlashCommandBuilder()
     .addStringOption(option => option.setName(`account`).setDescription(`The account you want to view.`));
 
 const run = async (client: Client, interaction: ChatInputCommandInteraction): Promise<void> => {
-    const tornUsers: Map<string, TornAccount> = ((await Leaderboard.findOne()) as LeaderboardDoc)?.accounts;
+    const tornUsers = (await Leaderboard.findOne())?.accounts;
+    if (tornUsers === undefined) {
+        await interaction.followUp({ content: `The leaderboard is currently updating. Please try again later.`, ephemeral: true });
+        return;
+    }
 
     const username = await getQuery(interaction, interaction.options.getString(`account`)?.toLowerCase());
     if (username === undefined) {

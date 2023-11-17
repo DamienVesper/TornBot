@@ -9,8 +9,6 @@ import Leaderboard from '../../models/leaderboard.model';
 import updateRoles from '../../utils/updateRoles';
 
 import type { Client } from '../../typings/discord';
-import type { TornAccount } from '../../typings/accounts';
-import type { LeaderboardDoc } from '../../typings/models';
 
 const cmd = new SlashCommandBuilder()
     .setName(`update`)
@@ -24,7 +22,12 @@ const run = async (client: Client, interaction: ChatInputCommandInteraction): Pr
 
     await interaction.deferReply();
 
-    const tornUsers: Map<string, TornAccount> = ((await Leaderboard.findOne()) as LeaderboardDoc)?.accounts;
+    const tornUsers = (await Leaderboard.findOne())?.accounts;
+    if (tornUsers === undefined) {
+        await interaction.followUp({ content: `The leaderboard is currently updating. Please try again later.`, ephemeral: true });
+        return;
+    }
+
     const dbUser = await User.findOne({ discordID: interaction.user.id });
     if (dbUser == null) {
         await interaction.followUp({ content: `You don't have an account yet!`, ephemeral: true });

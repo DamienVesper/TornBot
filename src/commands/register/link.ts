@@ -5,8 +5,6 @@ import User from '../../models/user.model';
 import Leaderboard from '../../models/leaderboard.model';
 
 import type { Client } from '../../typings/discord';
-import type { TornAccount } from '../../typings/accounts';
-import type { LeaderboardDoc } from '../../typings/models';
 
 const cmd = new SlashCommandBuilder()
     .setName(`link`)
@@ -14,10 +12,13 @@ const cmd = new SlashCommandBuilder()
     .addStringOption(option => option.setName(`account`).setDescription(`The account you want to link.`).setRequired(true));
 
 const run = async (client: Client, interaction: ChatInputCommandInteraction): Promise<void> => {
-    const tornUsers: Map<string, TornAccount> = ((await Leaderboard.findOne()) as LeaderboardDoc)?.accounts;
+    const tornUsers = (await Leaderboard.findOne())?.accounts;
+    if (tornUsers === undefined) {
+        await interaction.followUp({ content: `The leaderboard is currently updating. Please try again later.`, ephemeral: true });
+        return;
+    }
 
     const userToLink = (interaction.options.getString(`account`) as string).toLowerCase();
-
     await interaction.deferReply();
 
     const userIsRegistered = await User.findOne({ discordID: interaction.user.id });
